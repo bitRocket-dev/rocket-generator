@@ -1,10 +1,18 @@
 {
   "name": "rocket-generator",
-  "version": "1.0.0",
+  "version": "1.0.3",
   "description": "Node Generator for bitRocket.dev Community",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "generate:redux-flow": "node ./@generators/scripts/redux-flow/index $1",
+    "generate:component-shared": "node ./@generators/scripts/component-shared/index $1",
+    "generate:component-ui": "node ./@generators/scripts/component-ui/index $1",
+    "generate:component-flow": "node ./@generators/scripts/flow/index $1",
+    "generate:component-redux-flow": "node ./@generators/scripts/redux-flow/index $1",
+    "generate:component-view": "node ./@generators/scripts/component-view/index $1"
+  },
+  "bin": {
+    "rocket-generator": "./index.js"
   },
   "keywords": [
     "node-generator",
@@ -12,8 +20,11 @@
     "redux"
   ],
   "repository": {
-    "url": "https://github.com/bitRocket-dev/rocket-lodash"
+    "url": "https://github.com/bitRocket-dev/rocket-generator"
   },
   "author": "bitRocket.dev",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "inquirer": "^8.1.0"
+  }
 }
