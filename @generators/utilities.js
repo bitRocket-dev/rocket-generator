@@ -16,3 +16,8 @@ exports.utilityPath = (string) => {
       }
     });
 };
+
+exports.throwIfError = (err) => {
+  if (err) throw err;
+};
+

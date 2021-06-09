@@ -4,7 +4,8 @@
 
 const fs = require("fs");
 const { spawn } = require("child_process");
-var inquirer = require("inquirer");
+const inquirer = require("inquirer");
+const componentUi = require("./@generators/scripts/component-ui/component-ui");
 
 const questions = [
   // START CRUD
@@ -114,29 +115,17 @@ inquirer.prompt(questions).then((answers) => {
       break;
     case "components-UI":
       answers.componentsUIType.map((item) => {
-        let dir;
-        item === "New"
-          ? (dir = `./src/components-ui/${answers.componentsUINew}`)
-          : (dir = `./src/components-ui/${item}`);
-        if (item === "New")
-          spawn("npm", [
-            "run",
-            "generate:component-ui",
-            `${answers.componentsUINew}`,
-          ]);
+        const dir =
+          item === "New"
+            ? `./src/components-ui/${answers.componentsUINew}`
+            : `./src/components-ui/${item}`;
 
-        fs.existsSync(dir)
-          ? console.log(
-              "\x1b[31m",
-              `ERROR! The directory ${item} already exist`
-            )
-          : item === "New"
-          ? spawn("npm", [
-              "run",
-              "generate:component-ui",
-              `${answers.componentsUINew}`,
-            ])
-          : spawn("npm", ["run", "generate:component-ui", `${item}`]);
+        if (fs.existsSync(dir)) {
+          console.log("\x1b[31m", `ERROR! The directory ${item} already exist`);
+          return;
+        }
+
+        componentUi(item === "New" ? answers.componentsUINew : item);
       });
       break;
     default:
