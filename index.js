@@ -1,16 +1,18 @@
 #!/usr/bin/env node
 // Used to tell Node.js that this is a CLI tool
+/** @format */
 
 const fs = require("fs");
 const { spawn } = require("child_process");
 var inquirer = require("inquirer");
+
 const questions = [
   // START CRUD
   {
     type: "list",
     name: "action",
     message: "Hi! How can i help you?",
-    choices: ["components-UI", "CRUD", "rocket-components"],
+    choices: ["components-UI", "CRUD"],
   },
   {
     type: "checkbox",
@@ -22,7 +24,7 @@ const questions = [
   {
     type: "checkbox",
     name: "readType",
-    message: "what is the type?",
+    message: "what is the type??",
     choices: ["List", "Detail"],
     when: (answers) =>
       answers.reduxFlowType && answers.reduxFlowType.includes("Read"),
@@ -40,6 +42,7 @@ const questions = [
     },
   },
   // END CRUD
+
   // START COMPONENTS UI
   {
     type: "checkbox",
@@ -88,6 +91,7 @@ const questions = [
   },
   // END COMPONENTS UI
 ];
+
 inquirer.prompt(questions).then((answers) => {
   switch (answers.action) {
     case "CRUD":
@@ -113,16 +117,25 @@ inquirer.prompt(questions).then((answers) => {
         let dir;
         item === "New"
           ? (dir = `./src/components-ui/${answers.componentsUINew}`)
-          : (dir = `./src/components-ui/${answers.componentsUIType}`);
+          : (dir = `./src/components-ui/${item}`);
         if (item === "New")
           spawn("npm", [
             "run",
             "generate:component-ui",
             `${answers.componentsUINew}`,
           ]);
-        console.log(dir);
+
         fs.existsSync(dir)
-          ? console.log("\x1b[31m", "ERROR! The directory already exist")
+          ? console.log(
+              "\x1b[31m",
+              `ERROR! The directory ${item} already exist`
+            )
+          : item === "New"
+          ? spawn("npm", [
+              "run",
+              "generate:component-ui",
+              `${answers.componentsUINew}`,
+            ])
           : spawn("npm", ["run", "generate:component-ui", `${item}`]);
       });
       break;
