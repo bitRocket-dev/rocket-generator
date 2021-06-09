@@ -1,0 +1,19 @@
+{
+  "name": "rocket-generator",
+  "version": "1.0.0",
+  "description": "Node Generator for bitRocket.dev Community",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "node-generator",
+    "react",
+    "redux"
+  ],
+  "repository": {
+    "url": "https://github.com/bitRocket-dev/rocket-lodash"
+  },
+  "author": "bitRocket.dev",
+  "license": "ISC"
+}
