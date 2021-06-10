@@ -9,7 +9,6 @@ async function componentUi(name) {
 
   const formattedName = utilityCapitalizeFirst(name);
   const dir = `./src/components-ui/${formattedName}`;
-  const path = "./src/components-ui";
 
   const localDir = `${__dirname}/${formattedName}`;
 
@@ -25,11 +24,7 @@ async function componentUi(name) {
     story(formattedName),
     throwIfError
   );
-  fs.writeFile(
-    `${dir}/index.tsx`,
-    component(formattedName),
-    throwIfError
-  );
+  fs.writeFile(`${dir}/index.tsx`, component(formattedName), throwIfError);
 }
 
-module.exports = componentUi
+module.exports = componentUi;
