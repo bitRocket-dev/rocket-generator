@@ -6,6 +6,7 @@ const fs = require("fs");
 const { spawn } = require("child_process");
 const inquirer = require("inquirer");
 const componentUi = require("./@generators/scripts/component-ui/component-ui");
+const reduxFlow = require("./@generators/scripts/flow/reduxFlow");
 
 const questions = [
   // START CRUD
@@ -99,18 +100,9 @@ inquirer.prompt(questions).then((answers) => {
       answers.reduxFlowType.map((item) => {
         if (item === "Read") {
           answers.readType.map((item) =>
-            spawn("npm", [
-              "run",
-              "generate:component-flow",
-              `${item}-${answers.reduxFlowName}`,
-            ])
+            reduxFlow(`${item}-${answers.reduxFlowName}`)
           );
-        } else
-          spawn("npm", [
-            "run",
-            "generate:component-flow",
-            `${item}-${answers.reduxFlowName}`,
-          ]);
+        } else reduxFlow(`${item}-${answers.reduxFlowName}`);
       });
       break;
     case "components-UI":
