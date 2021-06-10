@@ -6,17 +6,25 @@ const fs = require("fs-extra");
 const inquirer = require("inquirer");
 const reduxFlow = require("./@generators/scripts/flow/reduxFlow");
 const componentUi = require("./@generators/scripts/component-ui/component-ui");
-const boilerplate = require("./@generators/hh/boilerplate");
+// const boilerplate = require("./@generators/hh/boilerplate");
+const componentView = require("./@generators/scripts/component-view/componentView");
+const componentShared = require("./@generators/scripts/component-shared/componentShared");
 
-const dir = "./";
-boilerplate(dir);
+// const dir = "./";
+// boilerplate(dir);
 
 const questions = [
   {
     type: "list",
     name: "action",
     message: "Hi! How can i help you?",
-    choices: ["rocket-components", "new-components-UI", "CRUD"],
+    choices: [
+      "CRUD",
+      "rocket-components",
+      "new-component-UI",
+      "new-component-view",
+      "new-component-shared",
+    ],
   },
   //#region CRUD
   {
@@ -29,7 +37,7 @@ const questions = [
   {
     type: "checkbox",
     name: "readType",
-    message: "what is the type??",
+    message: "Specify the Read.",
     choices: ["List", "Detail"],
     when: (answers) =>
       answers.reduxFlowType && answers.reduxFlowType.includes("Read"),
@@ -51,7 +59,7 @@ const questions = [
   //#region COMPONENTS UI
   {
     type: "checkbox",
-    name: "componentsUIType",
+    name: "rocketComponents",
     message: "Choose rocket component.",
     choices: [
       "Avatar",
@@ -82,9 +90,9 @@ const questions = [
   },
   {
     type: "input",
-    name: "componentsUINew",
+    name: "newComponentUI",
     message: "Insert name of new component ui.",
-    when: (answers) => answers.action === "new-components-UI",
+    when: (answers) => answers.action === "new-component-UI",
     validate: (answer) => {
       if (answer === "") {
         return "please enter a valid answer";
@@ -93,6 +101,36 @@ const questions = [
     },
   },
   //#endregion COMPONENTS UI
+
+  //#region COMPONENTS VIEW
+  {
+    type: "input",
+    name: "newComponentView",
+    message: "Insert name of new component view.",
+    when: (answers) => answers.action === "new-component-view",
+    validate: (answer) => {
+      if (answer === "") {
+        return "please enter a valid answer";
+      }
+      return true;
+    },
+  },
+  //#endregion COMPONENTS VIEW
+
+  //#region COMPONENTS SHARED
+  {
+    type: "input",
+    name: "newComponentShared",
+    message: "Insert name of new component shared.",
+    when: (answers) => answers.action === "new-component-shared",
+    validate: (answer) => {
+      if (answer === "") {
+        return "please enter a valid answer";
+      }
+      return true;
+    },
+  },
+  //#endregion COMPONENTS SHARED
 ];
 
 inquirer.prompt(questions).then((answers) => {
@@ -106,19 +144,8 @@ inquirer.prompt(questions).then((answers) => {
         } else reduxFlow(`${item}-${answers.reduxFlowName}`);
       });
       break;
-    case "new-components-UI":
-      const dir = `./src/components-ui/${answers.componentsUINew}`;
-      componentUi(answers.componentsUINew);
-      if (fs.existsSync(dir)) {
-        console.log(
-          "\x1b[31m",
-          `ERROR! The directory ${answers.componentsUINew} already exist`
-        );
-        return;
-      }
-      break;
     case "rocket-components":
-      answers.componentsUIType.map((item) => {
+      answers.rocketComponents.map((item) => {
         const dir = `./src/components-ui/${item}`;
         componentUi(item);
         if (fs.existsSync(dir)) {
@@ -127,6 +154,40 @@ inquirer.prompt(questions).then((answers) => {
         }
       });
       break;
+    case "new-component-UI":
+      const dir = `./src/components-ui/${answers.newComponentUI}`;
+      componentUi(answers.newComponentUI);
+      if (fs.existsSync(dir)) {
+        console.log(
+          "\x1b[31m",
+          `ERROR! The directory ${answers.newComponentUI} already exist`
+        );
+        return;
+      }
+      break;
+    case "new-component-view":
+      const dir2 = `./src/components-view/${answers.newComponentView}`;
+      componentView(answers.newComponentView);
+      if (fs.existsSync(dir2)) {
+        console.log(
+          "\x1b[31m",
+          `ERROR! The directory ${answers.newComponentView} already exist`
+        );
+        return;
+      }
+      break;
+    case "new-component-shared":
+      const dir3 = `./src/components-shared/${answers.newComponentShared}`;
+      componentShared(answers.newComponentShared);
+      if (fs.existsSync(dir3)) {
+        console.log(
+          "\x1b[31m",
+          `ERROR! The directory ${answers.newComponentShared} already exist`
+        );
+        return;
+      }
+      break;
+
     default:
       console.log("default");
   }
