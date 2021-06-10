@@ -10,9 +10,6 @@ const boilerplate = require("./@generators/RocketBoilerplate/boilerplate");
 const componentView = require("./@generators/scripts/component-view/componentView");
 const componentShared = require("./@generators/scripts/component-shared/componentShared");
 
-const dir = "./";
-boilerplate(dir);
-
 const showMenu = () => {
   const questions = [
     {
@@ -20,19 +17,26 @@ const showMenu = () => {
       name: "action",
       message: "Hi! How can i help you?",
       choices: [
+        "create-rocket-app",
         "CRUD",
         "rocket-components",
         "new-component-UI",
         "new-component-view",
         "new-component-shared",
-        "Exit",
+        "--- Exit ---",
       ],
+    },
+    {
+      type: "input",
+      name: "new-app",
+      message: "Create a boilerplate",
+      when: (answers) => answers.action === "create-rocket-app",
     },
     {
       type: "confirm",
       name: "exit",
       message: "Do you want exit?",
-      when: (answers) => answers.action === "Exit",
+      when: (answers) => answers.action === "--- Exit ---",
     },
     //#region CRUD
     {
@@ -202,8 +206,13 @@ const main = async () => {
             return;
           }
           break;
-        case "Exit":
+        case "--- Exit ---":
           process.exit();
+
+        case "create-rocket-app":
+          const dirBoilerplate = "./";
+          boilerplate(dirBoilerplate);
+          break;
 
         default:
           console.log("default");
