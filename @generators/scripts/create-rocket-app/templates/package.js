@@ -1,5 +1,9 @@
-{
-  "name": "RocketApp",
+/** @format */
+
+exports.package = (name) => {
+  return `
+  {
+  "name": "${name.toLowerCase()}",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -40,4 +44,5 @@
       "last 1 safari version"
     ]
   }
-}
+}`;
+};

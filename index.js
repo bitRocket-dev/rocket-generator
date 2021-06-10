@@ -28,7 +28,7 @@ const showMenu = () => {
     },
     {
       type: "input",
-      name: "new-app",
+      name: "newApp",
       message: "Create a boilerplate",
       when: (answers) => answers.action === "create-rocket-app",
     },
@@ -211,7 +211,7 @@ const main = async () => {
 
         case "create-rocket-app":
           const dirBoilerplate = "./";
-          boilerplate(dirBoilerplate);
+          boilerplate(dirBoilerplate, answers.newApp);
           break;
 
         default:
