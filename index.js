@@ -2,11 +2,14 @@
 // Used to tell Node.js that this is a CLI tool
 /** @format */
 
-const fs = require("fs");
-const { spawn } = require("child_process");
+const fs = require("fs-extra");
 const inquirer = require("inquirer");
 const reduxFlow = require("./@generators/scripts/flow/reduxFlow");
 const componentUi = require("./@generators/scripts/component-ui/component-ui");
+const boilerplate = require("./@generators/hh/boilerplate");
+
+const dir = "./";
+boilerplate(dir);
 
 const questions = [
   {
@@ -117,7 +120,7 @@ inquirer.prompt(questions).then((answers) => {
     case "rocket-components":
       answers.componentsUIType.map((item) => {
         const dir = `./src/components-ui/${item}`;
-        spawn("npm", ["run", "generate:component-ui", `${item}`]);
+        componentUi(item);
         if (fs.existsSync(dir)) {
           console.log("\x1b[31m", `ERROR! The directory ${item} already exist`);
           return;
