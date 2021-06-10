@@ -19,10 +19,10 @@ async function reduxFlow(name) {
   const dir2 = `${dir}/${nameUpper}${names[0]}`;
 
   if (await fs.pathExists(dir)) {
-    fs.mkdirsSync(dir2);
+    await fs.mkdirs(dir2);
   } else {
-    fs.mkdirsSync(dir);
-    fs.mkdirsSync(dir2);
+    await fs.mkdirs(dir);
+    await fs.mkdirs(dir2);
   }
 
   function writeFileErrorHandler(err) {
