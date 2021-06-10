@@ -16,5 +16,5 @@
     "noEmit": true,
     "jsx": "react-jsx"
   },
-  "include": ["hh/src"]
+  "include": ["RocketBoilerplate/src"]
 }
