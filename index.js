@@ -6,7 +6,7 @@ const fs = require("fs-extra");
 const inquirer = require("inquirer");
 const reduxFlow = require("./@generators/scripts/flow/reduxFlow");
 const componentUi = require("./@generators/scripts/component-ui/component-ui");
-const boilerplate = require("./@generators/RocketBoilerplate/boilerplate");
+const boilerplate = require("./@generators/scripts/create-rocket-app");
 const componentView = require("./@generators/scripts/component-view/componentView");
 const componentShared = require("./@generators/scripts/component-shared/componentShared");
 
