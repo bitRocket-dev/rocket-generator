@@ -7,7 +7,6 @@ const { spawn } = require("child_process");
 const inquirer = require("inquirer");
 const reduxFlow = require("./@generators/scripts/flow/reduxFlow");
 const componentUi = require("./@generators/scripts/component-ui/component-ui");
-const reduxFlow = require("./@generators/scripts/flow/reduxFlow");
 
 const questions = [
   {
