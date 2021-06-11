@@ -8,7 +8,8 @@ const reduxFlow = require("./@generators/scripts/flow/reduxFlow");
 const componentUi = require("./@generators/scripts/component-ui/component-ui");
 const componentView = require("./@generators/scripts/component-view/componentView");
 const componentShared = require("./@generators/scripts/component-shared/componentShared");
-const { execSync } = require("child_process");
+//const { execSync } = require("child_process");
+const boilerplate = require("./@generators/scripts/create-rocket-app/boilerplate");
 
 const showMenu = () => {
   const questions = [
@@ -181,7 +182,7 @@ const main = async () => {
           break;
 
         case "create-rocket-app":
-          execSync(`npm run create-rocket-app ${answers.newApp}`);
+          boilerplate(answers.newApp);
           break;
 
         case "--- Exit ---":
