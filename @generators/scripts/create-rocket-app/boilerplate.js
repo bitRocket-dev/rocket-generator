@@ -13,7 +13,10 @@ async function boilerplate(name) {
   await fs.copy(localDir, dir);
 
   fs.writeFile(`${dir}/package.json`, package(name));
-  spawn("npm", ["install"], { cwd: dir });
+
+  console.log(`\n\x1b[33m`, "WAITING... INSTALLING PACKAGE...");
+  await spawn("npm", ["install"], { cwd: dir });
+  console.log(`\x1b[32m`, "DONE! GOOD CODING!");
 }
 
 module.exports = boilerplate;
