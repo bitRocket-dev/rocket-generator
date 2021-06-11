@@ -6,7 +6,7 @@ const { package } = require("./templates/package");
 async function boilerplate(dir, name) {
   const localDir = `${__dirname}/boilerplate`;
 
-  if (fs.existsSync(dir)) fs.copy(localDir, dir);
+  if (await fs.pathExists(dir)) fs.copy(localDir, dir);
   fs.writeFile(`./package.json`, package(name));
 }
 

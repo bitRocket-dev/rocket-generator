@@ -160,51 +160,21 @@ const main = async () => {
             } else reduxFlow(`${item}-${answers.reduxFlowName}`);
           });
           break;
+
         case "rocket-components":
-          answers.rocketComponents.map((item) => {
-            const dir = `./src/components-ui/${item}`;
-            componentUi(item);
-            if (fs.existsSync(dir)) {
-              console.log(
-                "\x1b[31m",
-                `ERROR! The directory ${item} already exist`
-              );
-              return;
-            }
-          });
+          answers.rocketComponents.map((item) => componentUi(item));
           break;
+
         case "new-component-UI":
-          const dir = `./src/components-ui/${answers.newComponentUI}`;
           componentUi(answers.newComponentUI);
-          if (fs.existsSync(dir)) {
-            console.log(
-              "\x1b[31m",
-              `ERROR! The directory ${answers.newComponentUI} already exist`
-            );
-            return;
-          }
           break;
+
         case "new-component-view":
-          const dir2 = `./src/components-view/${answers.newComponentView}`;
           componentView(answers.newComponentView);
-          if (fs.existsSync(dir2)) {
-            console.log(
-              "\x1b[31m",
-              `ERROR! The directory ${answers.newComponentView} already exist`
-            );
-            return;
-          }
           break;
+
         case "new-component-shared":
-          const dir3 = `./src/components-shared/${answers.newComponentShared}`;
           componentShared(answers.newComponentShared);
-          if (fs.existsSync(dir3)) {
-            console.log(
-              "\x1b[31m",
-              `ERROR! The directory ${answers.newComponentShared} already exist`
-            );
-            return;
-          }
           break;
         case "--- Exit ---":
           process.exit();
