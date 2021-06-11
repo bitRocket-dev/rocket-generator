@@ -3,7 +3,7 @@
 exports.package = (name) => {
   return `
   {
-  "name": "${name.toLowerCase()}",
+  "name": "${name}",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
