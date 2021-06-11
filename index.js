@@ -6,9 +6,9 @@ const inquirer = require("inquirer");
 const packjs = require("./package.json");
 const reduxFlow = require("./@generators/scripts/flow/reduxFlow");
 const componentUi = require("./@generators/scripts/component-ui/component-ui");
-const boilerplate = require("./@generators/scripts/create-rocket-app/boilerplate");
 const componentView = require("./@generators/scripts/component-view/componentView");
 const componentShared = require("./@generators/scripts/component-shared/componentShared");
+const { execSync } = require("child_process");
 
 const showMenu = () => {
   const questions = [
@@ -148,7 +148,6 @@ const showMenu = () => {
 };
 
 const main = async () => {
-  console.log("main");
   for (let count = 0; count <= 1000; count++) {
     await showMenu().then((answers) => {
       switch (answers.action) {
@@ -182,7 +181,7 @@ const main = async () => {
           break;
 
         case "create-rocket-app":
-          boilerplate(answers.newApp);
+          execSync(`npm run create-rocket-app ${answers.newApp}`);
           break;
 
         case "--- Exit ---":

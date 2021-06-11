@@ -1,6 +1,8 @@
 /** @format */
 
 const fs = require("fs-extra");
+const { spawn } = require("child_process");
+
 const { package } = require("./templates/package");
 
 async function boilerplate(name) {
@@ -11,7 +13,7 @@ async function boilerplate(name) {
   await fs.copy(localDir, dir);
 
   fs.writeFile(`${dir}/package.json`, package(name));
-  process.exit();
+  spawn("npm", ["install"], { cwd: dir });
 }
 
 module.exports = boilerplate;
