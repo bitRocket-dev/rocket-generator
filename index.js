@@ -3,6 +3,7 @@
 /** @format */
 
 const inquirer = require("inquirer");
+const packjs = require("./package.json");
 const reduxFlow = require("./@generators/scripts/flow/reduxFlow");
 const componentUi = require("./@generators/scripts/component-ui/component-ui");
 const boilerplate = require("./@generators/scripts/create-rocket-app/boilerplate");
@@ -162,7 +163,10 @@ const main = async () => {
           break;
 
         case "rocket-components":
-          answers.rocketComponents.map((item) => componentUi(item));
+          console.log(answers.newApp);
+          answers.rocketComponents.map((item) =>
+            componentUi(item, packjs.name)
+          );
           break;
 
         case "new-component-UI":
@@ -178,7 +182,6 @@ const main = async () => {
           break;
 
         case "create-rocket-app":
-          console.log("here");
           boilerplate(answers.newApp);
           break;
 

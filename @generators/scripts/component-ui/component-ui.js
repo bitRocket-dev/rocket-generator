@@ -4,11 +4,11 @@ const fs = require("fs-extra");
 const { component, story } = require("./templates.js");
 const { utilityCapitalizeFirst, throwIfError } = require("../../utilities.js");
 
-async function componentUi(name) {
+async function componentUi(name, pack) {
   if (!name) throw new Error("You must include a component name.");
 
   const formattedName = utilityCapitalizeFirst(name);
-  const dir = `./src/components-ui/${formattedName}`;
+  const dir = `./${pack}/src/components-ui/${formattedName}`;
 
   const localDir = `${__dirname}/${formattedName}`;
 
