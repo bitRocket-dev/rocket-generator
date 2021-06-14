@@ -8,6 +8,7 @@ const componentUi = require("./@generators/scripts/component-ui/component-ui");
 const componentView = require("./@generators/scripts/component-view/componentView");
 const componentShared = require("./@generators/scripts/component-shared/componentShared");
 const boilerplate = require("./@generators/scripts/create-rocket-app/boilerplate");
+const translations = require("./@generators/scripts/translations/translations");
 
 const showMenu = () => {
   const questions = [
@@ -17,6 +18,7 @@ const showMenu = () => {
       message: "Hi! How can i help you?",
       choices: [
         "create-rocket-app",
+        "translations",
         "CRUD",
         "rocket-components",
         "new-component-UI",
@@ -25,6 +27,7 @@ const showMenu = () => {
         "--- Exit ---",
       ],
     },
+
     {
       type: "list",
       name: "typeApp",
@@ -162,7 +165,6 @@ const main = async () => {
           break;
 
         case "rocket-components":
-          console.log(answers.newApp);
           answers.rocketComponents.map((item) => componentUi(item));
           break;
 
@@ -180,6 +182,10 @@ const main = async () => {
 
         case "create-rocket-app":
           boilerplate(answers.newApp, answers.typeApp);
+          break;
+
+        case "translations":
+          translations();
           break;
 
         case "--- Exit ---":
