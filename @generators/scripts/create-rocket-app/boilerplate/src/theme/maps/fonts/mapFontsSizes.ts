@@ -1,20 +1,8 @@
 /** @format */
 
-export interface TFontSizeValues {
-  display: string;
-  header: string;
-  title: string;
-  subtitle: string;
-  caption: string;
-}
+export interface TFontSizeValues {}
 
-export const mapFontsSize: TFontSizeValues = {
-  display: '50px',
-  header: '28px',
-  title: '21px',
-  subtitle: '16px',
-  caption: '14px',
-};
+export const mapFontsSize: TFontSizeValues = {};
 
 export type TFontVariant = keyof TFontSizeValues;
 export type TFontSize = keyof TFontSizeValues;

@@ -1,8 +1,7 @@
 /** @format */
 
 import { memo, FC } from 'react';
-import { Route } from 'react-router';
-import { Redirect } from 'react-router-dom';
+import { Redirect, Route } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 interface Props {

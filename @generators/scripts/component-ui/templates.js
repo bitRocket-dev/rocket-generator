@@ -1,16 +1,16 @@
 /** @format */
 
-exports.component = name => `
+exports.component = (name) => `
 import { FC } from "react";
 
 export interface Props {}
 
 export const UI${name} :FC<Props> = ({}): JSX.Element => {
-  return <div>UI${name}</div>;
+  return <div data-cy='ui-${name}'>UI${name}</div>;
 };
 `;
 
-exports.story = name => `
+exports.story = (name) => `
 import { UI${name}, Props } from './';
 import { Story, Meta } from '@storybook/react/types-6-0';
 import { Providers } from '../../Providers';
@@ -32,4 +32,14 @@ const Template: Story<Props> = props => (
 export const Default = Template.bind({});
 
 Default.args = {};
+`;
+
+exports.test = (name) => `
+import { UI${name}, Props } from './';
+import { mount } from '@cypress/react'
+
+it('renders learn react link', () => {
+  mount(<UI${name} />)
+  cyGet('ui-${name}').contains('UI${name}')
+})
 `;

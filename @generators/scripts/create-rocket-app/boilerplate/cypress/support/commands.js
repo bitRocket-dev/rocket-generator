@@ -1,3 +1,8 @@
+/** @format */
+
+export const cyGet = (dataCy): void => cy.get(`[data-cy=${dataCy}]`);
+
+Cypress.Commands.add('cyGet', cyGet);
 // ***********************************************
 // This example commands.js shows you how to
 // create various custom commands and overwrite

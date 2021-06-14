@@ -2,7 +2,7 @@
 
 import { createConfigurationHeader } from './config';
 
-const fetchDELETE = async (url: string): Promise<any> => {
+export const fetchDELETE = async (url: string): Promise<any> => {
   const response = await fetch(url, {
     method: 'DELETE',
     headers: createConfigurationHeader(),
@@ -10,5 +10,3 @@ const fetchDELETE = async (url: string): Promise<any> => {
 
   return response ? response.json() : null;
 };
-
-export default fetchDELETE;

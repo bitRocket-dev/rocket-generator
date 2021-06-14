@@ -61,6 +61,7 @@ exports.package = (name) => {
   "devDependencies": {
     "@commitlint/cli": "^11.0.0",
     "@commitlint/config-conventional": "^11.0.0",
+    "@cypress/react": "^5.9.1",
     "@storybook/addon-actions": "^6.1.19",
     "@storybook/addon-essentials": "^6.1.20",
     "@storybook/addon-links": "^6.1.19",

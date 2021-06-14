@@ -2,7 +2,7 @@
 
 import { createConfigurationHeader } from './config';
 
-const fetchPOST = async (url: string, params: any): Promise<any> => {
+export const fetchPOST = async (url: string, params: any): Promise<any> => {
   const response = await fetch(url, {
     method: 'POST',
     headers: createConfigurationHeader(),
@@ -10,5 +10,3 @@ const fetchPOST = async (url: string, params: any): Promise<any> => {
   });
   return response ? response.json() : null;
 };
-
-export default fetchPOST;

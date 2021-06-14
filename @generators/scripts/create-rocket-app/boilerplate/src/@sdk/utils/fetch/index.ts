@@ -1,9 +1,9 @@
 /** @format */
 
-import fetchGET from './fetchGET';
-import fetchPOST from './fetchPOST';
-import fetchDELETE from './fetchDELETE';
-import fetchPUT from './fetchPUT';
+import { fetchGET } from './fetchGET';
+import { fetchPOST } from './fetchPOST';
+import { fetchDELETE } from './fetchDELETE';
+import { fetchPUT } from './fetchPUT';
 
 export interface TFetch {
   get: (url: string) => Promise<any>;

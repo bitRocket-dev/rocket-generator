@@ -1,6 +1,5 @@
 /** @format */
 
-import './rocketimg.png';
 import { FC } from 'react';
 
 export const App: FC = (): JSX.Element => {

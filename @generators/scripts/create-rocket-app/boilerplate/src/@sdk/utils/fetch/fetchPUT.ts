@@ -1,7 +1,7 @@
 /** @format */
 import { createConfigurationHeader } from './config';
 
-const fetchPUT = async (url: string, params?: any): Promise<any> => {
+export const fetchPUT = async (url: string, params?: any): Promise<any> => {
   const response = await fetch(url, {
     method: 'PUT',
     headers: createConfigurationHeader(),
@@ -10,5 +10,3 @@ const fetchPUT = async (url: string, params?: any): Promise<any> => {
 
   return response ? response.json() : null;
 };
-
-export default fetchPUT;
