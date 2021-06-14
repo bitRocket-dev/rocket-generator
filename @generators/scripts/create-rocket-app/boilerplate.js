@@ -14,7 +14,12 @@ async function boilerplate(name, type) {
 
   fs.writeFile(`${dir}/package.json`, package(name));
 
-  console.log(`\n\x1b[33m%s\x1b[0m`, "WAITING... INSTALLING PACKAGE...");
+  console.log(
+    `\n\x1b[33m`,
+    `\x1b[5m`,
+    "WAITING... INSTALLING PACKAGE...",
+    "\x1b[0m"
+  );
 
   await execAsync(`${type} install`, { cwd: dir });
 

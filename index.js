@@ -48,7 +48,7 @@ const showMenu = () => {
     {
       type: "input",
       name: "newApp",
-      message: "Create a boilerplate",
+      message: "What is the name?",
       when: (answers) => answers.main === "create-rocket-app",
     },
     //#region CRUD

@@ -29,7 +29,6 @@ exports.package = (name) => {
     "build:app": "react-scripts build",
     "build:storybook": "build-storybook -s public",
     "cypress": "./node_modules/.bin/cypress open",
-    "postinstall": "husky install",
     "prettier": "prettier --write src/**/*.{ts,tsx} src/**/**/*.{ts,tsx} src/**/**/**/*.{ts,tsx} src/**/**/**/**/*.{ts,tsx} src/**/**/**/**/**/*.{ts,tsx}",
     "start:build": "npm run build:app && serve -s build",
     "start:dev": "react-scripts start",
