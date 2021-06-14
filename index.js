@@ -14,10 +14,19 @@ const showMenu = () => {
   const questions = [
     {
       type: "list",
+      name: "main",
+      message: "Hi! What do you want to do?",
+      choices: [
+        "create-rocket-app",
+        "Add/Create other components",
+        "--- Exit ---",
+      ],
+    },
+    {
+      type: "list",
       name: "action",
       message: "Hi! How can i help you?",
       choices: [
-        "create-rocket-app",
         "translations",
         "CRUD",
         "rocket-components",
@@ -26,6 +35,7 @@ const showMenu = () => {
         "new-component-shared",
         "--- Exit ---",
       ],
+      when: (answers) => answers.main === "Add/Create other components",
     },
 
     {
@@ -33,13 +43,13 @@ const showMenu = () => {
       name: "typeApp",
       message: "npm or yarn?",
       choices: ["npm", "yarn"],
-      when: (answers) => answers.action === "create-rocket-app",
+      when: (answers) => answers.main === "create-rocket-app",
     },
     {
       type: "input",
       name: "newApp",
       message: "Create a boilerplate",
-      when: (answers) => answers.action === "create-rocket-app",
+      when: (answers) => answers.main === "create-rocket-app",
     },
     //#region CRUD
     {
@@ -151,49 +161,51 @@ const showMenu = () => {
 };
 
 const main = async () => {
-  while (true) {
+  let app = true;
+  while (app) {
     await showMenu().then((answers) => {
-      switch (answers.action) {
-        case "CRUD":
-          answers.reduxFlowType.map((item) => {
-            if (item === "Read") {
-              answers.readType.map((item) =>
-                reduxFlow(`${item}-${answers.reduxFlowName}`)
-              );
-            } else reduxFlow(`${item}-${answers.reduxFlowName}`);
-          });
-          break;
+      if (answers.main === "create-rocket-app") {
+        boilerplate(answers.newApp, answers.typeApp);
+        app = false;
+      } else {
+        switch (answers.action) {
+          case "CRUD":
+            answers.reduxFlowType.map((item) => {
+              if (item === "Read") {
+                answers.readType.map((item) =>
+                  reduxFlow(`${item}-${answers.reduxFlowName}`)
+                );
+              } else reduxFlow(`${item}-${answers.reduxFlowName}`);
+            });
+            break;
 
-        case "rocket-components":
-          answers.rocketComponents.map((item) => componentUi(item));
-          break;
+          case "rocket-components":
+            answers.rocketComponents.map((item) => componentUi(item));
+            break;
 
-        case "new-component-UI":
-          componentUi(answers.newComponentUI);
-          break;
+          case "new-component-UI":
+            componentUi(answers.newComponentUI);
+            break;
 
-        case "new-component-view":
-          componentView(answers.newComponentView);
-          break;
+          case "new-component-view":
+            componentView(answers.newComponentView);
+            break;
 
-        case "new-component-shared":
-          componentShared(answers.newComponentShared);
-          break;
+          case "new-component-shared":
+            componentShared(answers.newComponentShared);
+            break;
 
-        case "create-rocket-app":
-          boilerplate(answers.newApp, answers.typeApp);
-          break;
+          case "translations":
+            translations();
+            break;
 
-        case "translations":
-          translations();
-          break;
+          case "--- Exit ---":
+            process.exit();
 
-        case "--- Exit ---":
-          process.exit();
-
-        default:
-          console.log("default");
-          break;
+          default:
+            console.log("default");
+            break;
+        }
       }
     });
   }
