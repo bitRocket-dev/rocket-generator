@@ -3,12 +3,10 @@
 /** @format */
 
 const inquirer = require("inquirer");
-const packjs = require("./package.json");
 const reduxFlow = require("./@generators/scripts/flow/reduxFlow");
 const componentUi = require("./@generators/scripts/component-ui/component-ui");
 const componentView = require("./@generators/scripts/component-view/componentView");
 const componentShared = require("./@generators/scripts/component-shared/componentShared");
-//const { execSync } = require("child_process");
 const boilerplate = require("./@generators/scripts/create-rocket-app/boilerplate");
 
 const showMenu = () => {
@@ -28,16 +26,17 @@ const showMenu = () => {
       ],
     },
     {
+      type: "list",
+      name: "typeApp",
+      message: "npm or yarn?",
+      choices: ["npm", "yarn"],
+      when: (answers) => answers.action === "create-rocket-app",
+    },
+    {
       type: "input",
       name: "newApp",
       message: "Create a boilerplate",
       when: (answers) => answers.action === "create-rocket-app",
-    },
-    {
-      type: "confirm",
-      name: "exit",
-      message: "Do you want exit?",
-      when: (answers) => answers.action === "--- Exit ---",
     },
     //#region CRUD
     {
@@ -149,7 +148,7 @@ const showMenu = () => {
 };
 
 const main = async () => {
-  for (let count = 0; count <= 1000; count++) {
+  while (true) {
     await showMenu().then((answers) => {
       switch (answers.action) {
         case "CRUD":
@@ -164,9 +163,7 @@ const main = async () => {
 
         case "rocket-components":
           console.log(answers.newApp);
-          answers.rocketComponents.map((item) =>
-            componentUi(item, packjs.name)
-          );
+          answers.rocketComponents.map((item) => componentUi(item));
           break;
 
         case "new-component-UI":
@@ -182,7 +179,7 @@ const main = async () => {
           break;
 
         case "create-rocket-app":
-          boilerplate(answers.newApp);
+          boilerplate(answers.newApp, answers.typeApp);
           break;
 
         case "--- Exit ---":
@@ -190,6 +187,7 @@ const main = async () => {
 
         default:
           console.log("default");
+          break;
       }
     });
   }

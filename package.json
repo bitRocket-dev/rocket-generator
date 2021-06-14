@@ -1,6 +1,6 @@
 {
   "name": "rocket-generator",
-  "version": "1.0.30",
+  "version": "1.0.32",
   "description": "Node Generator for bitRocket.dev Community",
   "main": "index.js",
   "scripts": {
@@ -10,7 +10,8 @@
     "generate:component-flow": "node ./@generators/scripts/flow/index $1",
     "generate:component-redux-flow": "node ./@generators/scripts/redux-flow/index $1",
     "generate:component-view": "node ./@generators/scripts/component-view/index $1",
-    "create-rocket-app": "node ./@generators/scripts/create-rocket-app/index $1"
+    "create-rocket-app": "node ./@generators/scripts/create-rocket-app/index $1",
+    "postcreate-rocket-app": "npm i"
   },
   "bin": {
     "rocket-generator": "./index.js"

@@ -1,23 +1,17 @@
 /** @format */
-const fs = require("fs-extra");
+const { exec } = require("child_process");
 
 exports.utilityCapitalizeFirst = (string) =>
   string.toLowerCase().charAt(0).toUpperCase() + string.slice(1);
 
-exports.utilityPath = (string) => {
-  let str = ".";
-  const arr = string
-    .split("/")
-    .filter((item) => item != ".")
-    .map((item) => {
-      str += "/" + item;
-      if (!fs.existsSync(str)) {
-        fs.mkdirSync(str);
-      }
-    });
-};
+exports.execAsync = (command, options = {}) =>
+  new Promise((resolve, reject) =>
+    exec(command, options, (err, stdout, stderr) => {
+      if (err) return reject(err, stderr);
+      return resolve(stdout);
+    })
+  );
 
 exports.throwIfError = (err) => {
   if (err) throw err;
 };
-

@@ -1,11 +1,10 @@
 /** @format */
 
 const fs = require("fs-extra");
-const { spawn } = require("child_process");
-
 const { package } = require("./templates/package");
+const { execAsync } = require("../../utilities");
 
-async function boilerplate(name) {
+async function boilerplate(name, type) {
   const dir = `./${name}`;
   await fs.mkdirs(dir);
   const localDir = `${__dirname}/boilerplate`;
@@ -15,7 +14,9 @@ async function boilerplate(name) {
   fs.writeFile(`${dir}/package.json`, package(name));
 
   console.log(`\n\x1b[33m`, "WAITING... INSTALLING PACKAGE...");
-  await spawn("npm", ["install"], { cwd: dir });
+
+  await execAsync(`${type} install`, { cwd: dir });
+
   console.log(`\x1b[32m`, "DONE! GOOD CODING!");
 }
 
