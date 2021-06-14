@@ -9,6 +9,7 @@ const componentView = require("./@generators/scripts/component-view/componentVie
 const componentShared = require("./@generators/scripts/component-shared/componentShared");
 const boilerplate = require("./@generators/scripts/create-rocket-app/boilerplate");
 const translations = require("./@generators/scripts/translations/translations");
+const customHook = require("./@generators/scripts/custom-hooks/customHook");
 
 const showMenu = () => {
   const questions = [
@@ -27,12 +28,13 @@ const showMenu = () => {
       name: "action",
       message: "Hi! How can i help you?",
       choices: [
-        "translations",
         "CRUD",
         "rocket-components",
         "new-component-UI",
         "new-component-view",
         "new-component-shared",
+        "translations",
+        "custom-hook",
         "--- Exit ---",
       ],
       when: (answers) => answers.main === "Add/Create other components",
@@ -156,6 +158,32 @@ const showMenu = () => {
       },
     },
     //#endregion COMPONENTS SHARED
+
+    //#region CUSTOM HOOK
+    {
+      type: "checkbox",
+      name: "customHooks",
+      message: "Choose rocket component.",
+      choices: [
+        "useCancelableFetch",
+        "useApiGet",
+        "useApiPost",
+        "useInput",
+        "useInputTaxCode",
+        "useInputVatNumber",
+        "useLocalStorage",
+        "useLocation",
+        "useLongPress",
+        "useMousePosition",
+        "useNavigation",
+        "useNotification",
+        "useOnlineCheck",
+        "useSessionStorage",
+        "useWindowResize",
+      ],
+      when: (answers) => answers.action === "custom-hook",
+    },
+    //#endregion CUSTOM HOOK
   ];
   return inquirer.prompt(questions);
 };
@@ -197,6 +225,10 @@ const main = async () => {
 
           case "translations":
             translations();
+            break;
+
+          case "custom-hook":
+            answers.customHooks.map((item) => customHook(item));
             break;
 
           case "--- Exit ---":
