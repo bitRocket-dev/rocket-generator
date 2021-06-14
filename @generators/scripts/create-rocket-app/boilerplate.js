@@ -3,6 +3,7 @@
 const fs = require("fs-extra");
 const { package } = require("./templates/package");
 const { execAsync } = require("../../utilities");
+const boxen = require("boxen");
 
 async function boilerplate(name, type) {
   const dir = `./${name}`;
@@ -13,9 +14,21 @@ async function boilerplate(name, type) {
 
   fs.writeFile(`${dir}/package.json`, package(name));
 
-  console.log(`\n\x1b[33m`, "WAITING... INSTALLING PACKAGE...");
+  console.log(`\n\x1b[33m%s\x1b[0m`, "WAITING... INSTALLING PACKAGE...");
 
   await execAsync(`${type} install`, { cwd: dir });
+
+  console.log(
+    `\n\x1b[36m%s\x1b[0m`,
+    boxen(
+      `Now start coding by typing:\n\n  cd ${name}\n\nAfter if you want create or import other components:\n\n  npx rocket-generator`,
+      {
+        padding: 1,
+        margin: 1,
+        borderStyle: "doubleSingle",
+      }
+    )
+  );
 
   console.log(`\x1b[32m`, "DONE! GOOD CODING!");
 }

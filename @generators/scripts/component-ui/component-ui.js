@@ -2,13 +2,17 @@
 
 const fs = require("fs-extra");
 const { component, story } = require("./templates.js");
-const { utilityCapitalizeFirst, throwIfError } = require("../../utilities.js");
+const {
+  utilityCapitalizeFirst,
+  throwIfError,
+  execAsync,
+} = require("../../utilities.js");
 
-async function componentUi(name, pack) {
+async function componentUi(name) {
   if (!name) throw new Error("You must include a component name.");
 
   const formattedName = utilityCapitalizeFirst(name);
-  const dir = `./${pack}/src/components-ui/${formattedName}`;
+  const dir = `./src/components-ui/${formattedName}`;
 
   const localDir = `${__dirname}/${formattedName}`;
 
@@ -25,6 +29,8 @@ async function componentUi(name, pack) {
     throwIfError
   );
   fs.writeFile(`${dir}/index.tsx`, component(formattedName), throwIfError);
+
+  await execAsync(`npm install styled-components`, { cwd: dir });
 }
 
 module.exports = componentUi;
