@@ -28,12 +28,12 @@ async function componentUi(name) {
     story(formattedName),
     throwIfError
   );
-  fs.writeFile(`${dir}/index.tsx`, component(formattedName), throwIfError);
   fs.writeFile(
-    `.${dir}/${formattedName}.test.js`,
+    `${dir}/${formattedName}.test.js`,
     test(formattedName),
     throwIfError
   );
+  fs.writeFile(`${dir}/index.tsx`, component(formattedName), throwIfError);
 
   await execAsync(`npm install styled-components`, { cwd: dir });
 }

@@ -35,8 +35,10 @@ Default.args = {};
 `;
 
 exports.test = (name) => `
-import { UI${name}, Props } from './';
+import React from 'react';
+import { UI${name} } from '.';
 import { mount } from '@cypress/react'
+
 
 it('renders learn react link', () => {
   mount(<UI${name} />)

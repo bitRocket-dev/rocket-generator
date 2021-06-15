@@ -11,8 +11,11 @@ exports.package = (name) => {
     "node": ">=10.13.0"
   },
   "dependencies": {
+  
+    "@cypress/webpack-dev-server": "^1.3.1",
     "connected-react-router": "^6.0.0",
     "fast-memoize": "^2.5.2",
+    "html-webpack-plugin": "^4.5.2",
     "react-dom": "^17.0.2",
     "react-redux": "^7.2.2",
     "react-router-dom": "^5.2.0",
@@ -23,7 +26,6 @@ exports.package = (name) => {
     "reselect": "^4.0.0",
     "styled-components": "^5.2.3",
     "web-vitals": "^1.0.1"
-    
   },
   "scripts": {
     "build:app": "react-scripts build",

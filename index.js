@@ -28,8 +28,8 @@ const showMenu = () => {
       name: "action",
       message: "What do you need?",
       choices: [
-        // "\x1b[33m--- Back ---\x1b[0m",
-        // new inquirer.Separator(),
+        "\x1b[33m--- Back ---\x1b[0m",
+        new inquirer.Separator(),
         "CRUD",
         // "rocket-components",
         "new-component-UI",
@@ -40,12 +40,12 @@ const showMenu = () => {
       ],
       when: (answers) => answers.main === "Add/Create other components",
     },
-    // {
-    //   type: "input",
-    //   name: "returnBack",
-    //   message: () => showMenu(),
-    //   when: (answers) => answers.action === "\x1b[33m--- Back ---\x1b[0m",
-    // },
+    {
+      type: "input",
+      name: "returnBack",
+      message: () => main(),
+      when: (answers) => answers.action === "\x1b[33m--- Back ---\x1b[0m",
+    },
     {
       type: "input",
       name: "Exit",
@@ -56,11 +56,7 @@ const showMenu = () => {
       type: "list",
       name: "createApp",
       message: "Create a boilerplate",
-      choices: [
-        "Insert Name",
-
-        //  "\x1b[33m--- Back ---\x1b[0m"
-      ],
+      choices: ["Insert Name", "\x1b[33m--- Back ---\x1b[0m"],
       when: (answers) => answers.main === "create-rocket-app",
     },
     {
@@ -69,13 +65,13 @@ const showMenu = () => {
       message: () => process.exit(),
       when: (answers) => answers.main === "\x1b[31m--- Exit ---\x1b[0m",
     },
-    // {
-    //   type: "input",
-    //   name: "back",
-    //   message: () => showMenu(),
-    //   when: (answers) =>
-    //     answers.action | (answers.createApp === "\x1b[33m--- Back ---\x1b[0m"),
-    // },
+    {
+      type: "input",
+      name: "back",
+      message: () => main(),
+      when: (answers) =>
+        answers.action | (answers.createApp === "\x1b[33m--- Back ---\x1b[0m"),
+    },
 
     {
       type: "input",
