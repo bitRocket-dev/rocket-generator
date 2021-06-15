@@ -5,7 +5,7 @@ const { package } = require("./templates/package");
 const { execAsync } = require("../../utilities");
 const boxen = require("boxen");
 
-async function boilerplate(name, type) {
+async function boilerplate(name) {
   const dir = `./${name}`;
   await fs.mkdirs(dir);
   const localDir = `${__dirname}/boilerplate`;
@@ -21,7 +21,7 @@ async function boilerplate(name, type) {
     "\x1b[0m"
   );
 
-  await execAsync(`${type} install`, { cwd: dir });
+  await execAsync(`npm install`, { cwd: dir });
 
   console.log(
     `\n\x1b[36m%s\x1b[0m`,

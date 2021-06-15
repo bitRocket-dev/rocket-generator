@@ -20,7 +20,7 @@ const showMenu = () => {
       choices: [
         "create-rocket-app",
         "Add/Create other components",
-        "--- Exit ---",
+        "\x1b[31m--- Exit ---\x1b[0m",
       ],
     },
     {
@@ -28,6 +28,8 @@ const showMenu = () => {
       name: "action",
       message: "Hi! How can i help you?",
       choices: [
+        "\x1b[33m--- Back ---\x1b[0m",
+        new inquirer.Separator(),
         "CRUD",
         "rocket-components",
         "new-component-UI",
@@ -35,23 +37,47 @@ const showMenu = () => {
         "new-component-shared",
         "translations",
         "custom-hook",
-        "--- Exit ---",
       ],
       when: (answers) => answers.main === "Add/Create other components",
     },
-
+    {
+      type: "input",
+      name: "returnBack",
+      message: () => showMenu(),
+      when: (answers) => answers.action === "\x1b[33m--- Back ---\x1b[0m",
+    },
+    {
+      type: "input",
+      name: "Exit",
+      message: () => process.exit(),
+      when: (answers) => answers.action === "\x1b[31m--- Exit ---\x1b[0m",
+    },
     {
       type: "list",
-      name: "typeApp",
-      message: "npm or yarn?",
-      choices: ["npm", "yarn"],
+      name: "createApp",
+      message: "Create a boilerplate",
+      choices: ["Insert Name", "\x1b[33m--- Back ---\x1b[0m"],
       when: (answers) => answers.main === "create-rocket-app",
     },
     {
       type: "input",
+      name: "exitApp",
+      message: () => process.exit(),
+      when: (answers) => answers.main === "\x1b[31m--- Exit ---\x1b[0m",
+    },
+    {
+      type: "input",
+      name: "back",
+      message: () => showMenu(),
+      when: (answers) =>
+        answers.action | (answers.createApp === "\x1b[33m--- Back ---\x1b[0m"),
+    },
+
+    {
+      type: "input",
       name: "newApp",
       message: "What is the name?",
-      when: (answers) => answers.main === "create-rocket-app",
+      when: (answers) => answers.createApp === "Insert Name",
     },
     //#region CRUD
     {
@@ -193,7 +219,7 @@ const main = async () => {
   while (app) {
     await showMenu().then((answers) => {
       if (answers.main === "create-rocket-app") {
-        boilerplate(answers.newApp, answers.typeApp);
+        boilerplate(answers.newApp);
         app = false;
       } else {
         switch (answers.action) {
@@ -231,11 +257,8 @@ const main = async () => {
             answers.customHooks.map((item) => customHook(item));
             break;
 
-          case "--- Exit ---":
-            process.exit();
-
           default:
-            console.log("default");
+            console.log("Default");
             break;
         }
       }
