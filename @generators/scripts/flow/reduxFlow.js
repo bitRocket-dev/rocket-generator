@@ -15,7 +15,7 @@ async function reduxFlow(name) {
 
   const nameUpper = names[1].charAt(0).toUpperCase() + names[1].slice(1);
 
-  const dir = `./src/@sdk/${nameUpper}`;
+  const dir = `./src/@sdk/redux-modules/${nameUpper}`;
   const dir2 = `${dir}/${nameUpper}${names[0]}`;
 
   if (await fs.pathExists(dir)) {

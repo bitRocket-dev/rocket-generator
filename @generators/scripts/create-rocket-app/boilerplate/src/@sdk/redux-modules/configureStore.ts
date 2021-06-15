@@ -2,8 +2,7 @@
 
 import { createStore, applyMiddleware, Store, CombinedState } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
-import { middlewareSaga } from './middlewares/middlewareSaga';
-import { middlewares } from './middlewares';
+import { middlewares, middlewareSaga } from './middlewares';
 import { watchers } from './watchers';
 import { utilityGetFromLocalStorage } from '../utils/cache/getFromLocalStorage';
 import { IS_DEVELOPMENT, NAME_APP } from '../declarations/general';

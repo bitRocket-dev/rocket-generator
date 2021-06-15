@@ -30,7 +30,7 @@ async function componentUi(name) {
   );
   fs.writeFile(`${dir}/index.tsx`, component(formattedName), throwIfError);
   fs.writeFile(
-    `./cypress/integration/${formattedName}.spec.js`,
+    `.${dir}/${formattedName}.test.js`,
     test(formattedName),
     throwIfError
   );

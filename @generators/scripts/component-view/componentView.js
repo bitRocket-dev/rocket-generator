@@ -9,19 +9,16 @@ async function componentView(name) {
 
   const formattedName = utilityCapitalizeFirst(name);
   const dir = `./src/components-view/View${formattedName}`;
-  const keep = `./src/components-view/View${formattedName}/components`;
 
   if (await fs.pathExists(dir))
     console.error(`\x1b[31m`, "A component with that name already exists.");
 
   await fs.mkdirs(dir);
-  await fs.mkdir(keep);
 
   function writeFileErrorHandler(err) {
     if (err) throw err;
   }
 
-  fs.writeFile(`${dir}/components/.gitkeep`, gitkeep(), writeFileErrorHandler);
   fs.writeFile(
     `${dir}/index.tsx`,
     component(formattedName),
