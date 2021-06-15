@@ -8,19 +8,29 @@ Per facilitare lo sviluppo, è importante che i nomi dei componenti e/o di funzi
 - `UI... (es. UIButton)` componenti atomici
 - `utility... (es. utilityFormattedDate)` funzioni di utility
 
-### Redux
+# Redux
 
-#### Actions
+## **Actions**
 
+`es. AT_EXAMPLE_CREATE_REQUEST, AT_EXAMPLE_CREATE_SUCCESS, AT_EXAMPLE_CREATE_FAILURE, `
+`AT_EXAMPLE_DELETE_REQUEST,`
 ....
 
-#### Redux Reducer
+---
 
+## **Redux Reducer**
+
+`es. reducerExample`
 ....
 
-#### Redux Saga
+---
 
+## **Redux Saga**
+
+`es. sagaExampleCreate`
 ....
+
+---
 
 **Il nome di un componente o di una classe inizia con la lettera maiuscola**
 **I nomi delle variabili sono il lingua inglese** e in _camelCase_ **- NON utilizzare underscore -**
