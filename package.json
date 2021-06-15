@@ -1,6 +1,6 @@
 {
   "name": "rocket-generator",
-  "version": "1.0.32",
+  "version": "1.0.34",
   "description": "Node Generator for bitRocket.dev Community",
   "main": "index.js",
   "scripts": {
@@ -29,6 +29,7 @@
   "dependencies": {
     "boxen": "^5.0.1",
     "fs-extra": "^10.0.0",
-    "inquirer": "^8.1.0"
+    "inquirer": "^8.1.0",
+    "styled-components": "^5.3.0"
   }
 }

@@ -1,7 +1,7 @@
 /** @format */
 
 const fs = require("fs-extra");
-const { component, story } = require("./templates.js");
+const { component, story, test } = require("./templates.js");
 const {
   utilityCapitalizeFirst,
   throwIfError,
@@ -29,6 +29,11 @@ async function componentUi(name) {
     throwIfError
   );
   fs.writeFile(`${dir}/index.tsx`, component(formattedName), throwIfError);
+  fs.writeFile(
+    `./cypress/integration/${formattedName}.spec.js`,
+    test(formattedName),
+    throwIfError
+  );
 
   await execAsync(`npm install styled-components`, { cwd: dir });
 }
