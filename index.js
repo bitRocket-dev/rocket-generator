@@ -26,7 +26,7 @@ const showMenu = () => {
     {
       type: "list",
       name: "action",
-      message: "Hi! How can i help you?",
+      message: "What do you need?",
       choices: [
         "\x1b[33m--- Back ---\x1b[0m",
         new inquirer.Separator(),

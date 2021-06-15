@@ -3,7 +3,7 @@
 # Indice
 
 - [Naming Convention](docs/NAMING_CONVENTION.md)
-- [Git Flow](docs/GIT_FLOW.md)
+- [Git Flow](@docs/GIT_FLOW.md)
 
 ### Strumenti utilizzati
 
@@ -13,7 +13,7 @@
 
 # Introduzione
 
-L'applicazione viene sviluppata in [react 17.0.0](https://reactjs.org/blog/2020/10/20/react-v17.html) utilizzando [create-react-app 4.0.0](https://github.com/facebook/create-react-app) con template [typescript](https://www.typescriptlang.org).
+L'applicazione viene sviluppata in [react 17.0.2](https://reactjs.org/blog/2020/10/20/react-v17.html) utilizzando [Rocket-generator](https://www.npmjs.com/package/rocket-generator) con template [typescript](https://www.typescriptlang.org).
 
 _Si suggerisce l'utilizzo dell'editor [VSCode](https://code.visualstudio.com/)_
 
@@ -63,6 +63,7 @@ La formattazione e i controlli sul codice hanno lo scopo di garantire la massima
 - `npm run start:storybook` avvio di storybook in locale
 - `npm run upgrade:check` controlla eventuali librerie non utilizzate o non aggiornate
 - `npm run upgrade:interactive` aggiornamenti delle librerie
+- `npm run start:cypress` avvio di Cypress
 
 ### Configurazione VSCode
 
