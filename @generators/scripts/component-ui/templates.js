@@ -35,13 +35,12 @@ Default.args = {};
 `;
 
 exports.test = (name) => `
-import React from 'react';
 import { UI${name} } from '.';
 import { mount } from '@cypress/react'
-
+import { cyGet } from "../cypress/support/commands";
 
 it('renders learn react link', () => {
   mount(<UI${name} />)
-  cy.cyGet('ui-${name}').contains('UI${name}')
+  cyGet('ui-${name}').contains('UI${name}')
 })
 `;
