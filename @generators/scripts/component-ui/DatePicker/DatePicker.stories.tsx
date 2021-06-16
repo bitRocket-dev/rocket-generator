@@ -1,11 +1,11 @@
 /** @format */
 
-import { Story, Meta } from '@storybook/react/types-6-0';
-import { Providers } from '../../Providers';
-import { UIDatePicker, Props } from '.';
+import { Story, Meta } from "@storybook/react/types-6-0";
+import { Providers } from "../Providers";
+import { UIDatePicker, Props } from ".";
 
 export default {
-  title: 'Example/DatePicker',
+  title: "Example/DatePicker",
   component: UIDatePicker,
   argTypes: {
     value: { table: { disable: true } },
@@ -16,7 +16,7 @@ export default {
   },
 } as Meta;
 
-const Template: Story<Props> = args => (
+const Template: Story<Props> = (args) => (
   <Providers>
     <UIDatePicker {...args} />
   </Providers>

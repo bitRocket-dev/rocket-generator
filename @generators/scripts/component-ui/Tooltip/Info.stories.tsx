@@ -1,15 +1,15 @@
 /** @format */
 
-import { UITooltip, Props } from '.';
-import { Story, Meta } from '@storybook/react/types-6-0';
-import { Providers } from '../../Providers';
+import { UITooltip, Props } from ".";
+import { Story, Meta } from "@storybook/react/types-6-0";
+import { Providers } from "../Providers";
 
 export default {
-  title: 'Example/Tooltip',
+  title: "Example/Tooltip",
   component: UITooltip,
 } as Meta;
 
-const Template: Story<Props> = props => (
+const Template: Story<Props> = (props) => (
   <Providers>
     <UITooltip {...props} />
   </Providers>

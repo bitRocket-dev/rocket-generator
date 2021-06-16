@@ -1,9 +1,9 @@
 /** @format */
 
-import { FC, memo } from 'react';
-import styled from 'styled-components';
-import { TStyled } from '../../theme';
-import { mediaQuery } from '../../theme/mediaQuery';
+import { FC, memo } from "react";
+import styled from "styled-components";
+import { TStyled } from "../@theme";
+import { mediaQuery } from "../@theme/mediaQuery";
 
 // #region ::: PARTIALS
 const WrapperDesktop = styled.div<TStyled>`
@@ -22,11 +22,15 @@ const WrapperMobile = styled.div<TStyled>`
 
 export interface Props {
   children: JSX.Element;
-  type: 'desktop' | 'mobile';
+  type: "desktop" | "mobile";
 }
 
 export const UIVisible: FC<Props> = memo(({ children, type }): JSX.Element => {
-  return type === 'desktop' ? <WrapperDesktop>{children}</WrapperDesktop> : <WrapperMobile>{children}</WrapperMobile>;
+  return type === "desktop" ? (
+    <WrapperDesktop>{children}</WrapperDesktop>
+  ) : (
+    <WrapperMobile>{children}</WrapperMobile>
+  );
 });
 
-UIVisible.displayName = 'UIVisible';
+UIVisible.displayName = "UIVisible";

@@ -1,11 +1,11 @@
 /** @format */
 
-import { FC } from 'react';
-import styled from 'styled-components';
-import { TStyled } from '../../theme';
+import { FC } from "react";
+import styled from "styled-components";
+import { TStyled } from "../@theme";
 
 interface propsStyled extends TStyled {
-  orientation: 'left' | 'right' | 'top' | 'bottom';
+  orientation: "left" | "right" | "top" | "bottom";
 }
 
 const Tooltip = styled.div<propsStyled>`
@@ -21,7 +21,7 @@ const Tooltip = styled.div<propsStyled>`
   border-radius: 5px;
   :after {
     ${({ orientation, theme }: propsStyled) =>
-      orientation === 'left' &&
+      orientation === "left" &&
       `content: ' ';
     position: absolute;
     top: 50%;
@@ -32,7 +32,7 @@ const Tooltip = styled.div<propsStyled>`
     border-color: transparent ${theme.colors.dark.primary} transparent transparent`};
 
     ${({ orientation, theme }: propsStyled) =>
-      orientation === 'right' &&
+      orientation === "right" &&
       `content: ' ';
     position: absolute;
     top: 50%;
@@ -43,7 +43,7 @@ const Tooltip = styled.div<propsStyled>`
     border-color: transparent  transparent transparent ${theme.colors.dark.primary}`}
 
     ${({ orientation, theme }: propsStyled) =>
-      orientation === 'bottom' &&
+      orientation === "bottom" &&
       `content: ' ';
     position: absolute;
     top: 100%;
@@ -52,7 +52,7 @@ const Tooltip = styled.div<propsStyled>`
     border-color:${theme.colors.dark.primary} transparent  transparent transparent `}
 
 ${({ orientation, theme }: propsStyled) =>
-      orientation === 'top' &&
+      orientation === "top" &&
       `content: ' ';
     position: fixed;    
     top: -1px;
@@ -64,9 +64,12 @@ ${({ orientation, theme }: propsStyled) =>
 
 export interface Props {
   text?: string;
-  orientation?: 'left' | 'right' | 'top' | 'bottom';
+  orientation?: "left" | "right" | "top" | "bottom";
 }
 
-export const UITooltip: FC<Props> = ({ text, orientation = 'left' }): JSX.Element => {
+export const UITooltip: FC<Props> = ({
+  text,
+  orientation = "left",
+}): JSX.Element => {
   return <Tooltip orientation={orientation}>{text}</Tooltip>;
 };

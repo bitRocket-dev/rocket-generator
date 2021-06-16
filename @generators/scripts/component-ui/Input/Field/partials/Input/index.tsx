@@ -1,11 +1,11 @@
 /** @format */
 
 // #region ::: IMPORT
-import React, { ChangeEvent, Dispatch, FC, memo, SetStateAction } from 'react';
-import styled from 'styled-components';
-import { TStyled } from '../../../../../theme';
-import { BoxPrefix } from './BoxPrefix';
-import { Outer } from './Outer';
+import React, { ChangeEvent, Dispatch, FC, memo, SetStateAction } from "react";
+import styled from "styled-components";
+import { TStyled } from "../../../../@theme";
+import { BoxPrefix } from "./BoxPrefix";
+import { Outer } from "./Outer";
 // #endregion
 
 // #region ::: PARTIALS
@@ -31,7 +31,7 @@ const UIInput = styled.input<TProps>`
   background-color: ${({ disabled, theme }) =>
     disabled ? theme.colors.backgroundDisabled : theme.colors.backgroundInput};
   ${({ uppercase }: TProps) => uppercase && `text-transform: uppercase`};
-  ${({ disabled }) => disabled && 'cursor: not-allowed'};
+  ${({ disabled }) => disabled && "cursor: not-allowed"};
   ::placeholder {
     color: ${({ theme }) => theme.colors.textGreyLight};
   }
@@ -54,7 +54,17 @@ export interface Props {
 }
 
 export const Input: FC<Props> = memo(
-  ({ placeholder, dataCy, value = '', disabled, onChange, maxLength, isValid = true, prefix, type }): JSX.Element => (
+  ({
+    placeholder,
+    dataCy,
+    value = "",
+    disabled,
+    onChange,
+    maxLength,
+    isValid = true,
+    prefix,
+    type,
+  }): JSX.Element => (
     <Outer isValid={isValid} prefix={prefix}>
       {prefix && <BoxPrefix>{prefix}</BoxPrefix>}
       <UIInput
@@ -69,7 +79,7 @@ export const Input: FC<Props> = memo(
         value={value}
       />
     </Outer>
-  ),
+  )
 );
 
-Input.displayName = 'Input';
+Input.displayName = "Input";

@@ -1,8 +1,8 @@
 /** @format */
 
 // #region ::: IMPORT
-import styled from 'styled-components';
-import { TStyled } from '../../../theme';
+import styled from "styled-components";
+import { TStyled } from "../../@theme";
 // #endregion
 
 export const TabsWrapper = styled.div<TStyled>`
@@ -12,5 +12,6 @@ export const TabsWrapper = styled.div<TStyled>`
   height: 55px;
   width: 100%;
   background: ${({ theme }): string => theme.colors.backgroundTabs};
-  border-bottom: ${({ theme }): string => `1px solid ${theme.colors.borderRow}`};
+  border-bottom: ${({ theme }): string =>
+    `1px solid ${theme.colors.borderRow}`};
 `;

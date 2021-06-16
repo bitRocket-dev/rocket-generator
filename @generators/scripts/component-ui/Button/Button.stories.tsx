@@ -1,18 +1,18 @@
 /** @format */
 
-import { Props, UIButton } from './';
-import { Story, Meta } from '@storybook/react/types-6-0';
-import { Providers } from '../../Providers';
+import { Props, UIButton } from "./";
+import { Story, Meta } from "@storybook/react/types-6-0";
+import { Providers } from "../Providers";
 
 export default {
-  title: 'Example/Button',
+  title: "Example/Button",
   component: UIButton,
   argTypes: {
     onClick: { table: { disable: true } },
   },
 } as Meta;
 
-const Template: Story<Props> = props => (
+const Template: Story<Props> = (props) => (
   <Providers>
     <UIButton {...props}></UIButton>
   </Providers>
@@ -21,6 +21,6 @@ const Template: Story<Props> = props => (
 export const Default = Template.bind({});
 
 Default.args = {
-  text: 'button',
-  icon: 'bank',
+  text: "button",
+  icon: "bank",
 };

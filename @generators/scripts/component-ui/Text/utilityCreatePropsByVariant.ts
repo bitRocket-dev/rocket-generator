@@ -1,9 +1,9 @@
 /** @format */
 
-import { TFontSize, TFontVariant } from '../../theme/maps/fonts/mapFontsSizes';
-import { TFontWeight } from '../../theme/maps/fonts/mapFontsWeights';
-import { TFontTag } from '../../theme/maps/fonts/mapFontsTag';
-import { TFontTransform } from '../../theme/maps/fonts/mapFontsTransforms';
+import { TFontSize, TFontVariant } from "../@theme/maps/fonts/mapFontsSizes";
+import { TFontWeight } from "../@theme/maps/fonts/mapFontsWeights";
+import { TFontTag } from "../@theme/maps/fonts/mapFontsTag";
+import { TFontTransform } from "../@theme/maps/fonts/mapFontsTransforms";
 
 interface TextProps {
   size: TFontSize;
@@ -12,43 +12,45 @@ interface TextProps {
   transform?: TFontTransform;
 }
 
-export const utilityCreatePropsByVariant = (variant: TFontVariant): TextProps => {
+export const utilityCreatePropsByVariant = (
+  variant: TFontVariant
+): TextProps => {
   switch (variant) {
-    case 'display':
+    case "display":
       return {
-        tag: 'h1',
-        weight: 'black',
-        size: 'display',
+        tag: "h1",
+        weight: "black",
+        size: "display",
       };
-    case 'header':
+    case "header":
       return {
-        tag: 'h2',
-        weight: 'black',
-        size: 'header',
+        tag: "h2",
+        weight: "black",
+        size: "header",
       };
-    case 'title':
+    case "title":
       return {
-        tag: 'h3',
-        weight: 'medium',
-        size: 'title',
+        tag: "h3",
+        weight: "medium",
+        size: "title",
       };
-    case 'subtitle':
+    case "subtitle":
       return {
-        tag: 'h4',
-        weight: 'bold',
-        size: 'subtitle',
+        tag: "h4",
+        weight: "bold",
+        size: "subtitle",
       };
-    case 'caption':
+    case "caption":
       return {
-        tag: 'p',
-        weight: 'regular',
-        size: 'caption',
+        tag: "p",
+        weight: "regular",
+        size: "caption",
       };
     default:
       return {
-        tag: 'span',
-        weight: 'regular',
-        size: 'caption',
+        tag: "span",
+        weight: "regular",
+        size: "caption",
       };
   }
 };

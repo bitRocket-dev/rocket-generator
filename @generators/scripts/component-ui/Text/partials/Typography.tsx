@@ -1,13 +1,13 @@
 /** @format */
 
-import styled from 'styled-components';
-import { TStyled } from '../../../theme';
-import { TColor } from '../../../theme/maps/general/mapColors';
-import { TFontSize } from '../../../theme/maps/fonts/mapFontsSizes';
-import { TFontWeight } from '../../../theme/maps/fonts/mapFontsWeights';
-import { TFontTag } from '../../../theme/maps/fonts/mapFontsTag';
-import { Formatter } from './Formatter';
-import { TFontTransform } from '../../../theme/maps/fonts/mapFontsTransforms';
+import styled from "styled-components";
+import { TStyled } from "../../@theme";
+import { TColor } from "../../@theme/maps/general/mapColors";
+import { TFontSize } from "../../@theme/maps/fonts/mapFontsSizes";
+import { TFontWeight } from "../../@theme/maps/fonts/mapFontsWeights";
+import { TFontTag } from "../../@theme/maps/fonts/mapFontsTag";
+import { Formatter } from "./Formatter";
+import { TFontTransform } from "../../@theme/maps/fonts/mapFontsTransforms";
 
 interface Props extends TStyled {
   color: TColor;
@@ -25,9 +25,10 @@ export const Typography = styled(Formatter)<Props>`
   font-weight: ${({ theme, weight }: Props) => theme.fonts.weight[weight]};
   text-overflow: ellipsis;
   overflow: hidden;
-  ${({ noWrap }: Props) => !noWrap && 'white-space:no-wrap ;'}
-  ${({ theme, transform }: Props) => transform && `text-transform: ${theme.fonts.transform[transform]}`};
-  ${({ underline }: Props) => underline && 'text-decoration:underline;'}
+  ${({ noWrap }: Props) => !noWrap && "white-space:no-wrap ;"}
+  ${({ theme, transform }: Props) =>
+    transform && `text-transform: ${theme.fonts.transform[transform]}`};
+  ${({ underline }: Props) => underline && "text-decoration:underline;"}
 `;
 
-Typography.displayName = 'Typography';
+Typography.displayName = "Typography";

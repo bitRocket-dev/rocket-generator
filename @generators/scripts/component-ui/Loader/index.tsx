@@ -1,8 +1,8 @@
 /** @format */
 
-import { FC } from 'react';
-import styled, { keyframes } from 'styled-components';
-import { TStyled } from '../../theme';
+import { FC } from "react";
+import styled, { keyframes } from "styled-components";
+import { TStyled } from "../@theme";
 
 const spin = keyframes`
   from {

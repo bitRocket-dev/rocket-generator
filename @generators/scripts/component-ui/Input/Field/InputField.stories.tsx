@@ -1,17 +1,27 @@
 /** @format */
 
-import { Story, Meta } from '@storybook/react/types-6-0';
-import { InputField, Props } from '.';
-import { useInput } from '../../../@sdk/hooks/useInput';
-import { utilityIsValidEmail } from '../../../@sdk/utils/validate/isValidEmail';
-import { utilityIsValidSdiNumber } from '../../../@sdk/utils/validate/isValidSdiNumber';
-import { INPUT_MAX_LENGHT_TAXCODE, utilityIsValidTaxCode } from '../../../@sdk/utils/validate/isValidTaxCode';
-import { INPUT_MAX_LENGHT_VATNUMBER, utilityIsValidVatNumber } from '../../../@sdk/utils/validate/isValidVatNumber';
-import { INPUT_MAX_YEAR, INPUT_MIN_YEAR, utilityIsValidYear } from '../../../@sdk/utils/validate/isValidYear';
-import { Providers } from '../../../Providers';
+import { Story, Meta } from "@storybook/react/types-6-0";
+import { InputField, Props } from ".";
+import { useInput } from "../../../hooks/useInput";
+import { utilityIsValidEmail } from "../../..//utils/validate/isValidEmail";
+import { utilityIsValidSdiNumber } from "../../../utils/validate/isValidSdiNumber";
+import {
+  INPUT_MAX_LENGHT_TAXCODE,
+  utilityIsValidTaxCode,
+} from "../../../utils/validate/isValidTaxCode";
+import {
+  INPUT_MAX_LENGHT_VATNUMBER,
+  utilityIsValidVatNumber,
+} from "../../../utils/validate/isValidVatNumber";
+import {
+  INPUT_MAX_YEAR,
+  INPUT_MIN_YEAR,
+  utilityIsValidYear,
+} from "../../../utils/validate/isValidYear";
+import { Providers } from "../../../Providers";
 
 export default {
-  title: 'Example/InputField',
+  title: "Example/InputField",
   component: InputField,
   argTypes: {
     type: { table: { disable: true } },
@@ -22,8 +32,8 @@ export default {
 } as Meta;
 
 //#region ::: DEFAULT
-const Template: Story<Props> = props => {
-  const [value, onChange] = useInput('');
+const Template: Story<Props> = (props) => {
+  const [value, onChange] = useInput("");
 
   return (
     <Providers>
@@ -35,17 +45,22 @@ const Template: Story<Props> = props => {
 export const Default = Template.bind({});
 
 Default.args = {
-  label: 'Generic',
+  label: "Generic",
 };
 //#endregion
 
 //#region ::: EMAIL
-const TemplateEmail: Story<Props> = props => {
-  const [value, onChange, isValid] = useInput('', utilityIsValidEmail);
+const TemplateEmail: Story<Props> = (props) => {
+  const [value, onChange, isValid] = useInput("", utilityIsValidEmail);
 
   return (
     <Providers>
-      <InputField {...props} value={value} onChange={onChange} isValid={isValid} />
+      <InputField
+        {...props}
+        value={value}
+        onChange={onChange}
+        isValid={isValid}
+      />
     </Providers>
   );
 };
@@ -53,14 +68,14 @@ const TemplateEmail: Story<Props> = props => {
 export const Email = TemplateEmail.bind({});
 
 Email.args = {
-  errorMessage: 'Email non valida',
-  label: 'Email',
+  errorMessage: "Email non valida",
+  label: "Email",
 };
 //#endregion
 
 //#region ::: YEAR
-const TemplateYear: Story<Props> = props => {
-  const [value, onChange, isValid] = useInput('', utilityIsValidYear);
+const TemplateYear: Story<Props> = (props) => {
+  const [value, onChange, isValid] = useInput("", utilityIsValidYear);
 
   return (
     <Providers>
@@ -79,17 +94,26 @@ const TemplateYear: Story<Props> = props => {
 export const Year = TemplateYear.bind({});
 
 Year.args = {
-  label: 'Year',
+  label: "Year",
 };
 //#endregion
 
 //#region ::: SDI NUMBER
-const TemplateSdiNumber: Story<Props> = props => {
-  const [value, onChange, isValid] = useInput('', utilityIsValidSdiNumber, true);
+const TemplateSdiNumber: Story<Props> = (props) => {
+  const [value, onChange, isValid] = useInput(
+    "",
+    utilityIsValidSdiNumber,
+    true
+  );
 
   return (
     <Providers>
-      <InputField {...props} value={value} onChange={onChange} isValid={isValid} />
+      <InputField
+        {...props}
+        value={value}
+        onChange={onChange}
+        isValid={isValid}
+      />
     </Providers>
   );
 };
@@ -97,18 +121,24 @@ const TemplateSdiNumber: Story<Props> = props => {
 export const SdiNumber = TemplateSdiNumber.bind({});
 
 SdiNumber.args = {
-  label: 'Sdi Number',
-  errorMessage: 'Numero Sdi non valido',
+  label: "Sdi Number",
+  errorMessage: "Numero Sdi non valido",
 };
 //#endregion
 
 //#region ::: TAX CODE
-const TemplateTaxCode: Story<Props> = props => {
-  const [value, onChange, isValid] = useInput('', utilityIsValidTaxCode);
+const TemplateTaxCode: Story<Props> = (props) => {
+  const [value, onChange, isValid] = useInput("", utilityIsValidTaxCode);
 
   return (
     <Providers>
-      <InputField {...props} value={value} onChange={onChange} isValid={isValid} maxLength={INPUT_MAX_LENGHT_TAXCODE} />
+      <InputField
+        {...props}
+        value={value}
+        onChange={onChange}
+        isValid={isValid}
+        maxLength={INPUT_MAX_LENGHT_TAXCODE}
+      />
     </Providers>
   );
 };
@@ -116,14 +146,14 @@ const TemplateTaxCode: Story<Props> = props => {
 export const TaxCode = TemplateTaxCode.bind({});
 
 TaxCode.args = {
-  label: 'Tax Code',
-  errorMessage: 'Codice fiscale non valido',
+  label: "Tax Code",
+  errorMessage: "Codice fiscale non valido",
 };
 //#endregion
 
 //#region ::: VAT NUMBER
-const TemplateVatNumber: Story<Props> = props => {
-  const [value, onChange, isValid] = useInput('', utilityIsValidVatNumber);
+const TemplateVatNumber: Story<Props> = (props) => {
+  const [value, onChange, isValid] = useInput("", utilityIsValidVatNumber);
 
   return (
     <Providers>
@@ -141,7 +171,7 @@ const TemplateVatNumber: Story<Props> = props => {
 export const VatNumber = TemplateVatNumber.bind({});
 
 VatNumber.args = {
-  label: 'VAT Number',
-  errorMessage: 'Partita IVA non valida',
+  label: "VAT Number",
+  errorMessage: "Partita IVA non valida",
 };
 //#endregion

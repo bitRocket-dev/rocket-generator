@@ -1,8 +1,8 @@
 /** @format */
 
-import React, { FC, memo, SyntheticEvent } from 'react';
-import { useNavigation } from '../../@sdk/hooks/useNavigation';
-import { Wrapper } from './partials/Wrapper';
+import React, { FC, memo, SyntheticEvent } from "react";
+import { useNavigation } from "../..//hooks/useNavigation";
+import { Wrapper } from "./partials/Wrapper";
 
 export interface Props {
   to: string;
@@ -14,7 +14,14 @@ export interface Props {
 }
 
 export const NavigateTo: FC<Props> = memo(
-  ({ to, children, dataCy, fluid = true, onClick: callback, disabled }: Props): JSX.Element => {
+  ({
+    to,
+    children,
+    dataCy,
+    fluid = true,
+    onClick: callback,
+    disabled,
+  }: Props): JSX.Element => {
     const { navTo } = useNavigation();
 
     const onClick = (event: SyntheticEvent): void => {
@@ -25,10 +32,15 @@ export const NavigateTo: FC<Props> = memo(
     };
 
     return (
-      <Wrapper onClick={onClick} data-cy={dataCy} fluid={fluid} disabled={disabled}>
+      <Wrapper
+        onClick={onClick}
+        data-cy={dataCy}
+        fluid={fluid}
+        disabled={disabled}
+      >
         {children}
       </Wrapper>
     );
-  },
+  }
 );
-NavigateTo.displayName = 'NavigateTo';
+NavigateTo.displayName = "NavigateTo";

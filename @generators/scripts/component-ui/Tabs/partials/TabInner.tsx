@@ -1,8 +1,8 @@
 /** @format */
 
 // #region ::: IMPORT
-import styled from 'styled-components';
-import { TStyled } from '../../../theme';
+import styled from "styled-components";
+import { TStyled } from "../../@theme";
 // #endregion
 
 interface Props extends TStyled {

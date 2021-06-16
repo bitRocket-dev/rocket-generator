@@ -1,11 +1,11 @@
 /** @format */
 
-import { Story, Meta } from '@storybook/react/types-6-0';
-import { Providers } from '../../Providers';
-import { UITimePicker, Props } from '.';
+import { Story, Meta } from "@storybook/react/types-6-0";
+import { Providers } from "../Providers";
+import { UITimePicker, Props } from ".";
 
 export default {
-  title: 'Example/TimePicker',
+  title: "Example/TimePicker",
   component: UITimePicker,
   argTypes: {
     onChange: { table: { disable: true } },
@@ -13,7 +13,7 @@ export default {
   },
 } as Meta;
 
-export const Basic: Story<Props> = args => (
+export const Basic: Story<Props> = (args) => (
   <Providers>
     <UITimePicker {...args} />
   </Providers>

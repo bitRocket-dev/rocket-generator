@@ -1,10 +1,10 @@
 /** @format */
 
-import { FC, memo } from 'react';
-import { TColor } from '../../theme/maps/general/mapColors';
-import { Typography } from './partials/Typography';
-import { TFontVariant } from '../../theme/maps/fonts/mapFontsSizes';
-import { utilityCreatePropsByVariant } from './utilityCreatePropsByVariant';
+import { FC, memo } from "react";
+import { TColor } from "../@theme/maps/general/mapColors";
+import { Typography } from "./partials/Typography";
+import { TFontVariant } from "../@theme/maps/fonts/mapFontsSizes";
+import { utilityCreatePropsByVariant } from "./utilityCreatePropsByVariant";
 
 export interface Props {
   text: string;
@@ -16,11 +16,27 @@ export interface Props {
 }
 
 export const UIText: FC<Props> = memo(
-  ({ text, variant = 'caption', color = 'primary', dataCy, noWrap = true, underline }: Props): JSX.Element => {
+  ({
+    text,
+    variant = "caption",
+    color = "primary",
+    dataCy,
+    noWrap = true,
+    underline,
+  }: Props): JSX.Element => {
     const props = utilityCreatePropsByVariant(variant);
 
-    return <Typography text={text} color={color} dataCy={dataCy} noWrap={noWrap} {...props} underline={underline} />;
-  },
+    return (
+      <Typography
+        text={text}
+        color={color}
+        dataCy={dataCy}
+        noWrap={noWrap}
+        {...props}
+        underline={underline}
+      />
+    );
+  }
 );
 
-UIText.displayName = 'UIText';
+UIText.displayName = "UIText";

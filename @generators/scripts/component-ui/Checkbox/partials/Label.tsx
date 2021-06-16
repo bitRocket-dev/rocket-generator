@@ -1,8 +1,8 @@
 /** @format */
 
 // #region ::: IMPORT
-import styled from 'styled-components';
-import { TStyled } from '../../../theme';
+import styled from "styled-components";
+import { TStyled } from "../../@theme";
 // #endregion
 
 interface Props extends TStyled {
@@ -10,7 +10,7 @@ interface Props extends TStyled {
 }
 
 export const Label = styled.label<Props>`
-  opacity: ${({ disabled }: Props) => (disabled ? '0.5' : '1')};
+  opacity: ${({ disabled }: Props) => (disabled ? "0.5" : "1")};
   align-items: top;
   box-sizing: border-box;
   display: flex;
@@ -19,6 +19,7 @@ export const Label = styled.label<Props>`
   text-size-adjust: 100%;
   touch-action: manipulation;
   -webkit-font-smoothing: antialiased;
-  -webkit-tap-highlight-color: ${({ theme }): string => theme.colors.light.primary};
-  cursor: ${({ disabled }): string => (disabled ? 'not-allowed' : 'pointer')};
+  -webkit-tap-highlight-color: ${({ theme }): string =>
+    theme.colors.light.primary};
+  cursor: ${({ disabled }): string => (disabled ? "not-allowed" : "pointer")};
 `;
