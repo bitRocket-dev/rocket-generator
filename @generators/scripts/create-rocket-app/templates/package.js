@@ -12,7 +12,6 @@ exports.package = (name) => {
   },
   "dependencies": {
   
-    "@cypress/webpack-dev-server": "^1.3.1",
     "connected-react-router": "^6.0.0",
     "fast-memoize": "^2.5.2",
     "html-webpack-plugin": "^4.5.2",
@@ -30,7 +29,7 @@ exports.package = (name) => {
   "scripts": {
     "build:app": "react-scripts build",
     "build:storybook": "build-storybook -s public",
-    "cypress": "./node_modules/.bin/cypress open",
+    "cypress": "./node_modules/.bin/cypress open-ct",
     "prettier": "prettier --write src/**/*.{ts,tsx} src/**/**/*.{ts,tsx} src/**/**/**/*.{ts,tsx} src/**/**/**/**/*.{ts,tsx} src/**/**/**/**/**/*.{ts,tsx}",
     "start:build": "npm run build:app && serve -s build",
     "start:dev": "react-scripts start",
@@ -64,6 +63,7 @@ exports.package = (name) => {
     "@commitlint/cli": "^11.0.0",
     "@commitlint/config-conventional": "^11.0.0",
     "@cypress/react": "^5.9.1",
+    "@cypress/webpack-dev-server": "^1.3.1",
     "@storybook/addon-actions": "^6.1.19",
     "@storybook/addon-essentials": "^6.1.20",
     "@storybook/addon-links": "^6.1.19",
