@@ -10,6 +10,7 @@ const componentShared = require("./@generators/scripts/component-shared/componen
 const boilerplate = require("./@generators/scripts/create-rocket-app/boilerplate");
 const translations = require("./@generators/scripts/translations/translations");
 const customHook = require("./@generators/scripts/custom-hooks/customHook");
+const customUtils = require("./@generators/scripts/custom-utils/customUtils");
 
 const showMenu = () => {
   const questions = [
@@ -36,7 +37,8 @@ const showMenu = () => {
         "new-component-view",
         "new-component-shared",
         "translations",
-        "custom-hook",
+        "hooks",
+        "utils",
       ],
       when: (answers) => answers.main === "Add/Create other components",
     },
@@ -209,6 +211,52 @@ const showMenu = () => {
       when: (answers) => answers.action === "custom-hook",
     },
     //#endregion CUSTOM HOOK
+
+    //#region UTILS
+    {
+      type: "checkbox",
+      name: "utils",
+      message: "Choose utils component do you want.",
+      choices: ["cache", "fetch", "formatting", "helpers", "time", "validate"],
+      when: (answers) => answers.action && answers.action.includes("utils"),
+    },
+    {
+      type: "checkbox",
+      name: "cacheUtils",
+      message: "Choose CACHE components.",
+      choices: [
+        "getFromLocalStorage.ts",
+        "removeLocalStorage.ts",
+        "saveToLocalStorage.ts",
+        "getFromSessionStorage.ts",
+        "removeSessionStorage.ts",
+        "saveToSessionStorage.ts",
+      ],
+      when: (answers) => answers.utils && answers.utils.includes("cache"),
+    },
+    {
+      type: "checkbox",
+      name: "formatUtils",
+      message: "Choose FORMATTING components.",
+      choices: ["arrayToObject.ts", "arrayToObjectList.ts"],
+      when: (answers) => answers.utils && answers.utils.includes("formatting"),
+    },
+    {
+      type: "checkbox",
+      name: "validUtils",
+      message: "Choose VALIDATE components.",
+      choices: [
+        "isValidEmail.ts",
+        "isValidPassword.ts",
+        "isValidSdiNumber.ts",
+        "isValidTaxCode.ts",
+        "isValidTelephoneNumber.ts",
+        "isValidVatNumber.ts",
+        "isValidYear.ts",
+      ],
+      when: (answers) => answers.utils && answers.utils.includes("validate"),
+    },
+    //#endregion UTILS
   ];
   return inquirer.prompt(questions);
 };
@@ -254,6 +302,41 @@ const main = async () => {
 
           case "custom-hook":
             answers.customHooks.map((item) => customHook(item));
+            break;
+
+          case "utils":
+            answers.utils &&
+              answers.utils.map((choice) => {
+                switch (choice) {
+                  case "cache":
+                    answers.cacheUtils &&
+                      answers.cacheUtils.map((item) =>
+                        customUtils(item, choice)
+                      );
+                    break;
+                  case "formatting":
+                    answers.formatUtils &&
+                      answers.formatUtils.map((item) =>
+                        customUtils(item, choice)
+                      );
+                    break;
+                  case "validate":
+                    answers.validUtils &&
+                      answers.validUtils.map((item) =>
+                        customUtils(item, choice)
+                      );
+                    break;
+                  case "fetch":
+                    customUtils(choice);
+                    break;
+                  case "helpers":
+                    customUtils(choice);
+                    break;
+                  case "time":
+                    customUtils(choice);
+                    break;
+                }
+              });
             break;
 
           default:
