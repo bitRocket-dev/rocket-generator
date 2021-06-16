@@ -32,7 +32,7 @@ const showMenu = () => {
         "\x1b[33m--- Back ---\x1b[0m",
         new inquirer.Separator(),
         "CRUD",
-        "rocket-components",
+        // "rocket-components",
         "new-component-UI",
         "new-component-view",
         "new-component-shared",
@@ -190,7 +190,7 @@ const showMenu = () => {
     {
       type: "checkbox",
       name: "customHooks",
-      message: "Choose rocket component.",
+      message: "Choose the hooks",
       choices: [
         "useCancelableFetch",
         "useApiGet",
@@ -208,7 +208,7 @@ const showMenu = () => {
         "useSessionStorage",
         "useWindowResize",
       ],
-      when: (answers) => answers.action === "custom-hook",
+      when: (answers) => answers.action === "hooks",
     },
     //#endregion CUSTOM HOOK
 

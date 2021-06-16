@@ -1,7 +1,7 @@
 const fs = require("fs-extra");
 
 async function customHook(name) {
-  const dir = `./hooks/${name}.ts`;
+  const dir = `./src/@sdk/hooks/${name}.ts`;
   const localDir = `${__dirname}/${name}.ts`;
 
   if (await fs.pathExists(dir))
