@@ -75,7 +75,7 @@ exports.package = (name) => {
     "@types/react-redux": "^7.1.16",
     "@types/react-router-dom": "^5.1.7",
     "@types/styled-components": "^5.1.9",
-    "cypress": "^6.5.0",
+    "cypress": "^7.5.0",
     "eslint-config-react-app": "^6.0.0",
     "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-jsx-a11y": "^6.4.1",
