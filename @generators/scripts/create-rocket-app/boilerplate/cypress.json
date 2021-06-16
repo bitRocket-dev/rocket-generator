@@ -1,4 +1,4 @@
 {
   "testFiles": "**/*.test.js",
-  "componentFolder": "src"
+  "integrationFolder": "src"
 }
