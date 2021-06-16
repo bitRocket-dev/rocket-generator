@@ -1,9 +1,9 @@
 /** @format */
 
-import { memo } from 'react';
-import styled from 'styled-components';
-import { Column as ColumnHedron } from 'hedron';
-import { TStyled } from '../../theme';
+import { memo } from "react";
+import styled from "styled-components";
+import { Column as ColumnHedron } from "hedron";
+import { TStyled } from "../@theme";
 
 interface PropsColumn {
   children: any;
@@ -57,30 +57,36 @@ const ColumnBase = memo(
       xsShift,
     };
     return <ColumnHedron {...allowedProps} />;
-  },
+  }
 );
 
-ColumnBase.displayName = 'ColumnBase';
+ColumnBase.displayName = "ColumnBase";
 
 interface Props extends TStyled {
-  alignItems?: 'center' | 'flex-start' | 'flex-end';
+  alignItems?: "center" | "flex-start" | "flex-end";
   contents?: boolean;
   flex?: boolean;
   fluid?: boolean;
   fullHeight?: boolean;
   hide?: boolean;
-  justifyContent?: 'center' | 'flex-start' | 'flex-end' | 'space-between' | 'space-around';
+  justifyContent?:
+    | "center"
+    | "flex-start"
+    | "flex-end"
+    | "space-between"
+    | "space-around";
   maxWidth?: number;
 }
 
 export const UIColumn = styled(ColumnBase)<Props>`
-  ${({ flex }: Props) => flex && 'display: flex;'};
-  ${({ contents }: Props) => contents && 'display: contents;'}
-  ${({ justifyContent }: Props) => justifyContent && `justify-content: ${justifyContent}`};
+  ${({ flex }: Props) => flex && "display: flex;"};
+  ${({ contents }: Props) => contents && "display: contents;"}
+  ${({ justifyContent }: Props) =>
+    justifyContent && `justify-content: ${justifyContent}`};
   ${({ alignItems }: Props) => alignItems && `align-items: ${alignItems};`};
-  ${({ fluid }: Props) => !fluid && 'padding: .5rem'};
-  ${({ fullHeight }: Props) => fullHeight && 'height: 100%;'};
+  ${({ fluid }: Props) => !fluid && "padding: .5rem"};
+  ${({ fullHeight }: Props) => fullHeight && "height: 100%;"};
   ${({ maxWidth }: Props) => maxWidth && `max-width: ${maxWidth}px`};
 `;
 
-UIColumn.displayName = 'UIColumn';
+UIColumn.displayName = "UIColumn";

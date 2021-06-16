@@ -2,22 +2,22 @@
 
 import { Story, Meta } from "@storybook/react/types-6-0";
 import { InputField, Props } from ".";
-import { useInput } from "../../../hooks/useInput";
-import { utilityIsValidEmail } from "../../..//utils/validate/isValidEmail";
-import { utilityIsValidSdiNumber } from "../../../utils/validate/isValidSdiNumber";
+import { useInput } from "../../../@sdk/hooks/useInput";
+import { utilityIsValidEmail } from "../../..//@sdk/utils/validate/isValidEmail";
+import { utilityIsValidSdiNumber } from "../../../@sdk/utils/validate/isValidSdiNumber";
 import {
   INPUT_MAX_LENGHT_TAXCODE,
   utilityIsValidTaxCode,
-} from "../../../utils/validate/isValidTaxCode";
+} from "../../../@sdk/utils/validate/isValidTaxCode";
 import {
   INPUT_MAX_LENGHT_VATNUMBER,
   utilityIsValidVatNumber,
-} from "../../../utils/validate/isValidVatNumber";
+} from "../../../@sdk/utils/validate/isValidVatNumber";
 import {
   INPUT_MAX_YEAR,
   INPUT_MIN_YEAR,
   utilityIsValidYear,
-} from "../../../utils/validate/isValidYear";
+} from "../../../@sdk/utils/validate/isValidYear";
 import { Providers } from "../../../Providers";
 
 export default {

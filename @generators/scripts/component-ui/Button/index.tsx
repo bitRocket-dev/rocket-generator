@@ -1,6 +1,6 @@
 /** @format */
 
-import React, { SyntheticEvent, FC, memo } from "react";
+import { SyntheticEvent, FC, memo } from "react";
 import styled from "styled-components";
 import { TStyled } from "../@theme";
 import { TIcon, UIIcon } from "../Icon";

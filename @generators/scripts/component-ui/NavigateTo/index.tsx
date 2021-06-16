@@ -1,7 +1,7 @@
 /** @format */
 
 import React, { FC, memo, SyntheticEvent } from "react";
-import { useNavigation } from "../..//hooks/useNavigation";
+import { useNavigation } from "../../@sdk/hooks/useNavigation";
 import { Wrapper } from "./partials/Wrapper";
 
 export interface Props {
