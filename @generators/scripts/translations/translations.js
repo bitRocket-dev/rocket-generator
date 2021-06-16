@@ -16,7 +16,11 @@ async function translations() {
 
   fs.writeFile(`${declaration}/index.ts`, locale(), writeFileErrorHandler);
   fs.writeFile(`${translations}/index.ts`, interface(), writeFileErrorHandler);
-  fs.writeFile(`./i18n/translate.ts`, translate(), writeFileErrorHandler);
+  fs.writeFile(
+    `./src/@sdk/i18n/translate.ts`,
+    translate(),
+    writeFileErrorHandler
+  );
 }
 
 module.exports = translations;
