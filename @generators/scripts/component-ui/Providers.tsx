@@ -1,8 +1,8 @@
 /** @format */
 
 import { FC, memo } from 'react';
-import { ProviderRedux } from './@sdk/redux-modules/Provider';
-import { ProviderTheme } from './theme/Provider';
+import { ProviderRedux } from '../@sdk/redux-modules/Provider';
+import { ProviderTheme } from './@theme/Provider';
 
 interface Props {
   children: JSX.Element;

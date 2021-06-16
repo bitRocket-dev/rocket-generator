@@ -9,12 +9,20 @@ const {
 } = require("../../utilities.js");
 
 async function componentUi(name) {
-  if (!name) throw new Error("You must include a component name.");
-
+  const themePath = "./src/components-ui/@theme";
+  const providerPath = "./src/components-ui/Providers.tsx";
+  const localThemeDir = `${__dirname}/@theme`;
+  const localProvidersDir = `${__dirname}/Providers.tsx`;
   const formattedName = utilityCapitalizeFirst(name);
   const dir = `./src/components-ui/${formattedName}`;
-
   const localDir = `${__dirname}/${formattedName}`;
+
+  if (!fs.existsSync(themePath)) {
+    fs.copy(localThemeDir, themePath).catch(() => {});
+    fs.copy(localProvidersDir, providerPath).catch(() => {});
+  }
+
+  if (!name) throw new Error("You must include a component name.");
 
   if (await fs.pathExists(dir))
     console.error(`\x1b[31m`, "A component with that name already exists.");

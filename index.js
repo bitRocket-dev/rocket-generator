@@ -20,7 +20,7 @@ const showMenu = () => {
       choices: [
         "create-rocket-app",
         "Add/Create other components",
-        "\x1b[31m--- Exit ---\x1b[0m",
+        "\x1b[31m--- Exit ---\x1b[0m \n",
       ],
     },
     {
@@ -31,7 +31,7 @@ const showMenu = () => {
         "\x1b[33m--- Back ---\x1b[0m",
         new inquirer.Separator(),
         "CRUD",
-        // "rocket-components",
+        "rocket-components",
         "new-component-UI",
         "new-component-view",
         "new-component-shared",
@@ -50,7 +50,7 @@ const showMenu = () => {
       type: "input",
       name: "Exit",
       message: () => process.exit(),
-      when: (answers) => answers.action === "\x1b[31m--- Exit ---\x1b[0m",
+      when: (answers) => answers.action === "\x1b[31m--- Exit ---\x1b[0m \n",
     },
     {
       type: "list",
@@ -63,7 +63,7 @@ const showMenu = () => {
       type: "input",
       name: "exitApp",
       message: () => process.exit(),
-      when: (answers) => answers.main === "\x1b[31m--- Exit ---\x1b[0m",
+      when: (answers) => answers.main === "\x1b[31m--- Exit ---\x1b[0m \n",
     },
     {
       type: "input",
