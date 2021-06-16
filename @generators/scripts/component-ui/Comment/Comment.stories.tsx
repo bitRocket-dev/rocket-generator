@@ -1,22 +1,23 @@
 /** @format */
 
-import { UIVisible, Props } from "./index";
+import { UIComment, Props } from "./";
 import { Story, Meta } from "@storybook/react/types-6-0";
 import { Providers } from "../Providers";
 
 export default {
-  title: "Example/Visible",
-  component: UIVisible,
+  title: "Example/Comment",
+  component: UIComment,
+  argTypes: {},
 } as Meta;
 
 const Template: Story<Props> = (props) => (
   <Providers>
-    <UIVisible {...props}>
-      <h1>I'm visibile!</h1>
-    </UIVisible>
+    <UIComment {...props} />
   </Providers>
 );
 
 export const Default = Template.bind({});
 
-Default.args = { type: "desktop" };
+Default.args = {
+  text: "commento",
+};

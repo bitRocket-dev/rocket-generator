@@ -18,7 +18,7 @@ import {
   INPUT_MIN_YEAR,
   utilityIsValidYear,
 } from "../../../@sdk/utils/validate/isValidYear";
-import { Providers } from "../../../Providers";
+import { Providers } from "../../Providers";
 
 export default {
   title: "Example/InputField",

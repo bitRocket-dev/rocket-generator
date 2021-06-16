@@ -4,7 +4,8 @@
 import React from "react";
 import { Story, Meta } from "@storybook/react/types-6-0";
 import { Props, UIText } from ".";
-import { ProviderTheme } from "../@theme/Provider";
+import { Providers } from "../Providers";
+
 // #endregion
 
 export default {
@@ -17,9 +18,9 @@ export default {
 } as Meta;
 
 const Template: Story<Props> = (args) => (
-  <ProviderTheme>
+  <Providers>
     <UIText {...args} />
-  </ProviderTheme>
+  </Providers>
 );
 
 export const Default = Template.bind({});

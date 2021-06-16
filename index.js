@@ -300,8 +300,9 @@ const main = async () => {
             translations();
             break;
 
-          case "custom-hook":
-            answers.customHooks.map((item) => customHook(item));
+          case "hooks":
+            answers.customHooks &&
+              answers.customHooks.map((item) => customHook(item));
             break;
 
           case "utils":
@@ -340,7 +341,7 @@ const main = async () => {
             break;
 
           default:
-            console.log("Default");
+            console.log("One moment..");
             break;
         }
       }

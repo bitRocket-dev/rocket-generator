@@ -1,12 +1,12 @@
 /** @format */
 
-const { splitString } = require('./splitStringUtility');
+const { splitString } = require("./splitStringUtility");
 
-exports.reducers = name => {
+exports.reducers = (name) => {
   const names = splitString(name);
   const formattedName = names[1].charAt(0).toUpperCase() + names[1].slice(1);
   return `
-import { TStore } from "../declarations/store";
+import { TStore } from "../../../declarations/store";
 
 export const reducer${formattedName} = (
   prevStore: TStore['${names[1]}'] = {},
