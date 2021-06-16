@@ -119,7 +119,6 @@ const showMenu = () => {
         "Button",
         "Checkbox",
         "Comment",
-        "Button",
         "DatePicker",
         "Grid",
         "Icon",
