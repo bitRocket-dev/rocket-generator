@@ -32,7 +32,7 @@ const showMenu = () => {
         "\x1b[33m--- Back ---\x1b[0m",
         new inquirer.Separator(),
         "CRUD",
-        // "rocket-components",
+        "rocket-components",
         "new-component-UI",
         "new-component-view",
         "new-component-shared",

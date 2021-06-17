@@ -18,6 +18,56 @@ async function componentUi(name) {
   const localDir = `${__dirname}/${formattedName}`;
   const path = `./src/components-ui/.gitkeep`;
 
+  if (formattedName) {
+    let dirPlus;
+    let localDirPlus;
+    switch (formattedName) {
+      case "Button":
+        dirPlus = `./src/components-ui/Icon`;
+        localDirPlus = `${__dirname}/Icon`;
+        break;
+      case "Datepicker":
+        dirPlus = [`./src/components-ui/Text`, `./src/components-ui/Input`];
+        localDirPlus = [`${__dirname}/Text`, `${__dirname}/Input`];
+        break;
+      case "Input":
+        dirPlus = [
+          `./src/components-ui/Text`,
+          `./src/components-ui/Icon`,
+          `./src/components-ui/Grid`,
+        ];
+        localDirPlus = [
+          `${__dirname}/Text`,
+          `${__dirname}/Icon`,
+          `${__dirname}/Grid`,
+        ];
+        break;
+      case "Select":
+        dirPlus = `./src/components-ui/Text`;
+        localDirPlus = `${__dirname}/Text`;
+        break;
+      case "Tabs":
+        dirPlus = [`./src/components-ui/Text`, `./src/components-ui/Grid`];
+        localDirPlus = [`${__dirname}/Text`, `${__dirname}/Grid`];
+        break;
+      case "TimePicker":
+        dirPlus = [`./src/components-ui/Text`, `./src/components-ui/Input`];
+        localDirPlus = [`${__dirname}/Text`, `${__dirname}/Input`];
+        break;
+      default:
+        break;
+    }
+    if (await fs.pathExists(dirPlus))
+      console.error(`\x1b[31m`, `A component ${formattedName} already exists.`);
+    if (localDirPlus instanceof Array) {
+      localDirPlus.map((item) =>
+        dirPlus.map((choice) => {
+          fs.copy(item, choice).catch(() => {});
+        })
+      );
+    } else fs.copy(localDirPlus, dirPlus).catch(() => {});
+  }
+
   if (!fs.existsSync(themePath)) {
     fs.copy(localThemeDir, themePath).catch(() => {});
     fs.copy(localProvidersDir, providerPath).catch(() => {});
@@ -26,7 +76,7 @@ async function componentUi(name) {
   if (!name) throw new Error("You must include a component name.");
 
   if (await fs.pathExists(dir))
-    console.error(`\x1b[31m`, "A component with that name already exists.");
+    console.error(`\x1b[31m`, `A component ${formattedName} already exists.`);
 
   if (await fs.pathExists(localDir)) return fs.copy(localDir, dir);
 
