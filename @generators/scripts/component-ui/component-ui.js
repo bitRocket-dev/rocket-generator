@@ -84,7 +84,8 @@ async function componentUi(name) {
   if (await fs.pathExists(dir))
     console.error(`\x1b[31m`, `A component ${formattedName} already exists.`);
 
-  if (await fs.pathExists(localDir)) return fs.copy(localDir, dir);
+  if (await fs.pathExists(localDir))
+    return fs.copy(localDir, dir).catch(() => {});
 
   await fs.mkdirs(dir);
 
