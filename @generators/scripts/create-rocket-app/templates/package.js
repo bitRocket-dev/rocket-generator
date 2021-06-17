@@ -91,7 +91,8 @@ exports.package = (name) => {
     "redux-devtools-extension": "^2.13.9",
     "serve": "^11.3.2",
     "typescript": "^4.1.2",
-    "@types/react-transition-group": "^4.4.1"
+    "@types/react-transition-group": "^4.4.1",
+    "@types/react-datepicker": "^3.1.8"
   }
 }`;
 };
