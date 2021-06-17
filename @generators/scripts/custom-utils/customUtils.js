@@ -10,6 +10,13 @@ async function customUtils(name, dirPath) {
       ? `${__dirname}/${name}`
       : `${__dirname}/${dirPath}/${name}`;
 
+  const path =
+    name === "fetch" || name === "helpers" || name === "time"
+      ? `./src/@sdk/utils/${name}/.gitkeep`
+      : `./src/@sdk/utils/${dirPath}/.gitkeep`;
+
+  if (await fs.pathExists(path)) fs.unlinkSync(path);
+
   if (await fs.pathExists(dir))
     console.error(
       `\x1b[31m`,
