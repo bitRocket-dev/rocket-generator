@@ -36,7 +36,7 @@ const showMenu = () => {
         "new-component-UI",
         "new-component-view",
         "new-component-shared",
-        "translations",
+        "i18n",
         "hooks",
         "utils",
       ],
@@ -290,7 +290,7 @@ const main = async () => {
             componentShared(answers.newComponentShared);
             break;
 
-          case "translations":
+          case "i18n":
             translations();
             break;
 
