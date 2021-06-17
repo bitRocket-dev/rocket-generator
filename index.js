@@ -44,12 +44,6 @@ const showMenu = () => {
     },
     {
       type: "input",
-      name: "returnBack",
-      message: () => main(),
-      when: (answers) => answers.action === "\x1b[33m--- Back ---\x1b[0m",
-    },
-    {
-      type: "input",
       name: "Exit",
       message: () => process.exit(),
       when: (answers) => answers.action === "\x1b[31m--- Exit ---\x1b[0m \n",
@@ -69,7 +63,7 @@ const showMenu = () => {
     },
     {
       type: "input",
-      name: "back",
+      name: "::: One Moment Please ::",
       message: () => main(),
       when: (answers) =>
         answers.action | (answers.createApp === "\x1b[33m--- Back ---\x1b[0m"),
