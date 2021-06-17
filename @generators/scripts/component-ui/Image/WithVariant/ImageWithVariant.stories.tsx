@@ -14,8 +14,7 @@ export default {
 
 const Template: Story<Props> = (props) => (
   <Providers>
-    {" "}
-    <ImageWithVariant {...props} />{" "}
+    <ImageWithVariant {...props} />
   </Providers>
 );
 
