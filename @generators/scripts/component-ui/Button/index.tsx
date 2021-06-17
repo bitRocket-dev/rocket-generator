@@ -10,6 +10,7 @@ import { utilityGetFontSize } from "./helpers/utilityGetFontSize";
 interface PropsWrapper extends TStyled {
   disabled?: boolean;
   variant?: "primary";
+  dataCy?: string;
 }
 
 const Button = styled.button<PropsWrapper>`
@@ -38,6 +39,7 @@ const Button = styled.button<PropsWrapper>`
 `;
 
 interface PropsShared {
+  dataCy?: string;
   disabled?: boolean;
   variant?: "primary";
   onClick?: (event: SyntheticEvent) => void;
@@ -57,10 +59,23 @@ interface PropsWithText extends PropsShared {
 export type Props = PropsWithIcon | PropsWithText;
 
 export const UIButton: FC<Props> = memo(
-  ({ disabled, variant, onClick, icon, text, size = "md" }): JSX.Element => {
+  ({
+    disabled,
+    variant,
+    onClick,
+    icon,
+    text,
+    size = "md",
+    dataCy = "UIButton",
+  }): JSX.Element => {
     const { fontSize } = utilityGetFontSize(size);
     return (
-      <Button disabled={disabled} variant={variant} onClick={onClick}>
+      <Button
+        disabled={disabled}
+        variant={variant}
+        onClick={onClick}
+        data-cy={dataCy}
+      >
         {icon && (
           <>
             <div style={{ margin: "0 0.40rem" }}>

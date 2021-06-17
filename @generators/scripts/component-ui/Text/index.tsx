@@ -20,7 +20,7 @@ export const UIText: FC<Props> = memo(
     text,
     variant = "caption",
     color = "primary",
-    dataCy,
+    dataCy = "UIText",
     noWrap = true,
     underline,
   }: Props): JSX.Element => {

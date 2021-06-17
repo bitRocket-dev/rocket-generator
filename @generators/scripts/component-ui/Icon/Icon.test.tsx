@@ -6,7 +6,7 @@ import { Providers } from "../Providers";
 it("renders UIIcon", () => {
   mount(
     <Providers>
-      <UIIcon width="10px" height="10px" />
+      <UIIcon icon="bank" />
     </Providers>
   );
   cyGet("UIIcon");

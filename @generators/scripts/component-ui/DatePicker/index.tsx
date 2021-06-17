@@ -1,12 +1,12 @@
 /** @format */
 
 // #region ::: IMPORT
-import { FC, forwardRef, memo, Ref, useRef, useState } from 'react';
-import DatePicker from 'react-datepicker';
-import { Field } from './partials/Field';
-import { UIText } from '../Text';
-import { InputDate } from '../Input/Date';
-import './theme.css';
+import { FC, forwardRef, memo, Ref, useRef, useState } from "react";
+import DatePicker from "react-datepicker";
+import { Field } from "./partials/Field";
+import { UIText } from "../Text";
+import { InputDate } from "../Input/Date";
+import "./theme.css";
 // #endregion
 
 interface InputProps {
@@ -21,7 +21,7 @@ interface InputProps {
 const DatePickerCustomInput = forwardRef(
   (
     { label, onClick, value, onChange, isFilter, hasBackground }: InputProps,
-    ref: Ref<HTMLInputElement>,
+    ref: Ref<HTMLInputElement>
   ): JSX.Element => (
     <Field>
       {label && <UIText text={label} variant="caption" />}
@@ -35,11 +35,12 @@ const DatePickerCustomInput = forwardRef(
         hasBackground={hasBackground}
       />
     </Field>
-  ),
+  )
 );
-DatePickerCustomInput.displayName = 'DatePickerCustomInput';
+DatePickerCustomInput.displayName = "DatePickerCustomInput";
 
 export interface Props {
+  dataCy?: string;
   label?: string;
   value: Date | null;
   onChange: (date: Date) => void;
@@ -51,6 +52,7 @@ export interface Props {
 
 export const UIDatePicker: FC<Props> = memo(
   ({
+    dataCy = "UIDatePicker",
     label,
     onChange,
     value,
@@ -63,9 +65,13 @@ export const UIDatePicker: FC<Props> = memo(
     const ref = useRef<HTMLInputElement>(null);
 
     const isExpirationDate = disabledPastData instanceof Date;
-    const isDisablePastDate = typeof disabledPastData === 'boolean';
+    const isDisablePastDate = typeof disabledPastData === "boolean";
     //@ts-ignore
-    const minDate: Date | null = isDisablePastDate ? new Date() : isExpirationDate ? disabledPastData : null;
+    const minDate: Date | null = isDisablePastDate
+      ? new Date()
+      : isExpirationDate
+      ? disabledPastData
+      : null;
 
     const handleChange = (date: Date): void => {
       setStartDate(date);
@@ -77,17 +83,23 @@ export const UIDatePicker: FC<Props> = memo(
 
     return (
       <DatePicker
-        wrapperClassName={fluid ? 'wrapper' : ''}
+        data-cy={dataCy}
+        wrapperClassName={fluid ? "wrapper" : ""}
         dateFormat="dd/MM/yyyy"
         selected={startDate}
         onChange={handleChange}
         minDate={minDate}
         customInput={
-          <DatePickerCustomInput label={label} ref={ref} isFilter={isFilter} hasBackground={hasBackground} />
+          <DatePickerCustomInput
+            label={label}
+            ref={ref}
+            isFilter={isFilter}
+            hasBackground={hasBackground}
+          />
         }
       />
     );
-  },
+  }
 );
 
-UIDatePicker.displayName = 'UIDatePicker';
+UIDatePicker.displayName = "UIDatePicker";

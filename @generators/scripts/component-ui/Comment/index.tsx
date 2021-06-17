@@ -15,11 +15,12 @@ export const WrapperComment = styled.div`
 
 export interface Props {
   text: string;
+  dataCy?: string;
 }
 
 export const UIComment: FC<Props> = memo(
-  ({ text }): JSX.Element => (
-    <WrapperComment>
+  ({ text, dataCy = "UIComment" }): JSX.Element => (
+    <WrapperComment data-cy={dataCy}>
       <p>{text}</p>
     </WrapperComment>
   )

@@ -1,12 +1,12 @@
 /** @format */
 
-import { ChangeEvent, FC, memo } from 'react';
-import { HiddenCheckbox } from './partials/HiddenCheckbox';
-import { Icon } from './partials/Icon';
-import { Label } from './partials/Label';
-import { Outer } from './partials/Outer';
-import { StyledCheckbox } from './partials/StyledCheckbox';
-import { WrapperText } from './partials/WrapperText';
+import { ChangeEvent, FC, memo } from "react";
+import { HiddenCheckbox } from "./partials/HiddenCheckbox";
+import { Icon } from "./partials/Icon";
+import { Label } from "./partials/Label";
+import { Outer } from "./partials/Outer";
+import { StyledCheckbox } from "./partials/StyledCheckbox";
+import { WrapperText } from "./partials/WrapperText";
 
 export interface Props {
   checked: boolean;
@@ -14,13 +14,25 @@ export interface Props {
   disabled?: boolean;
   title: string;
   description?: string;
+  dataCy?: string;
 }
 
 export const UICheckbox: FC<Props> = memo(
-  ({ checked, onChange, disabled, title, description }): JSX.Element => (
-    <Outer>
+  ({
+    checked,
+    onChange,
+    disabled,
+    title,
+    description,
+    dataCy = "UICheckbox",
+  }): JSX.Element => (
+    <Outer data-cy={dataCy}>
       <Label disabled={disabled}>
-        <HiddenCheckbox checked={checked} onChange={onChange} disabled={disabled} />
+        <HiddenCheckbox
+          checked={checked}
+          onChange={onChange}
+          disabled={disabled}
+        />
         <StyledCheckbox disabled={disabled} checked={checked}>
           <Icon viewBox="0 0 24 24">
             <polyline points="20 6 9 17 4 12" />
@@ -34,5 +46,5 @@ export const UICheckbox: FC<Props> = memo(
         )}
       </Label>
     </Outer>
-  ),
+  )
 );
