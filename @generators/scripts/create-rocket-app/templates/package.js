@@ -24,6 +24,8 @@ exports.package = (name) => {
     “@types/react-transition-group”: “^4.4.1",
     “react-image”: “^4.0.3",
     “react-quick-pinch-zoom”: “^4.0.2",
+    "react-image": "^4.0.3",
+    "react-quick-pinch-zoom": "^4.0.2",
     "react": "^17.0.2",
     “react-datepicker”: “^3.8.0",
     "redux-saga": "^1.1.3",

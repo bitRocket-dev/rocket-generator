@@ -35,11 +35,15 @@ async function componentUi(name) {
           `./src/components-ui/Text`,
           `./src/components-ui/Icon`,
           `./src/components-ui/Grid`,
+          `./src/@sdk/utils/validate`,
+          `./src/@sdk/hooks/useInput.ts`,
         ];
         localDirPlus = [
           `${__dirname}/Text`,
           `${__dirname}/Icon`,
           `${__dirname}/Grid`,
+          `${__dirname}/utility/validate`,
+          `${__dirname}/utility/useInput.ts`,
         ];
         break;
       case "Select":
@@ -61,6 +65,10 @@ async function componentUi(name) {
       case "Image":
         dirPlus = `./src/components-ui/Loader`;
         localDirPlus = `${__dirname}/Loader`;
+        break;
+      case "NavigateTo":
+        dirPlus = `./src/@sdk/hooks/useNavigation.ts`;
+        localDirPlus = `${__dirname}/utility/useNavigation.ts`;
         break;
       default:
         break;
