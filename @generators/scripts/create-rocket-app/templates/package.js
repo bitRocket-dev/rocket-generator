@@ -14,12 +14,20 @@ exports.package = (name) => {
   
     "connected-react-router": "^6.0.0",
     "fast-memoize": "^2.5.2",
+    "hedron": "^1.0.1",
     "html-webpack-plugin": "^4.5.2",
     "react-dom": "^17.0.2",
     "react-redux": "^7.2.2",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
+    "react-transition-group": "^4.4.2",
+<<<<<<< HEAD
+    "react-image": "^4.0.3",
+    "react-quick-pinch-zoom": "^4.0.2",
+=======
+>>>>>>> 330c2702137f8edb8bbb8d5f18e837f8ab12a79c
     "react": "^17.0.2",
+    "react-datepicker": "^4.1.1",
     "redux-saga": "^1.1.3",
     "redux": "^4.1.0",
     "reselect": "^4.0.0",
