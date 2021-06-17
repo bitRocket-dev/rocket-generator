@@ -1,6 +1,6 @@
 /** @format */
 
-import { Props, UIButton } from "./";
+import { Props, UIButton } from ".";
 import { Story, Meta } from "@storybook/react/types-6-0";
 import { Providers } from "../Providers";
 

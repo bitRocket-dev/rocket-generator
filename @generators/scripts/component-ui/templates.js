@@ -41,6 +41,6 @@ import { cyGet } from "../../../cypress/support/commands";
 
 it('renders learn react link', () => {
   mount(<UI${name} />)
-  cyGet('ui-${name}').contains('UI${name}')
+  cyGet('ui-${name}')
 })
 `;

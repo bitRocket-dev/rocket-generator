@@ -97,7 +97,7 @@ async function componentUi(name) {
     throwIfError
   );
   fs.writeFile(
-    `${dir}/${formattedName}.spec.js`,
+    `${dir}/${formattedName}.test.tsx`,
     test(formattedName),
     throwIfError
   );
