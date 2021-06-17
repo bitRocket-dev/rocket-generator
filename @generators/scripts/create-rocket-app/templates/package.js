@@ -21,11 +21,8 @@ exports.package = (name) => {
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
     "react-transition-group": "^4.4.2",
-<<<<<<< HEAD
     "react-image": "^4.0.3",
     "react-quick-pinch-zoom": "^4.0.2",
-=======
->>>>>>> 330c2702137f8edb8bbb8d5f18e837f8ab12a79c
     "react": "^17.0.2",
     "react-datepicker": "^4.1.1",
     "redux-saga": "^1.1.3",

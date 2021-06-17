@@ -2,7 +2,7 @@
 
 import { ImageZoomable, Props } from ".";
 import { Story, Meta } from "@storybook/react/types-6-0";
-import { Providers } from "../Providers";
+import { Providers } from "../../Providers";
 
 export default {
   title: "Example/ImageZoomable",
