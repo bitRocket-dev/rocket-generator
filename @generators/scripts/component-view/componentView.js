@@ -1,7 +1,7 @@
 /** @format */
 
 const fs = require("fs-extra");
-const { component, gitkeep, test } = require("./templates.js");
+const { component, test } = require("./templates.js");
 const { utilityCapitalizeFirst } = require("../../utilities.js");
 
 async function componentView(name) {
@@ -9,6 +9,7 @@ async function componentView(name) {
 
   const formattedName = utilityCapitalizeFirst(name);
   const dir = `./src/components-view/${formattedName}`;
+  const path = `./src/components-view/.gitkeep`;
 
   if (await fs.pathExists(dir))
     console.error(`\x1b[31m`, "A component with that name already exists.");
@@ -18,6 +19,8 @@ async function componentView(name) {
   function writeFileErrorHandler(err) {
     if (err) throw err;
   }
+
+  if (await fs.pathExists(path)) fs.unlinkSync(path);
 
   fs.writeFile(
     `${dir}/index.tsx`,

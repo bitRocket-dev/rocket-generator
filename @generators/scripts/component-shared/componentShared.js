@@ -9,6 +9,7 @@ async function componentShared(name) {
 
   const formattedName = utilityCapitalizeFirst(name);
   const dir = `./src/components-shared/${formattedName}`;
+  const path = `./src/components-shared/.gitkeep`;
 
   if (await fs.pathExists(dir))
     console.error(`\x1b[31m`, "A component with that name already exists.");
@@ -18,6 +19,8 @@ async function componentShared(name) {
   function writeFileErrorHandler(err) {
     if (err) throw err;
   }
+
+  if (await fs.pathExists(path)) fs.unlinkSync(path);
 
   fs.writeFile(
     `${dir}/${formattedName}.stories.tsx`,

@@ -16,6 +16,7 @@ async function componentUi(name) {
   const formattedName = utilityCapitalizeFirst(name);
   const dir = `./src/components-ui/${formattedName}`;
   const localDir = `${__dirname}/${formattedName}`;
+  const path = `./src/components-ui/.gitkeep`;
 
   if (!fs.existsSync(themePath)) {
     fs.copy(localThemeDir, themePath).catch(() => {});
@@ -30,6 +31,8 @@ async function componentUi(name) {
   if (await fs.pathExists(localDir)) return fs.copy(localDir, dir);
 
   await fs.mkdirs(dir);
+
+  if (await fs.pathExists(path)) fs.unlinkSync(path);
 
   fs.writeFile(
     `${dir}/${formattedName}.stories.tsx`,
