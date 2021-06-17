@@ -1,5 +1,7 @@
 /** @format */
 
+//#region  ::: PARTIALS
+
 const callApi = async (response: Response) => {
   if (!response.ok)
     return Promise.reject({
@@ -20,6 +22,10 @@ const tryGetResponseBody = async (response: Response) => {
   }
 };
 
+const sleep = (time: number) => new Promise(resolve => setTimeout(resolve, time));
+
+//#endregion
+
 export const fetchWithRetries = async (input: RequestInfo, init?: RequestInit, numOfRetry = 3, sleepTime = 500) => {
   for (let index = 1; index <= numOfRetry; index++) {
     try {
@@ -37,5 +43,3 @@ export const fetchWithRetries = async (input: RequestInfo, init?: RequestInit, n
 
   return Promise.reject({ message: `No more retry left`, input, numOfRetry, sleepTime });
 };
-
-const sleep = (time: number) => new Promise(resolve => setTimeout(resolve, time));
