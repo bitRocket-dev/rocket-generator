@@ -4,7 +4,7 @@ const { locale } = require("./templates/locale");
 const { translate } = require("./templates/translate");
 
 async function translations() {
-  const declaration = "./src/@sdk/i18n/declaration/";
+  const declaration = "./src/@sdk/i18n/declarations/";
   const translations = "./src/@sdk/i18n/translations/";
 
   if (!(await fs.pathExists(declaration))) await fs.mkdirs(declaration);
