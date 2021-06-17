@@ -54,16 +54,22 @@ async function componentUi(name) {
         dirPlus = [`./src/components-ui/Text`, `./src/components-ui/Input`];
         localDirPlus = [`${__dirname}/Text`, `${__dirname}/Input`];
         break;
+      case "Avatar":
+        dirPlus = `./src/components-ui/Text`;
+        localDirPlus = `${__dirname}/Text`;
+        break;
+      case "Image":
+        dirPlus = `./src/components-ui/Loader`;
+        localDirPlus = `${__dirname}/Loader`;
+        break;
       default:
         break;
     }
     if (await fs.pathExists(dirPlus))
       console.error(`\x1b[31m`, `A component ${formattedName} already exists.`);
     if (localDirPlus instanceof Array) {
-      localDirPlus.map((item) =>
-        dirPlus.map((choice) => {
-          fs.copy(item, choice).catch(() => {});
-        })
+      localDirPlus.map((item, index) =>
+        fs.copy(item, dirPlus[index]).catch(() => {})
       );
     } else fs.copy(localDirPlus, dirPlus).catch(() => {});
   }
