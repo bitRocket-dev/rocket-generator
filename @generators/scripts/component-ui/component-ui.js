@@ -97,7 +97,9 @@ async function componentUi(name) {
 
   await fs.mkdirs(dir);
 
-  if (await fs.pathExists(path)) fs.unlinkSync(path);
+  fs.pathExists(path, (err, exists) => {
+    if (exists) fs.unlinkSync(path);
+  });
 
   fs.writeFile(
     `${dir}/${formattedName}.stories.tsx`,
