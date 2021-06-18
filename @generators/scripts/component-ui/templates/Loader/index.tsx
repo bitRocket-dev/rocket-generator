@@ -22,8 +22,10 @@ const Loader = styled.div`
   animation: ${spin} 0.6s linear infinite;
 `;
 
-export interface Props {}
+export interface Props {
+  dataCy?: string;
+}
 
-export const UILoader: FC<Props> = (): JSX.Element => {
-  return <Loader />;
+export const UILoader: FC<Props> = ({ dataCy = "UILoader" }): JSX.Element => {
+  return <Loader data-cy={dataCy} />;
 };

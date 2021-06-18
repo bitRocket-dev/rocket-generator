@@ -1,7 +1,7 @@
 import { UIText } from ".";
 import { mount } from "@cypress/react";
 import { cyGet } from "../../../cypress/support/commands";
-import { Providers } from "../../Providers";
+import { Providers } from "../Providers";
 
 it("renders UIText", () => {
   mount(

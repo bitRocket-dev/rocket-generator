@@ -63,13 +63,19 @@ ${({ orientation, theme }: propsStyled) =>
 `;
 
 export interface Props {
+  dataCy?: string;
   text?: string;
   orientation?: "left" | "right" | "top" | "bottom";
 }
 
 export const UITooltip: FC<Props> = ({
+  dataCy = "UITooltip",
   text,
   orientation = "left",
 }): JSX.Element => {
-  return <Tooltip orientation={orientation}>{text}</Tooltip>;
+  return (
+    <Tooltip data-cy={dataCy} orientation={orientation}>
+      {text}
+    </Tooltip>
+  );
 };

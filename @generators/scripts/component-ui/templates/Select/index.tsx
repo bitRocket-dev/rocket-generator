@@ -1,8 +1,8 @@
 /** @format */
 
-import { FC } from 'react';
-import { UIText } from '../Text';
-import { Select } from './partials/Select';
+import { FC } from "react";
+import { UIText } from "../Text";
+import { Select } from "./partials/Select";
 
 export interface TOption {
   name: string;
@@ -17,16 +17,18 @@ export interface Props {
   disabled?: boolean;
   label?: string;
   isRequired?: boolean;
+  dataCy?: string;
 }
 
 export const UISelect: FC<Props> = ({
   options,
   selected,
   onChange,
-  placeholder = 'Select',
+  placeholder = "Select",
   disabled,
   label,
   isRequired,
+  dataCy = "UISelect",
 }): JSX.Element => {
   const selectLabel = isRequired ? `${label}*` : label;
   const renderOption = (option: TOption): JSX.Element => (
@@ -41,7 +43,8 @@ export const UISelect: FC<Props> = ({
       <Select
         onChange={(event): void => onChange(parseInt(event.target.value))}
         disabled={disabled}
-        value={selected ? selected : '0'}
+        value={selected ? selected : "0"}
+        data-cy={dataCy}
       >
         <option value="0" disabled>
           {placeholder}

@@ -21,16 +21,19 @@ const WrapperMobile = styled.div<TStyled>`
 // #endregion
 
 export interface Props {
+  dataCy?: string;
   children: JSX.Element;
   type: "desktop" | "mobile";
 }
 
-export const UIVisible: FC<Props> = memo(({ children, type }): JSX.Element => {
-  return type === "desktop" ? (
-    <WrapperDesktop>{children}</WrapperDesktop>
-  ) : (
-    <WrapperMobile>{children}</WrapperMobile>
-  );
-});
+export const UIVisible: FC<Props> = memo(
+  ({ children, type, dataCy = "UIVisible" }): JSX.Element => {
+    return type === "desktop" ? (
+      <WrapperDesktop data-cy={dataCy}>{children}</WrapperDesktop>
+    ) : (
+      <WrapperMobile data-cy={dataCy}>{children}</WrapperMobile>
+    );
+  }
+);
 
 UIVisible.displayName = "UIVisible";

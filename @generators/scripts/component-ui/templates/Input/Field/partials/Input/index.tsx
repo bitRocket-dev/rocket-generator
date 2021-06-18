@@ -56,7 +56,7 @@ export interface Props {
 export const Input: FC<Props> = memo(
   ({
     placeholder,
-    dataCy,
+    dataCy = "Input",
     value = "",
     disabled,
     onChange,

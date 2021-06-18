@@ -87,14 +87,16 @@ export interface Props {
   checked: boolean;
   onChange: (event: ChangeEvent<HTMLInputElement>) => void;
   disabled?: boolean;
+  dataCy?: string;
 }
 
 export const UIRadioButton: FC<Props> = ({
   checked,
   onChange,
   disabled,
+  dataCy = "UIRadioButton",
 }): JSX.Element => (
-  <Label>
+  <Label data-cy={dataCy}>
     <HiddenRadio
       checked={disabled ? false : checked}
       onChange={onChange}
