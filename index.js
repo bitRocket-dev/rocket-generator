@@ -5,19 +5,27 @@
 const inquirer = require("inquirer");
 const reduxFlow = require("./@generators/scripts/flow/reduxFlow");
 const componentUi = require("./@generators/scripts/component-ui");
-const componentView = require("./@generators/scripts/component-view/componentView");
-const componentShared = require("./@generators/scripts/component-shared/componentShared");
+const componentView = require("./@generators/scripts/component-view");
+const componentShared = require("./@generators/scripts/component-shared");
 const boilerplate = require("./@generators/scripts/create-rocket-app/boilerplate");
 const translations = require("./@generators/scripts/translations/translations");
 const customHook = require("./@generators/scripts/hooks");
 const customUtils = require("./@generators/scripts/utils/customUtils");
 const fs = require("fs-extra");
 
-const fileNameHooks = fs.readdirSync(
-  "./@generators/scripts/custom-hooks/templates"
-);
+const fileNameHooks = fs.readdirSync("./@generators/scripts/hooks/templates");
 const fileNameComponentUi = fs.readdirSync(
   "./@generators/scripts/component-ui/templates"
+);
+const fileNameUtils = fs.readdirSync("./@generators/scripts/utils/templates");
+const fileNameUtilsValidate = fs.readdirSync(
+  "./@generators/scripts/utils/templates/validate"
+);
+const fileNameUtilsFormatting = fs.readdirSync(
+  "./@generators/scripts/utils/templates/formatting"
+);
+const fileNameUtilsCache = fs.readdirSync(
+  "./@generators/scripts/utils/templates/cache"
 );
 
 const showMenu = () => {
@@ -180,43 +188,28 @@ const showMenu = () => {
       type: "checkbox",
       name: "utils",
       message: "Choose utils component do you want.",
-      choices: ["cache", "fetch", "formatting", "helpers", "time", "validate"],
+      choices: fileNameUtils,
       when: (answers) => answers.action && answers.action.includes("utils"),
     },
     {
       type: "checkbox",
       name: "cacheUtils",
       message: "Choose CACHE components.",
-      choices: [
-        "getFromLocalStorage.ts",
-        "removeLocalStorage.ts",
-        "saveToLocalStorage.ts",
-        "getFromSessionStorage.ts",
-        "removeSessionStorage.ts",
-        "saveToSessionStorage.ts",
-      ],
+      choices: fileNameUtilsCache,
       when: (answers) => answers.utils && answers.utils.includes("cache"),
     },
     {
       type: "checkbox",
       name: "formatUtils",
       message: "Choose FORMATTING components.",
-      choices: ["arrayToObject.ts", "arrayToObjectList.ts"],
+      choices: fileNameUtilsFormatting,
       when: (answers) => answers.utils && answers.utils.includes("formatting"),
     },
     {
       type: "checkbox",
       name: "validUtils",
       message: "Choose VALIDATE components.",
-      choices: [
-        "isValidEmail.ts",
-        "isValidPassword.ts",
-        "isValidSdiNumber.ts",
-        "isValidTaxCode.ts",
-        "isValidTelephoneNumber.ts",
-        "isValidVatNumber.ts",
-        "isValidYear.ts",
-      ],
+      choices: fileNameUtilsValidate,
       when: (answers) => answers.utils && answers.utils.includes("validate"),
     },
     //#endregion UTILS
