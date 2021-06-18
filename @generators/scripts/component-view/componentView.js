@@ -20,7 +20,9 @@ async function componentView(name) {
     if (err) throw err;
   }
 
-  if (await fs.pathExists(path)) fs.unlinkSync(path);
+  fs.pathExists(path, (err, exists) => {
+    if (exists) fs.unlinkSync(path);
+  });
 
   fs.writeFile(
     `${dir}/index.tsx`,
