@@ -5,6 +5,7 @@
 const inquirer = require("inquirer");
 const reduxFlow = require("./@generators/scripts/flow/reduxFlow");
 const componentUi = require("./@generators/scripts/component-ui");
+const componentRouting = require("./@generators/scripts/components-routing");
 const componentView = require("./@generators/scripts/component-view");
 const componentShared = require("./@generators/scripts/component-shared");
 const boilerplate = require("./@generators/scripts/create-rocket-app/boilerplate");
@@ -28,6 +29,10 @@ const fileNameUtilsCache = fs.readdirSync(
   "./@generators/scripts/utils/templates/cache"
 );
 
+const fileNameRoutingComponent = fs.readdirSync(
+  "./@generators/scripts/utils/templates/cache"
+);
+
 const showMenu = () => {
   const questions = [
     {
@@ -48,6 +53,8 @@ const showMenu = () => {
         "\x1b[33m--- Back ---\x1b[0m",
         new inquirer.Separator(),
         "CRUD",
+        "routing-component",
+        "new-component-routing",
         "rocket-components",
         "new-component-UI",
         "new-component-view",
@@ -142,6 +149,32 @@ const showMenu = () => {
       },
     },
     //#endregion COMPONENTS UI
+
+    //#region NEW COMPONENTS ROUTING
+    {
+      type: "checkbox",
+      name: "routingComponents",
+      message: "Choose routing component.",
+      choices: fileNameRoutingComponent,
+      when: (answers) => answers.action === "routing-component",
+    },
+    //#endregion NEW COMPONENTS ROUTING
+
+    //#region NEW COMPONENTS ROUTING
+    {
+      type: "input",
+      name: "newComponentRouting",
+      message: "Insert name of new component ui.",
+      when: (answers) => answers.action === "new-component-routing",
+      validate: (answer) => {
+        if (answer === "") {
+          return "please enter a valid answer";
+        }
+        return true;
+      },
+    },
+
+    //#endregion NEW COMPONENTS ROUTING
 
     //#region COMPONENTS VIEW
     {
@@ -242,6 +275,10 @@ const main = async () => {
 
           case "new-component-UI":
             componentUi(answers.newComponentUI);
+            break;
+
+          case "new-component-routing":
+            componentRouting(answers.newComponentRouting);
             break;
 
           case "new-component-view":
