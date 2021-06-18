@@ -1,8 +1,8 @@
 const fs = require("fs-extra");
 
 async function customHook(name) {
-  const dir = `./src/@sdk/hooks/${name}.ts`;
-  const localDir = `${__dirname}/${name}.ts`;
+  const dir = `./src/@sdk/hooks/${name}`;
+  const localDir = `${__dirname}/${name}`;
 
   if (await fs.pathExists(dir))
     console.error(`\x1b[31m`, "A component with that name already exists.");

@@ -4,13 +4,21 @@
 
 const inquirer = require("inquirer");
 const reduxFlow = require("./@generators/scripts/flow/reduxFlow");
-const componentUi = require("./@generators/scripts/component-ui/component-ui");
+const componentUi = require("./@generators/scripts/component-ui");
 const componentView = require("./@generators/scripts/component-view/componentView");
 const componentShared = require("./@generators/scripts/component-shared/componentShared");
 const boilerplate = require("./@generators/scripts/create-rocket-app/boilerplate");
 const translations = require("./@generators/scripts/translations/translations");
-const customHook = require("./@generators/scripts/custom-hooks/customHook");
-const customUtils = require("./@generators/scripts/custom-utils/customUtils");
+const customHook = require("./@generators/scripts/hooks");
+const customUtils = require("./@generators/scripts/utils/customUtils");
+const fs = require("fs-extra");
+
+const fileNameHooks = fs.readdirSync(
+  "./@generators/scripts/custom-hooks/templates"
+);
+const fileNameComponentUi = fs.readdirSync(
+  "./@generators/scripts/component-ui/templates"
+);
 
 const showMenu = () => {
   const questions = [
@@ -110,30 +118,7 @@ const showMenu = () => {
       type: "checkbox",
       name: "rocketComponents",
       message: "Choose rocket component.",
-      choices: [
-        "Avatar",
-        "Button",
-        "Checkbox",
-        "Comment",
-        "DatePicker",
-        "Grid",
-        "Icon",
-        "Image",
-        "Input",
-        "Loader",
-        "Modal",
-        "NavigateTo",
-        "Observer",
-        "Radio",
-        "Select",
-        "Steps",
-        "Switch",
-        "Tabs",
-        "Text",
-        "TimePicker",
-        "Tooltip",
-        "Visible",
-      ],
+      choices: fileNameComponentUi,
       when: (answers) => answers.action === "rocket-components",
     },
     {
@@ -185,23 +170,7 @@ const showMenu = () => {
       type: "checkbox",
       name: "customHooks",
       message: "Choose the hooks",
-      choices: [
-        "useCancelableFetch",
-        "useApiGet",
-        "useApiPost",
-        "useInput",
-        "useInputTaxCode",
-        "useInputVatNumber",
-        "useLocalStorage",
-        "useLocation",
-        "useLongPress",
-        "useMousePosition",
-        "useNavigation",
-        "useNotification",
-        "useOnlineCheck",
-        "useSessionStorage",
-        "useWindowResize",
-      ],
+      choices: fileNameHooks,
       when: (answers) => answers.action === "hooks",
     },
     //#endregion CUSTOM HOOK
