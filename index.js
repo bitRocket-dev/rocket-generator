@@ -14,7 +14,7 @@ const customHook = require("./@generators/scripts/hooks");
 const customUtils = require("./@generators/scripts/utils/customUtils");
 const fs = require("fs-extra");
 
-const fileNameHooks = fs.readdirSync("./@generators/scripts/hooks/templates");
+const fileNameHooks = fs.readdirSync("@generators/scripts/hooks/templates");
 const fileNameComponentUi = fs.readdirSync(
   "./@generators/scripts/component-ui/templates"
 );
