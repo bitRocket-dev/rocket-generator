@@ -33,11 +33,13 @@ export const ImageWithVariant: ForwardRefExoticComponent<
     { dataCy = "ImageWithVariant", picture, variant, ...props },
     ref
   ): JSX.Element => (
-    <ImageGeneric
-      data-cy={dataCy}
-      ref={ref}
-      srcList={utilityGetImageSrc(picture, variant)}
-      {...props}
-    />
+    <div data-cy={dataCy}>
+      <ImageGeneric
+        data-cy={dataCy}
+        ref={ref}
+        srcList={utilityGetImageSrc(picture, variant)}
+        {...props}
+      />
+    </div>
   )
 );

@@ -82,22 +82,24 @@ export const UIDatePicker: FC<Props> = memo(
     };
 
     return (
-      <DatePicker
-        data-cy={dataCy}
-        wrapperClassName={fluid ? "wrapper" : ""}
-        dateFormat="dd/MM/yyyy"
-        selected={startDate}
-        onChange={handleChange}
-        minDate={minDate}
-        customInput={
-          <DatePickerCustomInput
-            label={label}
-            ref={ref}
-            isFilter={isFilter}
-            hasBackground={hasBackground}
-          />
-        }
-      />
+      <div data-cy={dataCy}>
+        <DatePicker
+          data-cy={dataCy}
+          wrapperClassName={fluid ? "wrapper" : ""}
+          dateFormat="dd/MM/yyyy"
+          selected={startDate}
+          onChange={handleChange}
+          minDate={minDate}
+          customInput={
+            <DatePickerCustomInput
+              label={label}
+              ref={ref}
+              isFilter={isFilter}
+              hasBackground={hasBackground}
+            />
+          }
+        />
+      </div>
     );
   }
 );
