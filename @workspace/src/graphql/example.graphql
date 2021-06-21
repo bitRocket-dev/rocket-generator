@@ -1,0 +1,21 @@
+# @format
+
+query getOrder($id: ID!) {
+  getOrder(id: $id) {
+    id
+    agencyCoupon
+    cashback
+    creationDate
+    locatorCode
+    status
+    type
+    buyer {
+      id
+      taxCode
+      firstName
+      lastName
+      selfCertification
+    }
+  }
+  }
+}

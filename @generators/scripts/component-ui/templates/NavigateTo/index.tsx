@@ -1,6 +1,6 @@
 /** @format */
 
-import React, { FC, memo, SyntheticEvent } from "react";
+import { FC, memo, SyntheticEvent } from "react";
 import { useNavigation } from "../../@sdk/hooks/useNavigation";
 import { Wrapper } from "./partials/Wrapper";
 

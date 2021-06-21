@@ -3,9 +3,9 @@
 import { FC, memo } from "react";
 import styled from "styled-components";
 import { utilityGetInitials } from "../helpers/getInitialName";
-import { TStyled } from "../../../utils/@theme";
-import { TColor } from "../../../utils/@theme/maps/general/mapColors";
-import { UIText } from "../../../Text";
+import { TStyled } from "../../@theme";
+import { UIText } from "../../Text";
+import { TColor } from "../../@theme/maps/general/mapColors";
 import { utilityGetSizes } from "../helpers/getSize";
 import { TSize } from "../helpers/declarations";
 

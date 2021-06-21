@@ -1,0 +1,101 @@
+{
+  "stepList": [
+    {
+      "cf-questions": "Ciao, come ti chiami?",
+      "tag": "input",
+      "type": "text",
+      "name": "name"
+    },
+    {
+      "cf-questions": "Ok {previous-answer}, quanti anni hai?",
+      "tag": "input",
+      "type": "text",
+      "name": "age"
+    },
+    {
+      "tag": "fieldset",
+      "cf-questions": "Sei un programmatore?",
+      "children": [
+        {
+          "tag": "input",
+          "type": "radio",
+          "cf-label": "Si",
+          "name": "isDev",
+          "value": "Si"
+        },
+        {
+          "tag": "input",
+          "type": "radio",
+          "cf-label": "No",
+          "name": "isDev",
+          "value": "No"
+        }
+      ]
+    },
+    {
+      "cf-conditional-isDev": "No",
+      "tag": "cf-robot-message",
+      "cf-questions": "Allora, vai a cagare"
+    },
+    {
+      "tag": "fieldset",
+      "cf-questions": "Seleziona una o più opzioni",
+      "children": [
+        {
+          "cf-conditional-isDev": "Si",
+          "tag": "input",
+          "type": "checkbox",
+          "cf-label": "Option1",
+          "name": "options",
+          "value": "Option1"
+        },
+        {
+          "cf-conditional-isDev": "Si",
+          "tag": "input",
+          "type": "checkbox",
+          "cf-label": "Option2",
+          "name": "options",
+          "value": "Option2"
+        },
+        {
+          "cf-conditional-isDev": "Si",
+          "tag": "input",
+          "type": "checkbox",
+          "cf-label": "Option3",
+          "name": "options",
+          "value": "Option3"
+        }
+      ]
+    },
+    {
+      "tag": "fieldset",
+      "cf-questions": "Seleziona un'immagine",
+      "children": [
+        {
+          "cf-image": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/1200px-React-icon.svg.png",
+          "tag": "input",
+          "type": "radio",
+          "cf-label": "React",
+          "name": "image",
+          "value": "React"
+        },
+        {
+          "cf-image": "https://miro.medium.com/max/3840/1*yjH3SiDaVWtpBX0g_2q68g.png",
+          "tag": "input",
+          "type": "radio",
+          "cf-label": "Angular",
+          "name": "image",
+          "value": "Angular"
+        },
+        {
+          "cf-image": "https://hackernoon.com/hn-images/1*HSisLuifMO6KbLfPOKtLow.jpeg",
+          "tag": "input",
+          "type": "radio",
+          "cf-label": "Vue",
+          "name": "image",
+          "value": "Vue"
+        }
+      ]
+    }
+  ]
+}

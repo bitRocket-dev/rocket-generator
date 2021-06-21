@@ -1,0 +1,28 @@
+/** @format */
+
+@import '~react-datepicker/dist/react-datepicker.css';
+
+.react-datepicker__header {
+  background-color: #00d96c;
+  border: 1px solid #00d96c;
+}
+
+.react-datepicker__current-month,
+.react-datepicker-time__header,
+.react-datepicker-year-header,
+.react-datepicker__day-name {
+  color: white;
+}
+
+.react-datepicker-popper {
+  z-index: 101;
+}
+
+.react-datepicker-popper[data-placement^='bottom'] .react-datepicker__triangle {
+  border-bottom-color: #00d96c;
+  left: 43px !important;
+}
+
+.wrapper {
+  width: 100%;
+}
