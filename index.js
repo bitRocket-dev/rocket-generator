@@ -111,6 +111,13 @@ const showMenu = () => {
       when: (answers) => answers.action === "CRUD",
     },
     {
+      type: "list",
+      name: "reducer",
+      message: "do you want the reducer??",
+      choices: ["yes", "no"],
+      when: (answers) => answers.flowType === "Asyncronous",
+    },
+    {
       type: "checkbox",
       name: "reduxFlowType",
       message: "what is the type?",
@@ -271,13 +278,22 @@ const main = async () => {
       } else {
         switch (answers.action) {
           case "CRUD":
-            answers.reduxFlowType.map((item) => {
-              if (item === "Read") {
-                answers.readType.map((item) =>
-                  reduxFlow(`${item}-${answers.reduxFlowName}`)
-                );
-              } else reduxFlow(`${item}-${answers.reduxFlowName}`);
-            });
+            if (answers.flowType === "Asyncronous") {
+              answers.reduxFlowType.map((item) => {
+                if (item === "Read") {
+                  answers.readType.map((item) =>
+                    reduxFlow(
+                      `${item}-${answers.reduxFlowName}`,
+                      answers.reducer
+                    )
+                  );
+                } else
+                  reduxFlow(
+                    `${item}-${answers.reduxFlowName}`,
+                    answers.reducer
+                  );
+              });
+            }
             break;
 
           case "rocket-components":

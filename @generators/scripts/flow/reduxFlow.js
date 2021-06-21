@@ -9,7 +9,7 @@ const { api } = require("./templates/api");
 const { reducers } = require("./templates/reducers");
 const { splitString } = require("./templates/splitStringUtility");
 
-async function reduxFlow(name) {
+async function reduxFlow(name,reducer) {
   const names = splitString(name);
   if (!names[1]) throw new Error("You must include a component name.");
 
@@ -38,7 +38,8 @@ async function reduxFlow(name) {
     writeFileErrorHandler
   );
   fs.writeFile(`${dir2}/api.tsx`, api(name), writeFileErrorHandler);
-  fs.writeFile(`${dir2}/reducers.tsx`, reducers(name), writeFileErrorHandler);
+  if(reducer === "yes")fs.writeFile(`${dir2}/reducers.tsx`, reducers(name), writeFileErrorHandler);
+  
 }
 
 module.exports = reduxFlow;
