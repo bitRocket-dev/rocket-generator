@@ -14,23 +14,29 @@ const customHook = require("./@generators/scripts/hooks");
 const customUtils = require("./@generators/scripts/utils/customUtils");
 const fs = require("fs-extra");
 
-const fileNameHooks = fs.readdirSync("./@generators/scripts/hooks/templates");
-const fileNameComponentUi = fs.readdirSync(
-  "./@generators/scripts/component-ui/templates"
+console.log(process.cwd());
+
+const fileNameHooks = fs.readdirSync(
+  `${__dirname}/@generators/scripts/hooks/templates`
 );
-const fileNameUtils = fs.readdirSync("./@generators/scripts/utils/templates");
+const fileNameComponentUi = fs.readdirSync(
+  `${__dirname}/@generators/scripts/component-ui/templates`
+);
+const fileNameUtils = fs.readdirSync(
+  `${__dirname}/@generators/scripts/utils/templates`
+);
 const fileNameUtilsValidate = fs.readdirSync(
-  "./@generators/scripts/utils/templates/validate"
+  `${__dirname}/@generators/scripts/utils/templates/validate`
 );
 const fileNameUtilsFormatting = fs.readdirSync(
-  "./@generators/scripts/utils/templates/formatting"
+  `${__dirname}/@generators/scripts/utils/templates/formatting`
 );
 const fileNameUtilsCache = fs.readdirSync(
-  "./@generators/scripts/utils/templates/cache"
+  `${__dirname}/@generators/scripts/utils/templates/cache`
 );
 
 const fileNameRoutingComponent = fs.readdirSync(
-  "./@generators/scripts/utils/templates/cache"
+  `${__dirname}/@generators/scripts/utils/templates/cache`
 );
 
 const showMenu = () => {
