@@ -7,8 +7,8 @@ async function customUtils(name, dirPath) {
       : `./src/@sdk/utils/${dirPath}/${name}`;
   const localDir =
     name === "fetch" || name === "helpers" || name === "time"
-      ? `${__dirname}/${name}`
-      : `${__dirname}/${dirPath}/${name}`;
+      ? `${__dirname}/templates/${name}`
+      : `${__dirname}/templates/${dirPath}/${name}`;
 
   const path =
     name === "fetch" || name === "helpers" || name === "time"
