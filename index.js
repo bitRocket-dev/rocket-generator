@@ -14,8 +14,6 @@ const customHook = require("./@generators/scripts/hooks");
 const customUtils = require("./@generators/scripts/utils/customUtils");
 const fs = require("fs-extra");
 
-console.log(process.cwd());
-
 const fileNameHooks = fs.readdirSync(
   `${__dirname}/@generators/scripts/hooks/templates`
 );
@@ -36,7 +34,7 @@ const fileNameUtilsCache = fs.readdirSync(
 );
 
 const fileNameRoutingComponent = fs.readdirSync(
-  `${__dirname}/@generators/scripts/utils/templates/cache`
+  `${__dirname}/@generators/scripts/components-routing/templates`
 );
 
 const showMenu = () => {
@@ -285,6 +283,10 @@ const main = async () => {
 
           case "new-component-routing":
             componentRouting(answers.newComponentRouting);
+            break;
+
+          case "routing-component":
+            answers.routingComponents.map((item) => componentRouting(item));
             break;
 
           case "new-component-view":
