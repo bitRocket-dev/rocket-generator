@@ -38,7 +38,7 @@ export const UISelect: FC<Props> = ({
   );
 
   return (
-    <>
+    <div data-cy={dataCy}>
       {selectLabel && <UIText text={selectLabel} variant="title" />}
       <Select
         onChange={(event): void => onChange(parseInt(event.target.value))}
@@ -51,6 +51,6 @@ export const UISelect: FC<Props> = ({
         </option>
         {options.map(renderOption)}
       </Select>
-    </>
+    </div>
   );
 };

@@ -11,7 +11,7 @@ import { UIRow } from "../../Grid/Row";
 // #endregion
 
 export interface Props {
-  dataCy: string;
+  dataCy?: string;
   disabled?: boolean;
   errorMessage?: string;
   isRequired?: boolean;
@@ -51,7 +51,7 @@ export const InputField: FC<Props> = memo(
     };
 
     return (
-      <>
+      <div data-cy={dataCy}>
         <UIRow flex>
           <UIColumn
             md={8}
@@ -98,7 +98,7 @@ export const InputField: FC<Props> = memo(
             <span>{errorMessage}</span>
           </ErrorRow>
         )}
-      </>
+      </div>
     );
   }
 );

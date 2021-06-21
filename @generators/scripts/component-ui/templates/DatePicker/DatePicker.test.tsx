@@ -6,7 +6,7 @@ import { Providers } from "../Providers";
 it("renders UIDatePicker", () => {
   mount(
     <Providers>
-      <UIDatePicker />
+      <UIDatePicker onChange={() => {}} />
     </Providers>
   );
   cyGet("UIDatePicker");
