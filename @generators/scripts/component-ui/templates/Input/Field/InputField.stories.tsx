@@ -2,7 +2,7 @@
 
 import { Story, Meta } from "@storybook/react/types-6-0";
 import { InputField, Props } from ".";
-import { useInput } from "../../../@sdk/hooks/templates/useInput";
+import { useInput } from "../../../@sdk/hooks/useInput";
 import { utilityIsValidEmail } from "../../..//@sdk/utils/validate/isValidEmail";
 import { utilityIsValidSdiNumber } from "../../../@sdk/utils/validate/isValidSdiNumber";
 import {
