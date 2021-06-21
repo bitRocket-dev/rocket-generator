@@ -1,21 +1,22 @@
 /** @format */
 
-import translations from "..";
-import { TLocale } from "./declaration";
-import { TTranslationsExample } from "./translation/Example";
+import { TLocale } from '.';
+import { translations } from './translations';
+import { TTranslationsGeneral } from './translations/general';
 
-export type TTranslation = TTranslationsExample;
+export type Translation = { it: string; en: string };
 
-export const t = ({
-  id,
-  locale,
-}: {
+export type TTranslation = TTranslationsGeneral;
+
+interface Params {
   id: TTranslation;
   locale: TLocale;
-}): string => {
-  if (!translations[locale][id]) {
-    console.warn("MISS TRANSLATION FOR ID", id);
+}
+
+export const t = ({ id, locale }: Params): string => {
+  if (!translations[id][locale]) {
+    console.warn('MISS TRANSLATION FOR ID', id);
     return id;
   }
-  return translations[locale][id];
+  return translations[id][locale];
 };
