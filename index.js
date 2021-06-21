@@ -113,9 +113,9 @@ const showMenu = () => {
     {
       type: "list",
       name: "reducer",
-      message: "do you want the reducer??",
+      message: "Do you want the reducer??",
       choices: ["yes", "no"],
-      when: (answers) => answers.flowType === "Asyncronous",
+      when: (answers) => answers.action === "CRUD",
     },
     {
       type: "checkbox",
@@ -293,6 +293,8 @@ const main = async () => {
                     answers.reducer
                   );
               });
+            } else {
+              reduxFlow(`Sync-${answers.reduxFlowName}`, answers.reducer);
             }
             break;
 
