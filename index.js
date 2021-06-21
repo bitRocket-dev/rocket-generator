@@ -168,7 +168,7 @@ const showMenu = () => {
     {
       type: "input",
       name: "newComponentRouting",
-      message: "Insert name of new component ui.",
+      message: "Insert name of new component routing",
       when: (answers) => answers.action === "new-component-routing",
       validate: (answer) => {
         if (answer === "") {
