@@ -104,11 +104,18 @@ const showMenu = () => {
     },
     //#region CRUD
     {
+      type: "list",
+      name: "flowType",
+      message: "what redux flow's type do you want?",
+      choices: ["Asyncronous", "Syncronous"],
+      when: (answers) => answers.action === "CRUD",
+    },
+    {
       type: "checkbox",
       name: "reduxFlowType",
       message: "what is the type?",
       choices: ["Create", "Read", "Update", "Delete"],
-      when: (answers) => answers.action === "CRUD",
+      when: (answers) => answers.flowType === "Asyncronous",
     },
     {
       type: "checkbox",
