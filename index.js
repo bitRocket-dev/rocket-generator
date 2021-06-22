@@ -4,6 +4,7 @@
 
 const inquirer = require("inquirer");
 const reduxFlow = require("./@generators/scripts/flow/reduxFlow");
+const reduxSyncFlow = require("./@generators/scripts/sync-flow/reduxSyncFlow");
 const componentUi = require("./@generators/scripts/component-ui");
 const componentRouting = require("./@generators/scripts/components-routing");
 const componentView = require("./@generators/scripts/component-view");
@@ -137,6 +138,27 @@ const showMenu = () => {
       message: "what is the type?",
       choices: ["Create", "Read", "Update", "Delete"],
       when: (answers) => answers.flowType === "Asyncronous",
+    },
+    {
+      type: "checkbox",
+      name: "reduxFlowSyncType",
+      message: "what is the type?",
+      choices: ["Create", "Update", "Delete", "Other"],
+      when: (answers) => answers.flowType === "Syncronous",
+    },
+    {
+      type: "input",
+      name: "otherSyncType",
+      message: "Insert the name of the type",
+      when: (answers) =>
+        answers.reduxFlowSyncType &&
+        answers.reduxFlowSyncType.includes("Other"),
+      validate: (answer) => {
+        if (answer === "") {
+          return "please enter a valid answer";
+        }
+        return true;
+      },
     },
     {
       type: "checkbox",

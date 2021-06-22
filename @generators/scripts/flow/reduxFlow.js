@@ -17,7 +17,7 @@ async function reduxFlow(name, reducer) {
 
   const dir = `./src/@sdk/redux-modules/${nameUpper}`;
   const dir2 = `${dir}/${names[0]}`;
-  const dirSync = `./src/@sdk/redux-modules/${nameUpper}-Sync`;
+  const dirSync = `./src/@sdk/redux-modules/${nameUpper}`;
 
   if (names[0] !== "Sync") {
     if (await fs.pathExists(dir)) {

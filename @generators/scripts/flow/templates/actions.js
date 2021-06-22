@@ -1,13 +1,15 @@
 /** @format */
 
-const { splitString } = require('./splitStringUtility');
+const { splitString } = require("./splitStringUtility");
 
-exports.actions = name => {
+exports.actions = (name) => {
   const names = splitString(name);
   const nameOperationTypeUpper = names[0].toUpperCase();
-  const nameOperationTypeLower = names[0].charAt(0).toUpperCase() + names[0].slice(1);
+  const nameOperationTypeLower =
+    names[0].charAt(0).toUpperCase() + names[0].slice(1);
   const nameActionTypeUpper = names[1].toUpperCase();
-  const nameActionTypeLowewr = names[1].charAt(0).toUpperCase() + names[1].slice(1);
+  const nameActionTypeLowewr =
+    names[1].charAt(0).toUpperCase() + names[1].slice(1);
 
   return `
 //#region ::: IMPORT
