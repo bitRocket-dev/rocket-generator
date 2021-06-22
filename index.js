@@ -13,7 +13,12 @@ const translations = require("./@generators/scripts/i18n");
 const customHook = require("./@generators/scripts/hooks");
 const customUtils = require("./@generators/scripts/utils/customUtils");
 const fs = require("fs-extra");
+const packages = require("./@generators/scripts/packages");
 
+//#region filename dynamic
+const fileNamePackages = fs.readdirSync(
+  `${__dirname}/@generators/scripts/packages/templates`
+);
 const fileNameHooks = fs.readdirSync(
   `${__dirname}/@generators/scripts/hooks/templates`
 );
@@ -35,6 +40,7 @@ const fileNameUtilsCache = fs.readdirSync(
 const fileNameRoutingComponent = fs.readdirSync(
   `${__dirname}/@generators/scripts/components-routing/templates`
 );
+//#endregion
 
 const showMenu = () => {
   const questions = [
@@ -49,6 +55,7 @@ const showMenu = () => {
         "i18n",
         "hooks",
         "utils",
+        "Packages",
         "\x1b[31m--- Exit ---\x1b[0m \n",
       ],
     },
@@ -93,6 +100,14 @@ const showMenu = () => {
       message: () => main(),
       when: (answers) =>
         answers.action | (answers.createApp === "\x1b[33m--- Back ---\x1b[0m"),
+    },
+
+    {
+      type: "checkbox",
+      name: "packages",
+      message: "Choose your packages",
+      choices: fileNamePackages,
+      when: (answers) => answers.main === "Packages",
     },
 
     {
@@ -271,104 +286,106 @@ const main = async () => {
   let app = true;
   while (app) {
     await showMenu().then((answers) => {
-      if (answers.main === "create-rocket-app") {
-        boilerplate(answers.newApp);
-        app = false;
-      } else {
-        switch (answers.action) {
-          case "CRUD":
-            if (answers.flowType === "Asyncronous") {
-              answers.reduxFlowType.map((item) => {
-                if (item === "Read") {
-                  answers.readType.map((item) =>
-                    reduxFlow(
-                      `${item}-${answers.reduxFlowName}`,
-                      answers.reducer
-                    )
-                  );
-                } else
-                  reduxFlow(
-                    `${item}-${answers.reduxFlowName}`,
-                    answers.reducer
-                  );
-              });
-            } else {
-              reduxFlow(`Sync-${answers.reduxFlowName}`, answers.reducer);
-            }
-            break;
+      switch (answers.main) {
+        case "create-rocket-app":
+          boilerplate(answers.newApp);
+          app = false;
+          break;
 
-          case "rocket-components":
-            answers.rocketComponents.map((item) => componentUi(item));
-            break;
+        case "Packages":
+          answers.packages.map((item) => packages(item));
+          break;
 
-          case "new-component-UI":
-            componentUi(answers.newComponentUI);
-            break;
+        case "CRUD":
+          if (answers.flowType === "Asyncronous") {
+            answers.reduxFlowType.map((item) => {
+              if (item === "Read") {
+                answers.readType.map((item) =>
+                  reduxFlow(`${item}-${answers.reduxFlowName}`, answers.reducer)
+                );
+              } else
+                reduxFlow(`${item}-${answers.reduxFlowName}`, answers.reducer);
+            });
+          } else {
+            reduxFlow(`Sync-${answers.reduxFlowName}`, answers.reducer);
+          }
+          break;
 
-          case "new-component-routing":
-            componentRouting(answers.newComponentRouting);
-            break;
+        case "i18n":
+          translations();
+          break;
 
-          case "routing-component":
-            answers.routingComponents.map((item) => componentRouting(item));
-            break;
+        case "utils":
+          answers.utils &&
+            answers.utils.map((choice) => {
+              switch (choice) {
+                case "cache":
+                  answers.cacheUtils &&
+                    answers.cacheUtils.map((item) => customUtils(item, choice));
+                  break;
+                case "formatting":
+                  answers.formatUtils &&
+                    answers.formatUtils.map((item) =>
+                      customUtils(item, choice)
+                    );
+                  break;
+                case "validate":
+                  answers.validUtils &&
+                    answers.validUtils.map((item) => customUtils(item, choice));
+                  break;
+                case "fetch":
+                  customUtils(choice);
+                  break;
+                case "helpers":
+                  customUtils(choice);
+                  break;
+                case "time":
+                  customUtils(choice);
+                  break;
+              }
+            });
+          break;
 
-          case "new-component-view":
-            componentView(answers.newComponentView);
-            break;
+        case "hooks":
+          answers.customHooks &&
+            answers.customHooks.map((item) => customHook(item));
+          break;
 
-          case "new-component-shared":
-            componentShared(answers.newComponentShared);
-            break;
+        case "Components":
+          switch (answers.action) {
+            case "rocket-components":
+              answers.rocketComponents.map((item) => componentUi(item));
+              break;
 
-          case "i18n":
-            translations();
-            break;
+            case "new-component-UI":
+              componentUi(answers.newComponentUI);
+              break;
 
-          case "hooks":
-            answers.customHooks &&
-              answers.customHooks.map((item) => customHook(item));
-            break;
+            case "new-component-routing":
+              componentRouting(answers.newComponentRouting);
+              break;
 
-          case "utils":
-            answers.utils &&
-              answers.utils.map((choice) => {
-                switch (choice) {
-                  case "cache":
-                    answers.cacheUtils &&
-                      answers.cacheUtils.map((item) =>
-                        customUtils(item, choice)
-                      );
-                    break;
-                  case "formatting":
-                    answers.formatUtils &&
-                      answers.formatUtils.map((item) =>
-                        customUtils(item, choice)
-                      );
-                    break;
-                  case "validate":
-                    answers.validUtils &&
-                      answers.validUtils.map((item) =>
-                        customUtils(item, choice)
-                      );
-                    break;
-                  case "fetch":
-                    customUtils(choice);
-                    break;
-                  case "helpers":
-                    customUtils(choice);
-                    break;
-                  case "time":
-                    customUtils(choice);
-                    break;
-                }
-              });
-            break;
+            case "routing-component":
+              answers.routingComponents.map((item) => componentRouting(item));
+              break;
 
-          default:
-            console.log("One moment..");
-            break;
-        }
+            case "new-component-view":
+              componentView(answers.newComponentView);
+              break;
+
+            case "new-component-shared":
+              componentShared(answers.newComponentShared);
+              break;
+
+            default:
+              console.log("One moment..");
+              break;
+          }
+          break;
+
+        default:
+          console.log("One moment..");
+          break;
       }
     });
   }
