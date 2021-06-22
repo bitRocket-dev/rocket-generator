@@ -107,6 +107,10 @@ async function componentUi(name) {
     } else fs.copy(localDirPlus, dirPlus).catch(() => {});
   }
 
+  if (fs.pathExistsSync(path)) {
+    fs.unlinkSync(path);
+  }
+
   if (!fs.existsSync(themePath)) {
     fs.copy(localThemeDir, themePath).catch(() => {});
     fs.copy(localProvidersDir, providerPath).catch(() => {});
@@ -121,8 +125,6 @@ async function componentUi(name) {
     return fs.copy(localDir, dir).catch(() => {});
 
   await fs.mkdirs(dir);
-
-  if (await fs.pathExists(path)) fs.unlinkSync(path);
 
   fs.writeFile(
     `${dir}/${formattedName}.stories.tsx`,
