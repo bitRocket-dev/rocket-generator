@@ -5,7 +5,7 @@ async function customHook(name) {
   const localDir = `${__dirname}/templates/${name}`;
 
   if (await fs.pathExists(dir))
-    console.error(`\x1b[31m`, "A component with that name already exists.");
+    console.error(`\x1b[31m`, `A component ${name} already exists.`);
 
   if (await fs.pathExists(localDir)) return fs.copy(localDir, dir);
 }
