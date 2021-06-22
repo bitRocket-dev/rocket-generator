@@ -1,6 +1,6 @@
 /** @format */
 
-import fetchGET from './fetchGET';
+import {fetchGET} from './fetchGET';
 import fetchPOST from './fetchPOST';
 import fetchDELETE from './fetchDELETE';
 import fetchPUT from './fetchPUT';
