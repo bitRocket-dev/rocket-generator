@@ -44,7 +44,11 @@ const showMenu = () => {
       message: "Hi! What do you want to do?",
       choices: [
         "create-rocket-app",
-        "Add/Create other components",
+        "Components",
+        "CRUD",
+        "i18n",
+        "hooks",
+        "utils",
         "\x1b[31m--- Exit ---\x1b[0m \n",
       ],
     },
@@ -55,18 +59,14 @@ const showMenu = () => {
       choices: [
         "\x1b[33m--- Back ---\x1b[0m",
         new inquirer.Separator(),
-        "CRUD",
         "routing-component",
         "new-component-routing",
         "rocket-components",
         "new-component-UI",
         "new-component-view",
         "new-component-shared",
-        "i18n",
-        "hooks",
-        "utils",
       ],
-      when: (answers) => answers.main === "Add/Create other components",
+      when: (answers) => answers.main === "Components",
     },
     {
       type: "input",
@@ -107,14 +107,14 @@ const showMenu = () => {
       name: "flowType",
       message: "what redux flow's type do you want?",
       choices: ["Asyncronous", "Syncronous"],
-      when: (answers) => answers.action === "CRUD",
+      when: (answers) => answers.main === "CRUD",
     },
     {
       type: "list",
       name: "reducer",
       message: "Do you want the reducer??",
       choices: ["yes", "no"],
-      when: (answers) => answers.action === "CRUD",
+      when: (answers) => answers.main === "CRUD",
     },
     {
       type: "checkbox",
@@ -135,7 +135,7 @@ const showMenu = () => {
       type: "input",
       name: "reduxFlowName",
       message: "Please insert the name of redux flow",
-      when: (answers) => answers.action === "CRUD",
+      when: (answers) => answers.main === "CRUD",
       validate: (answer) => {
         if (answer === "") {
           return "please enter a valid answer";
@@ -229,7 +229,7 @@ const showMenu = () => {
       name: "customHooks",
       message: "Choose the hooks",
       choices: fileNameHooks,
-      when: (answers) => answers.action === "hooks",
+      when: (answers) => answers.main === "hooks",
     },
     //#endregion CUSTOM HOOK
 
@@ -239,14 +239,14 @@ const showMenu = () => {
       name: "utils",
       message: "Choose utils component do you want.",
       choices: fileNameUtils,
-      when: (answers) => answers.action && answers.action.includes("utils"),
+      when: (answers) => answers.main && answers.main.includes("utils"),
     },
     {
       type: "checkbox",
       name: "cacheUtils",
       message: "Choose CACHE components.",
       choices: fileNameUtilsCache,
-      when: (answers) => answers.utils && answers.utils.includes("cache"),
+      when: (answers) => answers.main && answers.main.includes("cache"),
     },
     {
       type: "checkbox",
