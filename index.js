@@ -32,7 +32,6 @@ const fileNameUtilsFormatting = fs.readdirSync(
 const fileNameUtilsCache = fs.readdirSync(
   `${__dirname}/@generators/scripts/utils/templates/cache`
 );
-
 const fileNameRoutingComponent = fs.readdirSync(
   `${__dirname}/@generators/scripts/components-routing/templates`
 );

@@ -15,8 +15,8 @@ async function customUtils(name, dirPath) {
       ? `./src/@sdk/utils/${name}/.gitkeep`
       : `./src/@sdk/utils/${dirPath}/.gitkeep`;
 
-  fs.pathExists(path, (err, exists) => {
-    if (exists) fs.unlinkSync(path);
+  fs.pathExists(path, (exists) => {
+    if (exists) fs.unlinkSync(path).catch(() => {});
   });
 
   if (await fs.pathExists(dir))
