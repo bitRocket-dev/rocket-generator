@@ -1,19 +1,17 @@
 /** @format */
 
-const { splitString } = require("./splitStringUtility");
-
-exports.reducers = (name) => {
-  const names = splitString(name);
-  const formattedName = names[0].charAt(0).toUpperCase() + names[0].slice(1);
+exports.reducers = (name, choices) => {
+  const formattedName = name.charAt(0).toUpperCase() + name.slice(1);
   return `
 import { TStore } from "../../../declarations/store";
 import { TAction } from "../../../declarations/actions";
 
 export const reducer${formattedName} = (
-  prevStore: TStore['${names[0]}'] = {},
+  prevStore: TStore['${name}'] = {},
   action: TAction,
-): TStore['${names[0]}'] => {
+): TStore['${name}'] => {
   switch (action.type) {
+    ${choices.map((operation) => `case "${operation}":\n`).join("")}
     default:
       break;
   }

@@ -1,16 +1,17 @@
 /** @format */
 
-const { splitString } = require("./splitStringUtility");
-
-exports.constants = (name) => {
-  const names = splitString(name);
-  const nameActionOperationType = names[1].toUpperCase();
-  const nameActionOperationLog =
-    names[1].charAt(0).toUpperCase() + names[0].slice(1);
-  const nameActionType = names[0].toUpperCase();
-  const nameActionLog = names[0].charAt(0).toUpperCase() + names[0].slice(1);
+exports.constants = (name, choices) => {
+  const nameActionType = name.toUpperCase();
+  const nameActionLog = name.charAt(0).toUpperCase() + name.slice(1);
 
   return `
-export const AT_${nameActionType}_${nameActionOperationType}_REQUEST = '[Action] - ${nameActionLog} ${nameActionOperationLog} Request';  
+  ${choices
+    .map(
+      (operation) =>
+        `export const AT_${nameActionType}_${operation.toUpperCase()}_REQUEST = '[Action] - ${nameActionLog} ${
+          operation.charAt(0).toUpperCase() + operation.slice(1)
+        } Request';\n`
+    )
+    .join("")}
   `;
 };

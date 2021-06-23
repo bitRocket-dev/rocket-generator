@@ -3,8 +3,8 @@
 /** @format */
 
 const inquirer = require("inquirer");
-const reduxFlow = require("./@generators/scripts/flow/reduxFlow");
-const reduxSyncFlow = require("./@generators/scripts/sync-flow/reduxSyncFlow");
+const reduxFlow = require("./@generators/scripts/flow/index");
+const reduxSyncFlow = require("./@generators/scripts/sync-flow/index");
 const componentUi = require("./@generators/scripts/component-ui");
 const componentRouting = require("./@generators/scripts/components-routing");
 const componentView = require("./@generators/scripts/component-view");
@@ -329,8 +329,23 @@ const main = async () => {
                 reduxFlow(`${item}-${answers.reduxFlowName}`, answers.reducer);
             });
           } else {
-            reduxFlow(`Sync-${answers.reduxFlowName}`, answers.reducer);
+            // answers.reduxFlowSyncType.map((item) => {
+            //   if (item === "Other")
+            //      (
+            //       `${
+            //         answers.reduxFlowName
+            //       }-${answers.otherSyncType.toLowerCase()}`,
+            //       answers.reducer
+            //     );
+            //   else
+            reduxSyncFlow(
+              answers.reduxFlowName,
+              answers.reduxFlowSyncType,
+              answers.reducer
+            );
           }
+          //   });
+          // }
           break;
 
         case "i18n":
