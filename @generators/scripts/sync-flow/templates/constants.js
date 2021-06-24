@@ -8,9 +8,9 @@ exports.constants = (name, choices) => {
   ${choices
     .map(
       (operation) =>
-        `export const AT_${nameActionType}_${operation.toUpperCase()}_REQUEST = '[Action] - ${nameActionLog} ${
+        `export const AT_${nameActionType}_${operation.toUpperCase()} = '[Action] - ${nameActionLog} ${
           operation.charAt(0).toUpperCase() + operation.slice(1)
-        } Request';\n`
+        }';\n`
     )
     .join("")}
   `;

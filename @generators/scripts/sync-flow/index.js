@@ -15,12 +15,10 @@ async function reduxSyncFlow(name, choices, reducer) {
   if (await fs.pathExists(dir2)) {
     await scriptBody(name, choices);
 
-    const data = fs
-      .readFileSync(`./src/@sdk/redux-modules/${name}/actions.tsx`)
-      .toString()
-      .split("\n");
+    const data = fs.readFileSync(dir2).toString().split("\n");
 
     const str = await scriptImport(name, choices);
+    console.log(str);
     str.map((item) => {
       data.splice(3, 0, item);
       const text = data.join("\n");
