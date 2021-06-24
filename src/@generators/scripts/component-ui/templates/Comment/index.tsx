@@ -1,0 +1,27 @@
+/** @format */
+
+import { FC, memo } from 'react';
+import styled from 'styled-components';
+
+export const WrapperComment = styled.div`
+  width: 100%;
+  height: 25rem;
+  padding: 1.6rem;
+  border: 1px solid #a6a6a6;
+  border-radius: 16px;
+  background-color: #e6e6e6;
+  overflow-y: overlay;
+`;
+
+export interface Props {
+  text: string;
+  dataCy?: string;
+}
+
+export const UIComment: FC<Props> = memo(
+  ({ text, dataCy = 'UIComment' }): JSX.Element => (
+    <WrapperComment data-cy={dataCy}>
+      <p>{text}</p>
+    </WrapperComment>
+  ),
+);
