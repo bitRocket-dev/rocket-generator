@@ -1,8 +1,8 @@
 /** @format */
 
-const { splitString } = require('./splitStringUtility');
+import { splitString } from './splitStringUtility';
 
-exports.constants = name => {
+export const constants = name => {
   const names = splitString(name);
   const nameActionOperationType = names[0].toUpperCase();
   const nameActionOperationLog = names[0].charAt(0).toUpperCase() + names[0].slice(1);

@@ -1,6 +1,6 @@
 /** @format */
 
-exports.pkg = (name) => {
+export const pkg = name => {
   return `
   {
   "name": "${name}",

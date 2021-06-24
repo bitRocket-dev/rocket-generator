@@ -1,12 +1,12 @@
 /** @format */
 
-const fs = require('fs-extra');
-const { sagas } = require('./templates/sagas');
-const { actions } = require('./templates/actions');
-const { constants } = require('./templates/constants');
-const { api } = require('./templates/api');
-const { declarations } = require('./templates/declarations');
-const { reducers } = require('./templates/reducers');
+import fs from 'fs-extra';
+import { sagas } from './templates/sagas';
+import { actions } from './templates/actions';
+import { constants } from './templates/constants';
+import { api } from './templates/api';
+import { declarations } from './templates/declarations';
+import { reducers } from './templates/reducers';
 
 const [name] = process.argv.slice(2);
 if (!name) throw new Error('You must include a component name.');

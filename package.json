@@ -16,8 +16,7 @@
     "postinstall": "husky install",
     "prettier": "prettier --write src/**/*.{ts,tsx} src/**/**/*.{ts,tsx} src/**/**/**/*.{ts,tsx} src/**/**/**/**/*.{ts,tsx} src/**/**/**/**/**/*.{ts,tsx}",
     "test:commit-msg": "commitlint -env HUSKY_GIT_PARAMS",
-    "test:eslint": "eslint --ext .ts,.tsx ./src",
-    "test:format": "npm run test:lint && npm run test:eslint",
+    "test:format": "npm run test:lint",
     "test:lint": "tsc --noEmit"
   },
   "bin": {

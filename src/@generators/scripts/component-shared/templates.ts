@@ -1,6 +1,6 @@
 /** @format */
 
-exports.component = name => `
+export const component = name => `
 import { FC } from "react";
 
 export interface Props {}
@@ -10,7 +10,7 @@ export const ${name} :FC<Props> = ({}): JSX.Element => {
 };
 `;
 
-exports.story = name => `
+export const story = name => `
 import { ${name}, Props } from './';
 import { Story, Meta } from '@storybook/react/types-6-0';
 import { Providers } from '../../Providers';

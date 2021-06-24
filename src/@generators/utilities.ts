@@ -7,7 +7,7 @@ export const utilityCapitalizeFirst = string => string.toLowerCase().charAt(0).t
 export const execAsync = (command, options = {}) =>
   new Promise((resolve, reject) =>
     exec(command, options, (err, stdout, stderr) => {
-      if (err) return reject(err, stderr);
+      if (err) return reject(err);
       return resolve(stdout);
     }),
   );

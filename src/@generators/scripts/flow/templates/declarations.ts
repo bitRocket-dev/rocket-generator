@@ -1,8 +1,8 @@
 /** @format */
 
-const { splitString } = require('./splitStringUtility');
+import { splitString } from './splitStringUtility';
 
-exports.declarations = name => {
+export const declarations = name => {
   const names = splitString(name);
   const formattedName = names[1].charAt(0).toUpperCase() + names[1].slice(1);
 

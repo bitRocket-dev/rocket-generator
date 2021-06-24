@@ -1,10 +1,10 @@
 /** @format */
 
-const fs = require('fs-extra');
-const { component, test } = require('./templates.js');
-const { utilityCapitalizeFirst } = require('../../utilities.js');
+import fs from 'fs-extra';
+import { component, test } from './templates';
+import { utilityCapitalizeFirst } from '../../utilities';
 
-async function componentView(name) {
+export const componentView = async name => {
   if (!name) console.error(`\x1b[31m`, 'Insert a name valid!');
 
   const formattedName = utilityCapitalizeFirst(name);
@@ -25,6 +25,4 @@ async function componentView(name) {
 
   fs.writeFile(`${dir}/index.tsx`, component(formattedName), writeFileErrorHandler);
   fs.writeFile(`${dir}/${formattedName}.spec.js`, test(formattedName), writeFileErrorHandler);
-}
-
-module.exports = componentView;
+};

@@ -1,6 +1,4 @@
 /** @format */
 
-exports = {
-  CREATE_ROCKET_APP = 'create-rocket-app',
-  COMPONENTS = 'components',
-};
+export const CREATE_ROCKET_APP = 'create-rocket-app';
+export const COMPONENTS = 'components';

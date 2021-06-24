@@ -1,11 +1,11 @@
 /** @format */
 
-const fs = require('fs-extra');
-const { pkg } = require('./templates/package');
-const { execAsync } = require('../../utilities');
-const boxen = require('boxen');
+import fs from 'fs-extra';
+import * as boxen from 'boxen';
+import { pkg } from './templates/package';
+import { execAsync } from '../../utilities';
 
-async function boilerplate(name) {
+export const boilerplate = async name => {
   const dir = `./${name}`;
   await fs.mkdirs(dir);
   const localDir = `${__dirname}/boilerplate`;
@@ -56,6 +56,4 @@ async function boilerplate(name) {
   );
 
   console.log(`\x1b[32m`, 'DONE! GOOD CODING!');
-}
-
-module.exports = boilerplate;
+};

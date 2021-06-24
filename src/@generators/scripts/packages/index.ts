@@ -1,9 +1,9 @@
 /** @format */
 
-const fs = require('fs-extra');
-const { throwIfError } = require('../../utilities');
+import fs from 'fs-extra';
+import { throwIfError } from '../../utilities';
 
-async function packages(name) {
+export const packages = async name => {
   const localDir = `${__dirname}/templates/${name}`;
   const dir = `./src/@packages/${name}`;
 
@@ -11,6 +11,4 @@ async function packages(name) {
 
   if (await fs.pathExists(localDir)) return fs.copy(localDir, dir).catch(() => {});
   throwIfError;
-}
-
-module.exports = packages;
+};

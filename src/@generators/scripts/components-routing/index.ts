@@ -1,10 +1,10 @@
 /** @format */
 
-const { utilityCapitalizeFirst, throwIfError } = require('../../utilities');
-const fs = require('fs-extra');
-const { component } = require('./new-template.js');
+import { utilityCapitalizeFirst, throwIfError } from '../../utilities';
+import fs from 'fs-extra';
+import { component } from './new-template';
 
-async function componentRouting(name) {
+export const componentRouting = async name => {
   if (!name) throw new Error('You must include a component name.');
   const formattedName = utilityCapitalizeFirst(name);
   const dir = `./src/components-routing/Route${formattedName}`;
@@ -18,6 +18,4 @@ async function componentRouting(name) {
   await fs.mkdirs(dir);
 
   fs.writeFile(`${dir}/index.tsx`, component(formattedName), throwIfError);
-}
-
-module.exports = componentRouting;
+};

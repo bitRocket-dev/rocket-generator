@@ -1,10 +1,10 @@
 /** @format */
 
-const fs = require('fs-extra');
-const { component, story } = require('./templates.js');
-const { utilityCapitalizeFirst } = require('../../utilities.js');
+import fs from 'fs-extra';
+import { component, story } from './templates';
+import { utilityCapitalizeFirst } from '../../utilities';
 
-async function componentShared(name) {
+export const componentShared = async name => {
   if (!name) console.error(`\x1b[31m`, 'Insert a name valid!');
 
   const formattedName = utilityCapitalizeFirst(name);
@@ -25,6 +25,4 @@ async function componentShared(name) {
 
   fs.writeFile(`${dir}/${formattedName}.stories.tsx`, story(formattedName), writeFileErrorHandler);
   fs.writeFile(`${dir}/index.tsx`, component(formattedName), writeFileErrorHandler);
-}
-
-module.exports = componentShared;
+};

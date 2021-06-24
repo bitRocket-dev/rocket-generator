@@ -1,6 +1,6 @@
 /** @format */
 
-exports.component = name => `
+export const component = name => `
 import { FC } from "react";
 
 export interface Props {}
@@ -10,7 +10,7 @@ export const UI${name} :FC<Props> = ({}): JSX.Element => {
 };
 `;
 
-exports.story = name => `
+export const story = name => `
 import { UI${name}, Props } from './';
 import { Story, Meta } from '@storybook/react/types-6-0';
 import { Providers } from '../Providers';
@@ -34,7 +34,7 @@ export const Default = Template.bind({});
 Default.args = {};
 `;
 
-exports.test = name => `
+export const test = name => `
 import { UI${name} } from '.';
 import { mount } from '@cypress/react'
 import { cyGet } from "../../../cypress/support/commands";

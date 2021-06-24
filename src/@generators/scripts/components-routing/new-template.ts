@@ -1,6 +1,6 @@
 /** @format */
 
-exports.component = name => `
+export const component = name => `
 import { memo, FC } from 'react';
 import { Route } from 'react-router-dom';
 

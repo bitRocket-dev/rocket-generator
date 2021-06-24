@@ -1,15 +1,16 @@
-const electron = require('electron');
+/** @format */
+
+import electron from 'electron';
 const app = electron.app;
 const BrowserWindow = electron.BrowserWindow;
-const path = require('path');
-const isDev = require('electron-is-dev');
+import path from 'path';
+import isDev from 'electron-is-dev';
+
 let mainWindow;
 
 function createWindow() {
   mainWindow = new BrowserWindow({ width: 900, height: 680 });
-  mainWindow.loadURL(
-    isDev ? 'http://localhost:3000' : `file://${path.join(__dirname, '../build/index.html')}`,
-  );
+  mainWindow.loadURL(isDev ? 'http://localhost:3000' : `file://${path.join(__dirname, '../build/index.html')}`);
   mainWindow.on('closed', () => (mainWindow = null));
   isDev && mainWindow.webContents.openDevTools();
   const ses = mainWindow.webContents.session;

@@ -1,15 +1,15 @@
 /** @format */
 
-const fs = require('fs-extra');
-const { sagas } = require('./templates/sagas');
-const { actions } = require('./templates/actions');
-const { constants } = require('./templates/constants');
-const { declarations } = require('./templates/declarations');
-const { api } = require('./templates/api');
-const { reducers } = require('./templates/reducers');
-const { splitString } = require('./templates/splitStringUtility');
+import fs from 'fs-extra';
+import { sagas } from './templates/sagas';
+import { actions } from './templates/actions';
+import { constants } from './templates/constants';
+import { declarations } from './templates/declarations';
+import { api } from './templates/api';
+import { reducers } from './templates/reducers';
+import { splitString } from './templates/splitStringUtility';
 
-async function reduxFlow(name, reducer) {
+export const reduxFlow = async (name, reducer) => {
   const names = splitString(name);
   if (!names[1]) throw new Error('You must include a component name.');
 
@@ -50,6 +50,4 @@ async function reduxFlow(name, reducer) {
     if (names[0] !== 'Sync') fs.writeFile(`${dir2}/reducers.tsx`, reducers(name), writeFileErrorHandler);
     else fs.writeFile(`${dirSync}/reducers.tsx`, reducers(name), writeFileErrorHandler);
   }
-}
-
-module.exports = reduxFlow;
+};

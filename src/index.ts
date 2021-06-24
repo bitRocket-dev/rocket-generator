@@ -3,19 +3,17 @@
 
 import inquirer from 'inquirer';
 import fs from 'fs-extra';
-import reduxFlow from './@generators/scripts/flow/reduxFlow';
-import componentUi from './@generators/scripts/component-ui';
-import componentRouting from './@generators/scripts/components-routing';
-import componentView from './@generators/scripts/component-view';
-import componentShared from './@generators/scripts/component-shared';
-import boilerplate from './@generators/scripts/create-rocket-app/boilerplate';
-import translations from './@generators/scripts/i18n';
-import customHook from './@generators/scripts/hooks';
-import customUtils from './@generators/scripts/utils/customUtils';
-
-import packages from './@generators/scripts/packages';
-
-import options from './constants/options';
+import { reduxFlow } from './@generators/scripts/flow/reduxFlow';
+import { componentUi } from './@generators/scripts/component-ui';
+import { componentRouting } from './@generators/scripts/components-routing';
+import { componentView } from './@generators/scripts/component-view';
+import { componentShared } from './@generators/scripts/component-shared';
+import { boilerplate } from './@generators/scripts/create-rocket-app/boilerplate';
+import { translations } from './@generators/scripts/i18n';
+import { customHook } from './@generators/scripts/hooks';
+import { customUtils } from './@generators/scripts/utils/customUtils';
+import { packages } from './@generators/scripts/packages';
+import { COMPONENTS, CREATE_ROCKET_APP } from './constants/options';
 
 //#region filename dynamic
 const fileNamePackages = fs.readdirSync(`${__dirname}/@generators/scripts/packages/templates`);
@@ -35,8 +33,8 @@ const showMenu = () => {
       name: 'main',
       message: 'Hi! What do you want to do?',
       choices: [
-        options.CREATE_ROCKET_APP,
-        options.COMPONENTS,
+        CREATE_ROCKET_APP,
+        COMPONENTS,
         'CRUD',
         'i18n',
         'hooks',
@@ -59,7 +57,7 @@ const showMenu = () => {
         'new-component-view',
         'new-component-shared',
       ],
-      when: answers => answers.main === options.COMPONENTS,
+      when: answers => answers.main === COMPONENTS,
     },
     {
       type: 'input',
@@ -72,7 +70,7 @@ const showMenu = () => {
       name: 'createApp',
       message: 'Create a boilerplate',
       choices: ['Insert Name', '\x1b[33m--- Back ---\x1b[0m'],
-      when: answers => answers.main === options.CREATE_ROCKET_APP,
+      when: answers => answers.main === CREATE_ROCKET_APP,
     },
     {
       type: 'input',
@@ -84,7 +82,7 @@ const showMenu = () => {
       type: 'input',
       name: '::: One Moment Please ::',
       message: () => main(),
-      when: answers => answers.action | (answers.createApp === '\x1b[33m--- Back ---\x1b[0m'),
+      when: answers => answers.action || answers.createApp === '\x1b[33m--- Back ---\x1b[0m',
     },
 
     {
@@ -271,7 +269,7 @@ const main = async () => {
   while (app) {
     await showMenu().then(answers => {
       switch (answers.main) {
-        case options.CREATE_ROCKET_APP:
+        case CREATE_ROCKET_APP:
           boilerplate(answers.newApp);
           app = false;
           break;
@@ -326,7 +324,7 @@ const main = async () => {
           answers.customHooks && answers.customHooks.map(item => customHook(item));
           break;
 
-        case options.COMPONENTS:
+        case COMPONENTS:
           switch (answers.action) {
             case 'rocket-components':
               answers.rocketComponents.map(item => componentUi(item));

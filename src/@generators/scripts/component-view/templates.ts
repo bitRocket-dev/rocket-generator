@@ -1,6 +1,6 @@
 /** @format */
 
-exports.component = name => `
+export const component = name => `
 import { FC } from "react";
 
 export interface Props {}
@@ -10,7 +10,7 @@ export const View${name} :FC<Props> = ({}): JSX.Element => {
 };
 `;
 
-exports.test = name => `
+export const test = name => `
 import { View${name} } from '.';
 import { mount } from '@cypress/react'
 import { cyGet } from "../../../cypress/support/commands";
@@ -21,4 +21,4 @@ it('renders learn react link', () => {
 })
 `;
 
-exports.gitkeep = () => ``;
+export const gitkeep = () => ``;

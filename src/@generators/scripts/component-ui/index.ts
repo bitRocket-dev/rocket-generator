@@ -1,10 +1,10 @@
 /** @format */
 
-const fs = require('fs-extra');
-const { component, story, test } = require('./new-template.js');
-const { utilityCapitalizeFirst, throwIfError, execAsync } = require('../../utilities.js');
+import fs from 'fs-extra';
+import { component, story, test } from './new-template';
+import { utilityCapitalizeFirst, throwIfError, execAsync } from '../../utilities';
 
-async function componentUi(name) {
+export const componentUi = async name => {
   const themePath = './src/components-ui/@theme';
   const providerPath = './src/components-ui/Providers.tsx';
   const localThemeDir = `${__dirname}/utils/@theme`;
@@ -13,69 +13,68 @@ async function componentUi(name) {
   const dir = `./src/components-ui/${formattedName}`;
   const localDir = `${__dirname}/templates/${formattedName}`;
   const path = `./src/components-ui/.gitkeep`;
+  let dirPlus;
+  let localDirPlus;
+  function foo(formattedName) {
+    switch (formattedName) {
+      case 'Button':
+        dirPlus = `./src/components-ui/Icon`;
+        localDirPlus = `${__dirname}/templates/Icon`;
+        break;
+      case 'Datepicker':
+        dirPlus = [`./src/components-ui/Text`, `./src/components-ui/Input`];
+        localDirPlus = [`${__dirname}/templates/Text`, `${__dirname}/templates/Input`];
+        break;
+      case 'Input':
+        dirPlus = [
+          `./src/components-ui/Text`,
+          `./src/components-ui/Icon`,
+          `./src/components-ui/Grid`,
+          `./src/@sdk/utils/validate`,
+          `./src/@sdk/hooks/useInput.ts`,
+        ];
+        localDirPlus = [
+          `${__dirname}/templates/Text`,
+          `${__dirname}/templates/Icon`,
+          `${__dirname}/templates/Grid`,
+          `${__dirname}/utils/utility/validate`,
+          `${__dirname}/utils/utility/useInput.ts`,
+        ];
+        break;
+      case 'Select':
+        dirPlus = `./src/components-ui/Text`;
+        localDirPlus = `${__dirname}/templates/Text`;
+        break;
+      case 'Tabs':
+        dirPlus = [`./src/components-ui/Text`, `./src/components-ui/Grid`];
+        localDirPlus = [`${__dirname}/templates/Text`, `${__dirname}/templates/Grid`];
+        break;
+      case 'TimePicker':
+        dirPlus = [`./src/components-ui/Text`, `./src/components-ui/Input`];
+        localDirPlus = [`${__dirname}/templates/Text`, `${__dirname}/templates/Input`];
 
-  if (formattedName) {
-    let dirPlus;
-    let localDirPlus;
-    function foo(formattedName) {
-      switch (formattedName) {
-        case 'Button':
-          dirPlus = `./src/components-ui/Icon`;
-          localDirPlus = `${__dirname}/templates/Icon`;
-          break;
-        case 'Datepicker':
-          dirPlus = [`./src/components-ui/Text`, `./src/components-ui/Input`];
-          localDirPlus = [`${__dirname}/templates/Text`, `${__dirname}/templates/Input`];
-          break;
-        case 'Input':
-          dirPlus = [
-            `./src/components-ui/Text`,
-            `./src/components-ui/Icon`,
-            `./src/components-ui/Grid`,
-            `./src/@sdk/utils/validate`,
-            `./src/@sdk/hooks/useInput.ts`,
-          ];
-          localDirPlus = [
-            `${__dirname}/templates/Text`,
-            `${__dirname}/templates/Icon`,
-            `${__dirname}/templates/Grid`,
-            `${__dirname}/utils/utility/validate`,
-            `${__dirname}/utils/utility/useInput.ts`,
-          ];
-          break;
-        case 'Select':
-          dirPlus = `./src/components-ui/Text`;
-          localDirPlus = `${__dirname}/templates/Text`;
-          break;
-        case 'Tabs':
-          dirPlus = [`./src/components-ui/Text`, `./src/components-ui/Grid`];
-          localDirPlus = [`${__dirname}/templates/Text`, `${__dirname}/templates/Grid`];
-          break;
-        case 'TimePicker':
-          dirPlus = [`./src/components-ui/Text`, `./src/components-ui/Input`];
-          localDirPlus = [`${__dirname}/templates/Text`, `${__dirname}/templates/Input`];
-
-          break;
-        case 'Avatar':
-          dirPlus = `./src/components-ui/Text`;
-          localDirPlus = `${__dirname}/templates/Text`;
-          break;
-        case 'Image':
-          dirPlus = `./src/components-ui/Loader`;
-          localDirPlus = `${__dirname}/templates/Loader`;
-          break;
-        case 'NavigateTo':
-          dirPlus = `./src/@sdk/hooks/useNavigation.ts`;
-          localDirPlus = `${__dirname}/utils/utility/useNavigation.ts`;
-          break;
-        case 'Modal':
-          dirPlus = `./src/components-ui/Icon`;
-          localDirPlus = `${__dirname}/templates/Icon`;
-          break;
-        default:
-          break;
-      }
+        break;
+      case 'Avatar':
+        dirPlus = `./src/components-ui/Text`;
+        localDirPlus = `${__dirname}/templates/Text`;
+        break;
+      case 'Image':
+        dirPlus = `./src/components-ui/Loader`;
+        localDirPlus = `${__dirname}/templates/Loader`;
+        break;
+      case 'NavigateTo':
+        dirPlus = `./src/@sdk/hooks/useNavigation.ts`;
+        localDirPlus = `${__dirname}/utils/utility/useNavigation.ts`;
+        break;
+      case 'Modal':
+        dirPlus = `./src/components-ui/Icon`;
+        localDirPlus = `${__dirname}/templates/Icon`;
+        break;
+      default:
+        break;
     }
+  }
+  if (formattedName) {
     foo(formattedName);
     if (await fs.pathExists(dirPlus)) console.error(`\x1b[31m`, `A component ${formattedName} already exists.`);
     if (formattedName === 'Datepicker' || formattedName === 'TimePicker') {
@@ -110,6 +109,4 @@ async function componentUi(name) {
   fs.writeFile(`${dir}/index.tsx`, component(formattedName), throwIfError);
 
   await execAsync(`npm install styled-components`, { cwd: dir });
-}
-
-module.exports = componentUi;
+};

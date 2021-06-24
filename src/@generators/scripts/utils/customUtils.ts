@@ -1,8 +1,8 @@
 /** @format */
 
-const fs = require('fs-extra');
+import fs from 'fs-extra';
 
-async function customUtils(name, dirPath) {
+export const customUtils = async (name: string, dirPath?: string) => {
   const dir =
     name === 'fetch' || name === 'helpers' || name === 'time'
       ? `./src/@sdk/utils/${name}`
@@ -24,6 +24,4 @@ async function customUtils(name, dirPath) {
   if (await fs.pathExists(dir)) console.error(`\x1b[31m`, `A component ${name.toUpperCase()} already exists.`);
 
   if (await fs.pathExists(localDir)) return fs.copy(localDir, dir);
-}
-
-module.exports = customUtils;
+};
