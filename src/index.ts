@@ -2,7 +2,7 @@
 /** @format */
 
 import inquirer from 'inquirer';
-import fs from 'fs-extra';
+import { readdirSync } from 'fs-extra';
 import { reduxFlow } from './@generators/scripts/flow/reduxFlow';
 import { componentUi } from './@generators/scripts/component-ui';
 import { componentRouting } from './@generators/scripts/components-routing';
@@ -16,14 +16,14 @@ import { packages } from './@generators/scripts/packages';
 import { COMPONENTS, CREATE_ROCKET_APP } from './constants/options';
 
 //#region filename dynamic
-const fileNamePackages = fs.readdirSync(`${__dirname}/@generators/scripts/packages/templates`);
-const fileNameHooks = fs.readdirSync(`${__dirname}/@generators/scripts/hooks/templates`);
-const fileNameComponentUi = fs.readdirSync(`${__dirname}/@generators/scripts/component-ui/templates`);
-const fileNameUtils = fs.readdirSync(`${__dirname}/@generators/scripts/utils/templates`);
-const fileNameUtilsValidate = fs.readdirSync(`${__dirname}/@generators/scripts/utils/templates/validate`);
-const fileNameUtilsFormatting = fs.readdirSync(`${__dirname}/@generators/scripts/utils/templates/formatting`);
-const fileNameUtilsCache = fs.readdirSync(`${__dirname}/@generators/scripts/utils/templates/cache`);
-const fileNameRoutingComponent = fs.readdirSync(`${__dirname}/@generators/scripts/components-routing/templates`);
+const fileNamePackages = readdirSync(`${__dirname}/@generators/scripts/packages/templates`);
+const fileNameHooks = readdirSync(`${__dirname}/@generators/scripts/hooks/templates`);
+const fileNameComponentUi = readdirSync(`${__dirname}/@generators/scripts/component-ui/templates`);
+const fileNameUtils = readdirSync(`${__dirname}/@generators/scripts/utils/templates`);
+const fileNameUtilsValidate = readdirSync(`${__dirname}/@generators/scripts/utils/templates/validate`);
+const fileNameUtilsFormatting = readdirSync(`${__dirname}/@generators/scripts/utils/templates/formatting`);
+const fileNameUtilsCache = readdirSync(`${__dirname}/@generators/scripts/utils/templates/cache`);
+const fileNameRoutingComponent = readdirSync(`${__dirname}/@generators/scripts/components-routing/templates`);
 //#endregion
 
 const showMenu = () => {
