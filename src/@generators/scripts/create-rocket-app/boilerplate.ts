@@ -1,18 +1,18 @@
 /** @format */
 
-import fs from 'fs-extra';
+import {mkdirs, copy, writeFile} from 'fs-extra';
 import * as boxen from 'boxen';
 import { pkg } from './templates/package';
 import { execAsync } from '../../utilities';
 
 export const boilerplate = async name => {
   const dir = `./${name}`;
-  await fs.mkdirs(dir);
+  await mkdirs(dir);
   const localDir = `${__dirname}/boilerplate`;
 
-  await fs.copy(localDir, dir);
+  await copy(localDir, dir);
 
-  fs.writeFile(`${dir}/package.json`, pkg(name));
+  writeFile(`${dir}/package.json`, pkg(name));
 
   console.log(`\n\x1b[33m`, `\x1b[5m`, 'WAITING... INSTALLING PACKAGE...', '\x1b[0m');
 
