@@ -1,7 +1,8 @@
 /** @format */
 
 const fs = require("fs-extra");
-const { scriptImport } = require("./script");
+const { scriptImport } = require("./scriptImport");
+const { scriptBody } = require("./scriptBody");
 const { actions } = require("./templates/actions");
 const { constants } = require("./templates/constants");
 const { declarations } = require("./templates/declarations");
@@ -12,13 +13,14 @@ async function reduxSyncFlow(name, choices, reducer) {
   const dir2 = `./src/@sdk/redux-modules/${name}/actions.tsx`;
 
   if (await fs.pathExists(dir2)) {
+    await scriptBody(name, choices);
+
     const data = fs
       .readFileSync(`./src/@sdk/redux-modules/${name}/actions.tsx`)
       .toString()
       .split("\n");
 
-    const str = scriptImport(name, choices);
-    console.log(str);
+    const str = await scriptImport(name, choices);
     str.map((item) => {
       data.splice(2, 0, item);
       const text = data.join("\n");
