@@ -1,9 +1,10 @@
 {
   "name": "rocket-generator",
-  "version": "1.1.32",
+  "version": "1.1.37",
   "description": "Node Generator for bitRocket.dev Community",
-  "main": "build/index.js",
+  "main": "dist/index.js",
   "scripts": {
+    "deploy": "npm run build && npm publish",
     "build": "npx tsc",
     "create-rocket-app": "node ./@generators/scripts/create-rocket-app/index $1",
     "generate:component-flow": "node ./@generators/scripts/flow/index $1",
@@ -13,14 +14,13 @@
     "generate:component-view": "node ./@generators/scripts/component-view/index $1",
     "generate:redux-flow": "node ./@generators/scripts/redux-flow/index $1",
     "postcreate-rocket-app": "npm i",
-    "postinstall": "husky install",
     "prettier": "prettier --write src/**/*.{ts,tsx} src/**/**/*.{ts,tsx} src/**/**/**/*.{ts,tsx} src/**/**/**/**/*.{ts,tsx} src/**/**/**/**/**/*.{ts,tsx}",
     "test:commit-msg": "commitlint -env HUSKY_GIT_PARAMS",
     "test:format": "npm run test:lint",
     "test:lint": "tsc --noEmit"
   },
   "bin": {
-    "rocket-generator": "./build/index.js"
+    "rocket-generator": "./dist/index.js"
   },
   "keywords": [
     "node-generator",
