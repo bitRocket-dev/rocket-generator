@@ -9,8 +9,7 @@ exports.actions = (name, choices) => {
 import {
   ${choices
     .map(
-      (operation) =>
-        `AT_${nameActionTypeUpper}_${operation.toUpperCase()}_REQUEST, \n`
+      (operation) => `AT_${nameActionTypeUpper}_${operation.toUpperCase()}, \n`
     )
     .join("")}} from './constants';
 
@@ -18,8 +17,8 @@ import {
 ${choices
   .map(
     (operation) =>
-      `export const action${nameActionTypeLowewr}${operation}Request = (payload: any) => ({
-  type: AT_${nameActionTypeUpper}_${operation.toUpperCase()}_REQUEST,
+      `export const action${nameActionTypeLowewr}${operation} = (payload: any) => ({
+  type: AT_${nameActionTypeUpper}_${operation.toUpperCase()},
   payload,
   }); \n \n  `
   )

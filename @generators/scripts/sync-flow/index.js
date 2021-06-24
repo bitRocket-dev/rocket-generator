@@ -7,7 +7,7 @@ const { declarations } = require("./templates/declarations");
 const { reducers } = require("./templates/reducers");
 
 async function reduxSyncFlow(name, choices, reducer) {
-  const dir = `./src/@sdk/redux-modules/${name}`;
+  const dir = `./src/@sdk/redux-modules/${name.toLowerCase()}`;
 
   if (await fs.pathExists(dir))
     console.error(
