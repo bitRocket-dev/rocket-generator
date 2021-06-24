@@ -5,25 +5,22 @@ exports.actions = (name, choices) => {
   const nameActionTypeLowewr = name.charAt(0).toUpperCase() + name.slice(1);
 
   return `
-//#region ::: IMPORT
+  // prettier-ignore
 import {
   ${choices
     .map(
-      (operation) =>
-        `AT_${nameActionTypeUpper}_${operation.toUpperCase()}_REQUEST, \n`
+      (operation) => `AT_${nameActionTypeUpper}_${operation.toUpperCase()},\n`
     )
     .join("")}} from './constants';
 
-// #region ::: ${nameActionTypeUpper}
 ${choices
   .map(
     (operation) =>
-      `export const action${nameActionTypeLowewr}${operation}Request = (payload: any) => ({
-  type: AT_${nameActionTypeUpper}_${operation.toUpperCase()}_REQUEST,
+      `export const action${nameActionTypeLowewr}${operation} = (payload: any) => ({
+  type: AT_${nameActionTypeUpper}_${operation.toUpperCase()},
   payload,
-  }); \n \n  `
+  });\r`
   )
   .join("")}
-// #endregion
 `;
 };

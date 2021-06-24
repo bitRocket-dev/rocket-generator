@@ -22,7 +22,7 @@ async function reduxSyncFlow(name, choices, reducer) {
 
     const str = await scriptImport(name, choices);
     str.map((item) => {
-      data.splice(2, 0, item);
+      data.splice(3, 0, item);
       const text = data.join("\n");
       fs.writeFile(`${dir2}`, text, function (err) {
         if (err) return console.log(err);

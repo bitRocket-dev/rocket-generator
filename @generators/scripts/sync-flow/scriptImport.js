@@ -4,11 +4,11 @@ exports.scriptImport = (name, choices) => {
   const chomap = choices.map((item, index) => {
     switch (item) {
       case "Update":
-        content.push(`AT_${nameActionTypeUpper}_UPDATE,`);
+        content.push(`  AT_${nameActionTypeUpper}_UPDATE,\r`);
         break;
 
       case "Delete":
-        content.push(`AT_${nameActionTypeUpper}_DELETE,`);
+        content.push(`  AT_${nameActionTypeUpper}_DELETE,\r`);
         break;
 
       default:

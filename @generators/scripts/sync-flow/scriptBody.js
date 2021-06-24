@@ -8,10 +8,10 @@ exports.scriptBody = (name, choices) => {
   const chomap = choices.map((item) => {
     appendFileSync(
       dir,
-      `\nexport const action${formattedName}${item}= (payload: any) => ({
+      `export const action${formattedName}${item}= (payload: any) => ({
   type: AT_${name.toUpperCase()}_${item.toUpperCase()},
   payload,
-        });`
+        });\r`
     );
   });
   return chomap;
