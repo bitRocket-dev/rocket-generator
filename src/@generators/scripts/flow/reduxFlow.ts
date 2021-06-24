@@ -1,6 +1,6 @@
 /** @format */
 
-import fs from 'fs-extra';
+import {pathExists, mkdirs, writeFile} from 'fs-extra';
 import { sagas } from './templates/sagas';
 import { actions } from './templates/actions';
 import { constants } from './templates/constants';
@@ -20,14 +20,14 @@ export const reduxFlow = async (name, reducer) => {
   const dirSync = `./src/@sdk/redux-modules/${nameUpper}-Sync`;
 
   if (names[0] !== 'Sync') {
-    if (await fs.pathExists(dir)) {
-      await fs.mkdirs(dir2);
+    if (await pathExists(dir)) {
+      await mkdirs(dir2);
     } else {
-      await fs.mkdirs(dir);
-      await fs.mkdirs(dir2);
+      await mkdirs(dir);
+      await mkdirs(dir2);
     }
   } else {
-    await fs.mkdirs(dirSync);
+    await mkdirs(dirSync);
   }
 
   function writeFileErrorHandler(err) {
@@ -35,19 +35,19 @@ export const reduxFlow = async (name, reducer) => {
   }
 
   if (names[0] !== 'Sync') {
-    fs.writeFile(`${dir2}/sagas.tsx`, sagas(name), writeFileErrorHandler);
-    fs.writeFile(`${dir2}/actions.tsx`, actions(name), writeFileErrorHandler);
-    fs.writeFile(`${dir2}/constants.tsx`, constants(name), writeFileErrorHandler);
-    fs.writeFile(`${dir2}/declarations.tsx`, declarations(name), writeFileErrorHandler);
-    fs.writeFile(`${dir2}/api.tsx`, api(name), writeFileErrorHandler);
+    writeFile(`${dir2}/sagas.tsx`, sagas(name), writeFileErrorHandler);
+    writeFile(`${dir2}/actions.tsx`, actions(name), writeFileErrorHandler);
+    writeFile(`${dir2}/constants.tsx`, constants(name), writeFileErrorHandler);
+    writeFile(`${dir2}/declarations.tsx`, declarations(name), writeFileErrorHandler);
+    writeFile(`${dir2}/api.tsx`, api(name), writeFileErrorHandler);
   } else {
-    fs.writeFile(`${dirSync}/actions.tsx`, actions(name), writeFileErrorHandler);
-    fs.writeFile(`${dirSync}/constants.tsx`, constants(name), writeFileErrorHandler);
-    fs.writeFile(`${dirSync}/declarations.tsx`, declarations(name), writeFileErrorHandler);
+    writeFile(`${dirSync}/actions.tsx`, actions(name), writeFileErrorHandler);
+    writeFile(`${dirSync}/constants.tsx`, constants(name), writeFileErrorHandler);
+    writeFile(`${dirSync}/declarations.tsx`, declarations(name), writeFileErrorHandler);
   }
 
   if (reducer === 'yes') {
-    if (names[0] !== 'Sync') fs.writeFile(`${dir2}/reducers.tsx`, reducers(name), writeFileErrorHandler);
-    else fs.writeFile(`${dirSync}/reducers.tsx`, reducers(name), writeFileErrorHandler);
+    if (names[0] !== 'Sync') writeFile(`${dir2}/reducers.tsx`, reducers(name), writeFileErrorHandler);
+    else writeFile(`${dirSync}/reducers.tsx`, reducers(name), writeFileErrorHandler);
   }
 };

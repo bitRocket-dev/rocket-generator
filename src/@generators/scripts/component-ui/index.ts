@@ -1,8 +1,12 @@
 /** @format */
 
-import fs from 'fs-extra';
+import {pathExists, pathExistsSync, writeFile, mkdirs, copy, unlinkSync, existsSync} from 'fs-extra';
 import { component, story, test } from './new-template';
 import { utilityCapitalizeFirst, throwIfError, execAsync } from '../../utilities';
+
+import { dirname } from "path";
+import { fileURLToPath } from "url";
+const __dirname = dirname(fileURLToPath(import.meta.url));
 
 export const componentUi = async name => {
   const themePath = './src/components-ui/@theme';
@@ -76,37 +80,37 @@ export const componentUi = async name => {
   }
   if (formattedName) {
     foo(formattedName);
-    if (await fs.pathExists(dirPlus)) console.error(`\x1b[31m`, `A component ${formattedName} already exists.`);
+    if (await pathExists(dirPlus)) console.error(`\x1b[31m`, `A component ${formattedName} already exists.`);
     if (formattedName === 'Datepicker' || formattedName === 'TimePicker') {
-      fs.pathExistsSync(`./src/components-ui/Input`)
+      pathExistsSync(`./src/components-ui/Input`)
         ? foo('Input')
-        : fs.copy(`${__dirname}/templates/Input`, `./src/components-ui/Input`) && foo('Input');
+        : copy(`${__dirname}/templates/Input`, `./src/components-ui/Input`) && foo('Input');
     }
     if (localDirPlus instanceof Array) {
-      localDirPlus.map((item, index) => fs.copy(item, dirPlus[index]).catch(() => {}));
-    } else fs.copy(localDirPlus, dirPlus).catch(() => {});
+      localDirPlus.map((item, index) => copy(item, dirPlus[index]).catch(() => {}));
+    } else copy(localDirPlus, dirPlus).catch(() => {});
   }
 
-  if (fs.pathExistsSync(path)) {
-    fs.unlinkSync(path);
+  if (pathExistsSync(path)) {
+    unlinkSync(path);
   }
 
-  if (!fs.existsSync(themePath)) {
-    fs.copy(localThemeDir, themePath).catch(() => {});
-    fs.copy(localProvidersDir, providerPath).catch(() => {});
+  if (!existsSync(themePath)) {
+    copy(localThemeDir, themePath).catch(() => {});
+    copy(localProvidersDir, providerPath).catch(() => {});
   }
 
   if (!name) throw new Error('You must include a component name.');
 
-  if (await fs.pathExists(dir)) console.error(`\x1b[31m`, `A component ${formattedName} already exists.`);
+  if (await pathExists(dir)) console.error(`\x1b[31m`, `A component ${formattedName} already exists.`);
 
-  if (await fs.pathExists(localDir)) return fs.copy(localDir, dir).catch(() => {});
+  if (await pathExists(localDir)) return copy(localDir, dir).catch(() => {});
 
-  await fs.mkdirs(dir);
+  await mkdirs(dir);
 
-  fs.writeFile(`${dir}/${formattedName}.stories.tsx`, story(formattedName), throwIfError);
-  fs.writeFile(`${dir}/${formattedName}.test.tsx`, test(formattedName), throwIfError);
-  fs.writeFile(`${dir}/index.tsx`, component(formattedName), throwIfError);
+  writeFile(`${dir}/${formattedName}.stories.tsx`, story(formattedName), throwIfError);
+  writeFile(`${dir}/${formattedName}.test.tsx`, test(formattedName), throwIfError);
+  writeFile(`${dir}/index.tsx`, component(formattedName), throwIfError);
 
   await execAsync(`npm install styled-components`, { cwd: dir });
 };
