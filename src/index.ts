@@ -3,7 +3,7 @@
 
 import * as inquirer from 'inquirer';
 import { readdirSync } from 'fs-extra';
-import { reduxFlow } from './@generators/scripts/flow/reduxFlow';
+import { reduxFlow } from './@generators/scripts/flow-async/reduxFlow';
 import { componentUi } from './@generators/scripts/component-ui';
 import { componentRouting } from './@generators/scripts/components-routing';
 import { componentView } from './@generators/scripts/component-view';
@@ -14,7 +14,7 @@ import { customHook } from './@generators/scripts/hooks';
 import { customUtils } from './@generators/scripts/utils/customUtils';
 import { packages } from './@generators/scripts/packages';
 import { COMPONENTS, CREATE_ROCKET_APP } from './constants/options';
-import { reduxSyncFlow } from './@generators/scripts/sync-flow';
+import { reduxSyncFlow } from './@generators/scripts/flow-sync';
 import { error } from 'console';
 
 //#region filename dynamic
@@ -59,32 +59,33 @@ const showMenu = () => {
         'new-component-view',
         'new-component-shared',
       ],
-      when: answers => answers.main === 'Components',
+      when: (answers: { main: string }) => answers.main === 'Components',
     },
     {
       type: 'input',
       name: 'Exit',
       message: () => process.exit(),
-      when: answers => answers.action === '\x1b[31m--- Exit ---\x1b[0m \n',
+      when: (answers: { action: string }) => answers.action === '\x1b[31m--- Exit ---\x1b[0m \n',
     },
     {
       type: 'list',
       name: 'createApp',
       message: 'Create a boilerplate',
       choices: ['Insert Name', '\x1b[33m--- Back ---\x1b[0m'],
-      when: answers => answers.main === 'create-rocket-app',
+      when: (answers: { main: string }) => answers.main === 'create-rocket-app',
     },
     {
       type: 'input',
       name: 'exitApp',
       message: () => process.exit(),
-      when: answers => answers.main === '\x1b[31m--- Exit ---\x1b[0m \n',
+      when: (answers: { main: string }) => answers.main === '\x1b[31m--- Exit ---\x1b[0m \n',
     },
     {
       type: 'input',
       name: '::: One Moment Please ::',
       message: () => main(),
-      when: answers => answers.action || answers.createApp === '\x1b[33m--- Back ---\x1b[0m',
+      when: (answers: { action: any; createApp: string }) =>
+        answers.action || answers.createApp === '\x1b[33m--- Back ---\x1b[0m',
     },
     //#region PACKAGES
     {
@@ -92,7 +93,7 @@ const showMenu = () => {
       name: 'packages',
       message: 'Choose your packages',
       choices: fileNamePackages,
-      when: answers => answers.main === 'Packages',
+      when: (answers: { main: string }) => answers.main === 'Packages',
     },
     //#endregion PACKAGES
 
@@ -151,7 +152,7 @@ const showMenu = () => {
       type: 'input',
       name: 'newApp',
       message: 'What is the name?',
-      when: answers => answers.createApp === 'Insert Name',
+      when: (answers: { createApp: string }) => answers.createApp === 'Insert Name',
     },
     //#region CRUD
     {
@@ -159,35 +160,47 @@ const showMenu = () => {
       name: 'flowType',
       message: "what redux flow's type do you want?",
       choices: ['Asyncronous', 'Syncronous'],
-      when: answers => answers.main === 'CRUD',
+      when: (answers: { main: string }) => answers.main === 'CRUD',
     },
     {
       type: 'list',
       name: 'reducer',
       message: 'Do you want the reducer??',
       choices: ['yes', 'no'],
-      when: answers => answers.main === 'CRUD',
+      when: (answers: { main: string }) => answers.main === 'CRUD',
     },
     {
       type: 'checkbox',
       name: 'reduxFlowType',
       message: 'what is the type?',
       choices: ['Create', 'Read', 'Update', 'Delete'],
-      when: answers => answers.flowType === 'Asyncronous',
+      when: (answers: { flowType: string }) => answers.flowType === 'Asyncronous',
     },
     {
       type: 'checkbox',
       name: 'reduxFlowSyncType',
       message: 'what is the type?',
-      choices: ['Create', 'Update', 'Delete', 'Other'],
-      when: answers => answers.flowType === 'Syncronous',
+      choices: [
+        'Create',
+        'Update',
+        'Delete',
+        //  'Other'
+      ],
+      validate: answer => {
+        if (answer == '') {
+          return answer;
+        }
+        return true;
+      },
+      when: (answers: { flowType: string }) => answers.flowType === 'Syncronous',
     },
     {
       type: 'input',
       name: 'otherSyncType',
       message: 'Insert the name of the type',
-      when: answers => answers.reduxFlowSyncType && answers.reduxFlowSyncType.includes('Other'),
-      validate: answer => {
+      when: (answers: { reduxFlowSyncType: string | string[] }) =>
+        answers.reduxFlowSyncType && answers.reduxFlowSyncType.includes('Other'),
+      validate: (answer: string) => {
         if (answer === '') {
           return 'please enter a valid answer';
         }
@@ -199,14 +212,15 @@ const showMenu = () => {
       name: 'readType',
       message: 'Specify the Read.',
       choices: ['List', 'Detail'],
-      when: answers => answers.reduxFlowType && answers.reduxFlowType.includes('Read'),
+      when: (answers: { reduxFlowType: string | string[] }) =>
+        answers.reduxFlowType && answers.reduxFlowType.includes('Read'),
     },
     {
       type: 'input',
       name: 'reduxFlowName',
       message: 'Please insert the name of redux flow',
-      when: answers => answers.main === 'CRUD',
-      validate: answer => {
+      when: (answers: { main: string }) => answers.main === 'CRUD',
+      validate: (answer: string) => {
         if (answer === '') {
           return 'please enter a valid answer';
         }
@@ -220,14 +234,14 @@ const showMenu = () => {
       name: 'rocketComponents',
       message: 'Choose rocket component.',
       choices: fileNameComponentUi,
-      when: answers => answers.action === 'rocket-components',
+      when: (answers: { action: string }) => answers.action === 'rocket-components',
     },
     {
       type: 'input',
       name: 'newComponentUI',
       message: 'Insert name of new component ui.',
-      when: answers => answers.action === 'new-component-UI',
-      validate: answer => {
+      when: (answers: { action: string }) => answers.action === 'new-component-UI',
+      validate: (answer: string) => {
         if (answer === '') {
           return 'please enter a valid answer';
         }
@@ -241,7 +255,7 @@ const showMenu = () => {
       name: 'routingComponents',
       message: 'Choose routing component.',
       choices: fileNameRoutingComponent,
-      when: answers => answers.action === 'routing-component',
+      when: (answers: { action: string }) => answers.action === 'routing-component',
     },
     //#endregion NEW COMPONENTS ROUTING
     //#region NEW COMPONENTS ROUTING
@@ -249,8 +263,8 @@ const showMenu = () => {
       type: 'input',
       name: 'newComponentRouting',
       message: 'Insert name of new component routing',
-      when: answers => answers.action === 'new-component-routing',
-      validate: answer => {
+      when: (answers: { action: string }) => answers.action === 'new-component-routing',
+      validate: (answer: string) => {
         if (answer === '') {
           return 'please enter a valid answer';
         }
@@ -263,8 +277,8 @@ const showMenu = () => {
       type: 'input',
       name: 'newComponentView',
       message: 'Insert name of new component view.',
-      when: answers => answers.action === 'new-component-view',
-      validate: answer => {
+      when: (answers: { action: string }) => answers.action === 'new-component-view',
+      validate: (answer: string) => {
         if (answer === '') {
           return 'please enter a valid answer';
         }
@@ -277,8 +291,8 @@ const showMenu = () => {
       type: 'input',
       name: 'newComponentShared',
       message: 'Insert name of new component shared.',
-      when: answers => answers.action === 'new-component-shared',
-      validate: answer => {
+      when: (answers: { action: string }) => answers.action === 'new-component-shared',
+      validate: (answer: string) => {
         if (answer === '') {
           return 'please enter a valid answer';
         }
@@ -292,7 +306,7 @@ const showMenu = () => {
       name: 'customHooks',
       message: 'Choose the hooks',
       choices: fileNameHooks,
-      when: answers => answers.main === 'hooks',
+      when: (answers: { main: string }) => answers.main === 'hooks',
     },
     //#endregion CUSTOM HOOK
     //#region UTILS
@@ -301,28 +315,28 @@ const showMenu = () => {
       name: 'utils',
       message: 'Choose utils component do you want.',
       choices: fileNameUtils,
-      when: answers => answers.main && answers.main.includes('utils'),
+      when: (answers: { main: string | string[] }) => answers.main && answers.main.includes('utils'),
     },
     {
       type: 'checkbox',
       name: 'cacheUtils',
       message: 'Choose CACHE components.',
       choices: fileNameUtilsCache,
-      when: answers => answers.main && answers.main.includes('cache'),
+      when: (answers: { main: string | string[] }) => answers.main && answers.main.includes('cache'),
     },
     {
       type: 'checkbox',
       name: 'formatUtils',
       message: 'Choose FORMATTING components.',
       choices: fileNameUtilsFormatting,
-      when: answers => answers.utils && answers.utils.includes('formatting'),
+      when: (answers: { utils: string | string[] }) => answers.utils && answers.utils.includes('formatting'),
     },
     {
       type: 'checkbox',
       name: 'validUtils',
       message: 'Choose VALIDATE components.',
       choices: fileNameUtilsValidate,
-      when: answers => answers.utils && answers.utils.includes('validate'),
+      when: (answers: { utils: string | string[] }) => answers.utils && answers.utils.includes('validate'),
     },
     //#endregion UTILS
   ];
@@ -376,16 +390,16 @@ const main = async () => {
           break;
         case 'utils':
           answers.utils &&
-            answers.utils.map(choice => {
+            answers.utils.map((choice: string) => {
               switch (choice) {
                 case 'cache':
-                  answers.cacheUtils && answers.cacheUtils.map(item => customUtils(item, choice));
+                  answers.cacheUtils && answers.cacheUtils.map((item: string) => customUtils(item, choice));
                   break;
                 case 'formatting':
-                  answers.formatUtils && answers.formatUtils.map(item => customUtils(item, choice));
+                  answers.formatUtils && answers.formatUtils.map((item: string) => customUtils(item, choice));
                   break;
                 case 'validate':
-                  answers.validUtils && answers.validUtils.map(item => customUtils(item, choice));
+                  answers.validUtils && answers.validUtils.map((item: string) => customUtils(item, choice));
                   break;
                 case 'fetch':
                   customUtils(choice);
@@ -400,12 +414,12 @@ const main = async () => {
             });
           break;
         case 'hooks':
-          answers.customHooks && answers.customHooks.map(item => customHook(item));
+          answers.customHooks && answers.customHooks.map((item: any) => customHook(item));
           break;
         case 'Components':
           switch (answers.action) {
             case 'rocket-components':
-              answers.rocketComponents.map(item => componentUi(item));
+              answers.rocketComponents.map((item: any) => componentUi(item));
               break;
             case 'new-component-UI':
               componentUi(answers.newComponentUI);
@@ -414,7 +428,7 @@ const main = async () => {
               componentRouting(answers.newComponentRouting);
               break;
             case 'routing-component':
-              answers.routingComponents.map(item => componentRouting(item));
+              answers.routingComponents.map((item: any) => componentRouting(item));
               break;
             case 'new-component-view':
               componentView(answers.newComponentView);
