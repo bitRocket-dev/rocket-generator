@@ -13,8 +13,22 @@ import { translations } from './@generators/scripts/i18n';
 import { customHook } from './@generators/scripts/hooks';
 import { customUtils } from './@generators/scripts/utils/customUtils';
 import { packages } from './@generators/scripts/packages';
-import { COMPONENTS, CREATE_ROCKET_APP } from './constants/options';
 import { reduxSyncFlow } from './@generators/scripts/flow-sync';
+import {
+  COMPONENTS,
+  CREATE_ROCKET_APP,
+  CRUD,
+  HOOKS,
+  I18N,
+  NEW_COMPONENT_ROUTING,
+  NEW_COMPONENT_SHARED,
+  NEW_COMPONENT_UI,
+  NEW_COMPONENT_VIEW,
+  PACKAGES,
+  ROCKET_COMPONENTS,
+  ROUTING_COMPONENT,
+  UTILS,
+} from './constants/options';
 import { error } from 'console';
 
 //#region filename dynamic
@@ -34,16 +48,7 @@ const showMenu = () => {
       type: 'list',
       name: 'main',
       message: 'Hi! What do you want to do?',
-      choices: [
-        'create-rocket-app',
-        'Components',
-        'CRUD',
-        'i18n',
-        'hooks',
-        'utils',
-        'Packages',
-        '\x1b[31m--- Exit ---\x1b[0m \n',
-      ],
+      choices: [CREATE_ROCKET_APP, COMPONENTS, CRUD, I18N, HOOKS, UTILS, PACKAGES, '\x1b[31m--- Exit ---\x1b[0m \n'],
     },
     {
       type: 'list',
@@ -52,14 +57,14 @@ const showMenu = () => {
       choices: [
         '\x1b[33m--- Back ---\x1b[0m',
         new inquirer.Separator(),
-        'routing-component',
-        'new-component-routing',
-        'rocket-components',
-        'new-component-UI',
-        'new-component-view',
-        'new-component-shared',
+        ROUTING_COMPONENT,
+        NEW_COMPONENT_ROUTING,
+        ROCKET_COMPONENTS,
+        NEW_COMPONENT_UI,
+        NEW_COMPONENT_VIEW,
+        NEW_COMPONENT_SHARED,
       ],
-      when: (answers: { main: string }) => answers.main === 'Components',
+      when: answers => answers.main === COMPONENTS,
     },
     {
       type: 'input',
@@ -93,7 +98,7 @@ const showMenu = () => {
       name: 'packages',
       message: 'Choose your packages',
       choices: fileNamePackages,
-      when: (answers: { main: string }) => answers.main === 'Packages',
+      when: answers => answers.main === PACKAGES,
     },
     //#endregion PACKAGES
 
@@ -160,7 +165,7 @@ const showMenu = () => {
       name: 'flowType',
       message: "what redux flow's type do you want?",
       choices: ['Asyncronous', 'Syncronous'],
-      when: (answers: { main: string }) => answers.main === 'CRUD',
+      when: answers => answers.main === CRUD,
     },
     {
       type: 'list',
@@ -219,8 +224,8 @@ const showMenu = () => {
       type: 'input',
       name: 'reduxFlowName',
       message: 'Please insert the name of redux flow',
-      when: (answers: { main: string }) => answers.main === 'CRUD',
-      validate: (answer: string) => {
+      when: answers => answers.main === CRUD,
+      validate: answer => {
         if (answer === '') {
           return 'please enter a valid answer';
         }
@@ -234,14 +239,14 @@ const showMenu = () => {
       name: 'rocketComponents',
       message: 'Choose rocket component.',
       choices: fileNameComponentUi,
-      when: (answers: { action: string }) => answers.action === 'rocket-components',
+      when: answers => answers.action === ROCKET_COMPONENTS,
     },
     {
       type: 'input',
       name: 'newComponentUI',
       message: 'Insert name of new component ui.',
-      when: (answers: { action: string }) => answers.action === 'new-component-UI',
-      validate: (answer: string) => {
+      when: answers => answers.action === NEW_COMPONENT_UI,
+      validate: answer => {
         if (answer === '') {
           return 'please enter a valid answer';
         }
@@ -255,7 +260,7 @@ const showMenu = () => {
       name: 'routingComponents',
       message: 'Choose routing component.',
       choices: fileNameRoutingComponent,
-      when: (answers: { action: string }) => answers.action === 'routing-component',
+      when: answers => answers.action === ROUTING_COMPONENT,
     },
     //#endregion NEW COMPONENTS ROUTING
     //#region NEW COMPONENTS ROUTING
@@ -263,8 +268,8 @@ const showMenu = () => {
       type: 'input',
       name: 'newComponentRouting',
       message: 'Insert name of new component routing',
-      when: (answers: { action: string }) => answers.action === 'new-component-routing',
-      validate: (answer: string) => {
+      when: answers => answers.action === NEW_COMPONENT_ROUTING,
+      validate: answer => {
         if (answer === '') {
           return 'please enter a valid answer';
         }
@@ -277,8 +282,8 @@ const showMenu = () => {
       type: 'input',
       name: 'newComponentView',
       message: 'Insert name of new component view.',
-      when: (answers: { action: string }) => answers.action === 'new-component-view',
-      validate: (answer: string) => {
+      when: answers => answers.action === NEW_COMPONENT_VIEW,
+      validate: answer => {
         if (answer === '') {
           return 'please enter a valid answer';
         }
@@ -291,8 +296,8 @@ const showMenu = () => {
       type: 'input',
       name: 'newComponentShared',
       message: 'Insert name of new component shared.',
-      when: (answers: { action: string }) => answers.action === 'new-component-shared',
-      validate: (answer: string) => {
+      when: answers => answers.action === NEW_COMPONENT_SHARED,
+      validate: answer => {
         if (answer === '') {
           return 'please enter a valid answer';
         }
@@ -306,16 +311,16 @@ const showMenu = () => {
       name: 'customHooks',
       message: 'Choose the hooks',
       choices: fileNameHooks,
-      when: (answers: { main: string }) => answers.main === 'hooks',
+      when: answers => answers.main === HOOKS,
     },
     //#endregion CUSTOM HOOK
     //#region UTILS
     {
       type: 'checkbox',
-      name: 'utils',
+      name: UTILS,
       message: 'Choose utils component do you want.',
       choices: fileNameUtils,
-      when: (answers: { main: string | string[] }) => answers.main && answers.main.includes('utils'),
+      when: answers => answers.main && answers.main.includes(UTILS),
     },
     {
       type: 'checkbox',
@@ -347,11 +352,11 @@ const main = async () => {
   while (app) {
     await showMenu().then(answers => {
       switch (answers.main) {
-        case 'create-rocket-app':
+        case CREATE_ROCKET_APP:
           boilerplate(answers.newApp);
           app = false;
           break;
-        case 'Packages':
+        case PACKAGES:
           const options = [
             answers.apiKey,
             answers.authDomain,
@@ -363,7 +368,7 @@ const main = async () => {
           ];
           packages(answers.packages, options);
           break;
-        case 'CRUD':
+        case CRUD:
           if (answers.flowType === 'Asyncronous') {
             answers.reduxFlowType.map((item: any) => {
               if (item === 'Read') {
@@ -385,10 +390,10 @@ const main = async () => {
           //   });
           // }
           break;
-        case 'i18n':
+        case I18N:
           translations();
           break;
-        case 'utils':
+        case UTILS:
           answers.utils &&
             answers.utils.map((choice: string) => {
               switch (choice) {
@@ -413,27 +418,27 @@ const main = async () => {
               }
             });
           break;
-        case 'hooks':
-          answers.customHooks && answers.customHooks.map((item: any) => customHook(item));
+        case HOOKS:
+          answers.customHooks && answers.customHooks.map(item => customHook(item));
           break;
-        case 'Components':
+        case COMPONENTS:
           switch (answers.action) {
-            case 'rocket-components':
-              answers.rocketComponents.map((item: any) => componentUi(item));
+            case ROCKET_COMPONENTS:
+              answers.rocketComponents.map(item => componentUi(item));
               break;
-            case 'new-component-UI':
+            case NEW_COMPONENT_UI:
               componentUi(answers.newComponentUI);
               break;
-            case 'new-component-routing':
+            case NEW_COMPONENT_ROUTING:
               componentRouting(answers.newComponentRouting);
               break;
-            case 'routing-component':
-              answers.routingComponents.map((item: any) => componentRouting(item));
+            case ROUTING_COMPONENT:
+              answers.routingComponents.map(item => componentRouting(item));
               break;
-            case 'new-component-view':
+            case NEW_COMPONENT_VIEW:
               componentView(answers.newComponentView);
               break;
-            case 'new-component-shared':
+            case NEW_COMPONENT_SHARED:
               componentShared(answers.newComponentShared);
               break;
             default:
