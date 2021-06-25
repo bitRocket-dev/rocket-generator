@@ -62,43 +62,43 @@ var reduxFlow = function (name, reducer) { return __awaiter(void 0, void 0, void
                 dir2 = dir + "/" + names[0];
                 dirSync = "./src/@sdk/redux-modules/" + nameUpper + "-Sync";
                 if (!(names[0] !== 'Sync')) return [3, 7];
-                return [4, fs_extra_1.default.pathExists(dir)];
+                return [4, fs_extra_1.pathExists(dir)];
             case 1:
                 if (!_a.sent()) return [3, 3];
-                return [4, fs_extra_1.default.mkdirs(dir2)];
+                return [4, fs_extra_1.mkdirs(dir2)];
             case 2:
                 _a.sent();
                 return [3, 6];
-            case 3: return [4, fs_extra_1.default.mkdirs(dir)];
+            case 3: return [4, fs_extra_1.mkdirs(dir)];
             case 4:
                 _a.sent();
-                return [4, fs_extra_1.default.mkdirs(dir2)];
+                return [4, fs_extra_1.mkdirs(dir2)];
             case 5:
                 _a.sent();
                 _a.label = 6;
             case 6: return [3, 9];
-            case 7: return [4, fs_extra_1.default.mkdirs(dirSync)];
+            case 7: return [4, fs_extra_1.mkdirs(dirSync)];
             case 8:
                 _a.sent();
                 _a.label = 9;
             case 9:
                 if (names[0] !== 'Sync') {
-                    fs_extra_1.default.writeFile(dir2 + "/sagas.tsx", sagas_1.sagas(name), writeFileErrorHandler);
-                    fs_extra_1.default.writeFile(dir2 + "/actions.tsx", actions_1.actions(name), writeFileErrorHandler);
-                    fs_extra_1.default.writeFile(dir2 + "/constants.tsx", constants_1.constants(name), writeFileErrorHandler);
-                    fs_extra_1.default.writeFile(dir2 + "/declarations.tsx", declarations_1.declarations(name), writeFileErrorHandler);
-                    fs_extra_1.default.writeFile(dir2 + "/api.tsx", api_1.api(name), writeFileErrorHandler);
+                    fs_extra_1.writeFile(dir2 + "/sagas.tsx", sagas_1.sagas(name), writeFileErrorHandler);
+                    fs_extra_1.writeFile(dir2 + "/actions.tsx", actions_1.actions(name), writeFileErrorHandler);
+                    fs_extra_1.writeFile(dir2 + "/constants.tsx", constants_1.constants(name), writeFileErrorHandler);
+                    fs_extra_1.writeFile(dir2 + "/declarations.tsx", declarations_1.declarations(name), writeFileErrorHandler);
+                    fs_extra_1.writeFile(dir2 + "/api.tsx", api_1.api(name), writeFileErrorHandler);
                 }
                 else {
-                    fs_extra_1.default.writeFile(dirSync + "/actions.tsx", actions_1.actions(name), writeFileErrorHandler);
-                    fs_extra_1.default.writeFile(dirSync + "/constants.tsx", constants_1.constants(name), writeFileErrorHandler);
-                    fs_extra_1.default.writeFile(dirSync + "/declarations.tsx", declarations_1.declarations(name), writeFileErrorHandler);
+                    fs_extra_1.writeFile(dirSync + "/actions.tsx", actions_1.actions(name), writeFileErrorHandler);
+                    fs_extra_1.writeFile(dirSync + "/constants.tsx", constants_1.constants(name), writeFileErrorHandler);
+                    fs_extra_1.writeFile(dirSync + "/declarations.tsx", declarations_1.declarations(name), writeFileErrorHandler);
                 }
                 if (reducer === 'yes') {
                     if (names[0] !== 'Sync')
-                        fs_extra_1.default.writeFile(dir2 + "/reducers.tsx", reducers_1.reducers(name), writeFileErrorHandler);
+                        fs_extra_1.writeFile(dir2 + "/reducers.tsx", reducers_1.reducers(name), writeFileErrorHandler);
                     else
-                        fs_extra_1.default.writeFile(dirSync + "/reducers.tsx", reducers_1.reducers(name), writeFileErrorHandler);
+                        fs_extra_1.writeFile(dirSync + "/reducers.tsx", reducers_1.reducers(name), writeFileErrorHandler);
                 }
                 return [2];
         }

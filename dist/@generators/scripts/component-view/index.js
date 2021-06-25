@@ -54,19 +54,19 @@ var componentView = function (name) { return __awaiter(void 0, void 0, void 0, f
                 formattedName = utilities_1.utilityCapitalizeFirst(name);
                 dir = "./src/components-view/" + formattedName;
                 path = "./src/components-view/.gitkeep";
-                return [4, fs_extra_1.default.pathExists(dir)];
+                return [4, fs_extra_1.pathExists(dir)];
             case 1:
                 if (_a.sent())
                     console.error("\u001B[31m", 'A component with that name already exists.');
-                return [4, fs_extra_1.default.mkdirs(dir)];
+                return [4, fs_extra_1.mkdirs(dir)];
             case 2:
                 _a.sent();
-                fs_extra_1.default.pathExists(path, function (err, exists) {
+                fs_extra_1.pathExists(path, function (err, exists) {
                     if (exists)
-                        fs_extra_1.default.unlinkSync(path);
+                        fs_extra_1.unlinkSync(path);
                 });
-                fs_extra_1.default.writeFile(dir + "/index.tsx", templates_1.component(formattedName), writeFileErrorHandler);
-                fs_extra_1.default.writeFile(dir + "/" + formattedName + ".spec.js", templates_1.test(formattedName), writeFileErrorHandler);
+                fs_extra_1.writeFile(dir + "/index.tsx", templates_1.component(formattedName), writeFileErrorHandler);
+                fs_extra_1.writeFile(dir + "/" + formattedName + ".spec.js", templates_1.test(formattedName), writeFileErrorHandler);
                 return [2];
         }
     });

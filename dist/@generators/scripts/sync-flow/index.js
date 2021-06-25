@@ -36,39 +36,61 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.boilerplate = void 0;
+exports.reduxSyncFlow = void 0;
 var fs_extra_1 = require("fs-extra");
-var package_1 = require("./templates/package");
-var utilities_1 = require("../../utilities");
-var boxen = require("boxen");
-var boilerplate = function (name) { return __awaiter(void 0, void 0, void 0, function () {
-    var dir, localDir;
+var scriptImport_1 = require("./scriptImport");
+var scriptBody_1 = require("./scriptBody");
+var actions_1 = require("./templates/actions");
+var constants_1 = require("./templates/constants");
+var declarations_1 = require("./templates/declarations");
+var reducers_1 = require("./templates/reducers");
+var reduxSyncFlow = function (name, choices, reducer) { return __awaiter(void 0, void 0, void 0, function () {
+    function writeFileErrorHandler(err) {
+        if (err)
+            throw err;
+    }
+    var dir, dir2, data_1, str;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
-                dir = "./" + name;
-                return [4, fs_extra_1.mkdirs(dir)];
+                dir = "./src/@sdk/redux-modules/" + name;
+                dir2 = "./src/@sdk/redux-modules/" + name + "/actions.tsx";
+                return [4, fs_extra_1.pathExists(dir2)];
             case 1:
-                _a.sent();
-                localDir = __dirname + "/boilerplate";
-                return [4, fs_extra_1.copy(localDir, dir)];
+                if (!_a.sent()) return [3, 4];
+                return [4, scriptBody_1.scriptBody(name, choices)];
             case 2:
                 _a.sent();
-                fs_extra_1.writeFile(dir + "/package.json", package_1.pkg(name));
-                console.log("\n\u001B[33m", "\u001B[5m", 'WAITING... INSTALLING PACKAGE...', '\x1b[0m');
-                return [4, utilities_1.execAsync("npm install", { cwd: dir })];
+                data_1 = fs_extra_1.readFileSync(dir2).toString().split('\n');
+                return [4, scriptImport_1.scriptImport(name, choices)];
             case 3:
+                str = _a.sent();
+                console.log(str);
+                if (!str.includes(undefined)) {
+                    str.map(function (item) {
+                        data_1.splice(3, 0, item);
+                        var text = data_1.join('\n');
+                        fs_extra_1.writeFile("" + dir2, text, function (err) {
+                            if (err)
+                                return console.log(err);
+                        });
+                    });
+                }
+                return [3, 6];
+            case 4: return [4, fs_extra_1.mkdirs(dir)];
+            case 5:
                 _a.sent();
-                console.log("\n\n\u001B[31m%s\u001B[0m", "    ##################################################\n    ##################################################\n    ##############################(#(/          /#####\n    ############################,                #####\n    ########################(.                   #####\n    #############*     (##(                     *#####\n    #########/       (##(                      .######\n    #######,       (##(                        #######\n    #####(       (##(                        *########\n    ####(      (##(                        .##########\n    ####     (###############            /############\n    ###(   /#################         /###############\n    #### /##################/      (###(  ############\n    (#######################,  .(###*    (############\n    ########################,####*      /#############\n    ##########################.        ###############\n    #######################.        .#################\n    ###################(         ,####################\n    ###############(#((////(##########################\n    ##################################################\n\n");
-                console.log("\n\u001B[36m%s\u001B[0m", boxen("Now start coding by typing:\n\n  cd " + name + "\n\nAfter if you want create or import other components:\n\n  npx rocket-generator", {
-                    padding: 1,
-                    margin: 1,
-                    borderStyle: 'doubleSingle',
-                }));
-                console.log("\u001B[32m", 'DONE! GOOD CODING!');
+                fs_extra_1.writeFile(dir + "/actions.tsx", actions_1.actions(name, choices), writeFileErrorHandler);
+                _a.label = 6;
+            case 6:
+                fs_extra_1.writeFile(dir + "/constants.tsx", constants_1.constants(name, choices), writeFileErrorHandler);
+                fs_extra_1.writeFile(dir + "/declarations.tsx", declarations_1.declarations(name), writeFileErrorHandler);
+                if (reducer === 'yes') {
+                    fs_extra_1.writeFile(dir + "/reducers.tsx", reducers_1.reducers(name, choices), writeFileErrorHandler);
+                }
                 return [2];
         }
     });
 }); };
-exports.boilerplate = boilerplate;
-//# sourceMappingURL=boilerplate.js.map
+exports.reduxSyncFlow = reduxSyncFlow;
+//# sourceMappingURL=index.js.map

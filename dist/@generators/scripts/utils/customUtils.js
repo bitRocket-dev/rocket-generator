@@ -52,18 +52,18 @@ var customUtils = function (name, dirPath) { return __awaiter(void 0, void 0, vo
                 path = name === 'fetch' || name === 'helpers' || name === 'time'
                     ? "./src/@sdk/utils/" + name + "/.gitkeep"
                     : "./src/@sdk/utils/" + dirPath + "/.gitkeep";
-                fs_extra_1.default.pathExists(path, function (exists) {
+                fs_extra_1.pathExists(path, function (exists) {
                     if (exists)
-                        fs_extra_1.default.unlinkSync(path).catch(function () { });
+                        fs_extra_1.unlinkSync(path);
                 });
-                return [4, fs_extra_1.default.pathExists(dir)];
+                return [4, fs_extra_1.pathExists(dir)];
             case 1:
                 if (_a.sent())
                     console.error("\u001B[31m", "A component " + name.toUpperCase() + " already exists.");
-                return [4, fs_extra_1.default.pathExists(localDir)];
+                return [4, fs_extra_1.pathExists(localDir)];
             case 2:
                 if (_a.sent())
-                    return [2, fs_extra_1.default.copy(localDir, dir)];
+                    return [2, fs_extra_1.copy(localDir, dir)];
                 return [2];
         }
     });

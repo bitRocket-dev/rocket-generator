@@ -113,45 +113,45 @@ var componentUi = function (name) { return __awaiter(void 0, void 0, void 0, fun
                 path = "./src/components-ui/.gitkeep";
                 if (!formattedName) return [3, 2];
                 foo(formattedName);
-                return [4, fs_extra_1.default.pathExists(dirPlus)];
+                return [4, fs_extra_1.pathExists(dirPlus)];
             case 1:
                 if (_a.sent())
                     console.error("\u001B[31m", "A component " + formattedName + " already exists.");
                 if (formattedName === 'Datepicker' || formattedName === 'TimePicker') {
-                    fs_extra_1.default.pathExistsSync("./src/components-ui/Input")
+                    fs_extra_1.pathExistsSync("./src/components-ui/Input")
                         ? foo('Input')
-                        : fs_extra_1.default.copy(__dirname + "/templates/Input", "./src/components-ui/Input") && foo('Input');
+                        : fs_extra_1.copy(__dirname + "/templates/Input", "./src/components-ui/Input") && foo('Input');
                 }
                 if (localDirPlus instanceof Array) {
-                    localDirPlus.map(function (item, index) { return fs_extra_1.default.copy(item, dirPlus[index]).catch(function () { }); });
+                    localDirPlus.map(function (item, index) { return fs_extra_1.copy(item, dirPlus[index]).catch(function () { }); });
                 }
                 else
-                    fs_extra_1.default.copy(localDirPlus, dirPlus).catch(function () { });
+                    fs_extra_1.copy(localDirPlus, dirPlus).catch(function () { });
                 _a.label = 2;
             case 2:
-                if (fs_extra_1.default.pathExistsSync(path)) {
-                    fs_extra_1.default.unlinkSync(path);
+                if (fs_extra_1.pathExistsSync(path)) {
+                    fs_extra_1.unlinkSync(path);
                 }
-                if (!fs_extra_1.default.existsSync(themePath)) {
-                    fs_extra_1.default.copy(localThemeDir, themePath).catch(function () { });
-                    fs_extra_1.default.copy(localProvidersDir, providerPath).catch(function () { });
+                if (!fs_extra_1.existsSync(themePath)) {
+                    fs_extra_1.copy(localThemeDir, themePath).catch(function () { });
+                    fs_extra_1.copy(localProvidersDir, providerPath).catch(function () { });
                 }
                 if (!name)
                     throw new Error('You must include a component name.');
-                return [4, fs_extra_1.default.pathExists(dir)];
+                return [4, fs_extra_1.pathExists(dir)];
             case 3:
                 if (_a.sent())
                     console.error("\u001B[31m", "A component " + formattedName + " already exists.");
-                return [4, fs_extra_1.default.pathExists(localDir)];
+                return [4, fs_extra_1.pathExists(localDir)];
             case 4:
                 if (_a.sent())
-                    return [2, fs_extra_1.default.copy(localDir, dir).catch(function () { })];
-                return [4, fs_extra_1.default.mkdirs(dir)];
+                    return [2, fs_extra_1.copy(localDir, dir).catch(function () { })];
+                return [4, fs_extra_1.mkdirs(dir)];
             case 5:
                 _a.sent();
-                fs_extra_1.default.writeFile(dir + "/" + formattedName + ".stories.tsx", new_template_1.story(formattedName), utilities_1.throwIfError);
-                fs_extra_1.default.writeFile(dir + "/" + formattedName + ".test.tsx", new_template_1.test(formattedName), utilities_1.throwIfError);
-                fs_extra_1.default.writeFile(dir + "/index.tsx", new_template_1.component(formattedName), utilities_1.throwIfError);
+                fs_extra_1.writeFile(dir + "/" + formattedName + ".stories.tsx", new_template_1.story(formattedName), utilities_1.throwIfError);
+                fs_extra_1.writeFile(dir + "/" + formattedName + ".test.tsx", new_template_1.test(formattedName), utilities_1.throwIfError);
+                fs_extra_1.writeFile(dir + "/index.tsx", new_template_1.component(formattedName), utilities_1.throwIfError);
                 return [4, utilities_1.execAsync("npm install styled-components", { cwd: dir })];
             case 6:
                 _a.sent();

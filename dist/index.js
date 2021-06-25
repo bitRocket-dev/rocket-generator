@@ -1,5 +1,24 @@
 #!/usr/bin/env node
 "use strict";
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+};
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -37,7 +56,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var inquirer_1 = require("inquirer");
+var inquirer = __importStar(require("inquirer"));
 var fs_extra_1 = require("fs-extra");
 var reduxFlow_1 = require("./@generators/scripts/flow/reduxFlow");
 var component_ui_1 = require("./@generators/scripts/component-ui");
@@ -49,7 +68,8 @@ var i18n_1 = require("./@generators/scripts/i18n");
 var hooks_1 = require("./@generators/scripts/hooks");
 var customUtils_1 = require("./@generators/scripts/utils/customUtils");
 var packages_1 = require("./@generators/scripts/packages");
-var options_1 = require("./constants/options");
+var sync_flow_1 = require("./@generators/scripts/sync-flow");
+var console_1 = require("console");
 var fileNamePackages = fs_extra_1.readdirSync(__dirname + "/@generators/scripts/packages/templates");
 var fileNameHooks = fs_extra_1.readdirSync(__dirname + "/@generators/scripts/hooks/templates");
 var fileNameComponentUi = fs_extra_1.readdirSync(__dirname + "/@generators/scripts/component-ui/templates");
@@ -65,8 +85,8 @@ var showMenu = function () {
             name: 'main',
             message: 'Hi! What do you want to do?',
             choices: [
-                options_1.CREATE_ROCKET_APP,
-                options_1.COMPONENTS,
+                'create-rocket-app',
+                'Components',
                 'CRUD',
                 'i18n',
                 'hooks',
@@ -81,7 +101,7 @@ var showMenu = function () {
             message: 'What do you need?',
             choices: [
                 '\x1b[33m--- Back ---\x1b[0m',
-                new inquirer_1.default.Separator(),
+                new inquirer.Separator(),
                 'routing-component',
                 'new-component-routing',
                 'rocket-components',
@@ -89,7 +109,7 @@ var showMenu = function () {
                 'new-component-view',
                 'new-component-shared',
             ],
-            when: function (answers) { return answers.main === options_1.COMPONENTS; },
+            when: function (answers) { return answers.main === 'Components'; },
         },
         {
             type: 'input',
@@ -102,7 +122,7 @@ var showMenu = function () {
             name: 'createApp',
             message: 'Create a boilerplate',
             choices: ['Insert Name', '\x1b[33m--- Back ---\x1b[0m'],
-            when: function (answers) { return answers.main === options_1.CREATE_ROCKET_APP; },
+            when: function (answers) { return answers.main === 'create-rocket-app'; },
         },
         {
             type: 'input',
@@ -149,6 +169,25 @@ var showMenu = function () {
             message: 'what is the type?',
             choices: ['Create', 'Read', 'Update', 'Delete'],
             when: function (answers) { return answers.flowType === 'Asyncronous'; },
+        },
+        {
+            type: 'checkbox',
+            name: 'reduxFlowSyncType',
+            message: 'what is the type?',
+            choices: ['Create', 'Update', 'Delete', 'Other'],
+            when: function (answers) { return answers.flowType === 'Syncronous'; },
+        },
+        {
+            type: 'input',
+            name: 'otherSyncType',
+            message: 'Insert the name of the type',
+            when: function (answers) { return answers.reduxFlowSyncType && answers.reduxFlowSyncType.includes('Other'); },
+            validate: function (answer) {
+                if (answer === '') {
+                    return 'please enter a valid answer';
+                }
+                return true;
+            },
         },
         {
             type: 'checkbox',
@@ -267,7 +306,7 @@ var showMenu = function () {
             when: function (answers) { return answers.utils && answers.utils.includes('validate'); },
         },
     ];
-    return inquirer_1.default.prompt(questions);
+    return inquirer.prompt(questions);
 };
 var main = function () { return __awaiter(void 0, void 0, void 0, function () {
     var app;
@@ -280,7 +319,7 @@ var main = function () { return __awaiter(void 0, void 0, void 0, function () {
                 if (!app) return [3, 3];
                 return [4, showMenu().then(function (answers) {
                         switch (answers.main) {
-                            case options_1.CREATE_ROCKET_APP:
+                            case 'create-rocket-app':
                                 boilerplate_1.boilerplate(answers.newApp);
                                 app = false;
                                 break;
@@ -298,7 +337,7 @@ var main = function () { return __awaiter(void 0, void 0, void 0, function () {
                                     });
                                 }
                                 else {
-                                    reduxFlow_1.reduxFlow("Sync-" + answers.reduxFlowName, answers.reducer);
+                                    sync_flow_1.reduxSyncFlow(answers.reduxFlowName, answers.reduxFlowSyncType, answers.reducer).catch(console_1.error);
                                 }
                                 break;
                             case 'i18n':
@@ -332,7 +371,7 @@ var main = function () { return __awaiter(void 0, void 0, void 0, function () {
                             case 'hooks':
                                 answers.customHooks && answers.customHooks.map(function (item) { return hooks_1.customHook(item); });
                                 break;
-                            case options_1.COMPONENTS:
+                            case 'Components':
                                 switch (answers.action) {
                                     case 'rocket-components':
                                         answers.rocketComponents.map(function (item) { return component_ui_1.componentUi(item); });

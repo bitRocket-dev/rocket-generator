@@ -4,6 +4,7 @@
   "description": "Node Generator for bitRocket.dev Community",
   "main": "dist/index.js",
   "scripts": {
+    "start:dev": "npx ts-node src/index.ts",
     "deploy": "npm run build && npm publish",
     "build": "npx tsc",
     "create-rocket-app": "node ./@generators/scripts/create-rocket-app/index $1",
@@ -46,7 +47,6 @@
     "@types/node": "^15.12.4",
     "husky": "^5.0.9",
     "prettier": "^2.3.1",
-    "typescript": "^4.3.4",
-    "ts-node": "^10.0.0"
+    "typescript": "^4.3.4"
   }
 }

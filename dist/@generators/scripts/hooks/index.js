@@ -45,14 +45,14 @@ var customHook = function (name) { return __awaiter(void 0, void 0, void 0, func
             case 0:
                 dir = "./src/@sdk/hooks/" + name;
                 localDir = __dirname + "/templates/" + name;
-                return [4, fs_extra_1.default.pathExists(dir)];
+                return [4, fs_extra_1.pathExists(dir)];
             case 1:
                 if (_a.sent())
                     console.error("\u001B[31m", "A component " + name + " already exists.");
-                return [4, fs_extra_1.default.pathExists(localDir)];
+                return [4, fs_extra_1.pathExists(localDir)];
             case 2:
                 if (_a.sent())
-                    return [2, fs_extra_1.default.copy(localDir, dir)];
+                    return [2, fs_extra_1.copy(localDir, dir)];
                 return [2];
         }
     });

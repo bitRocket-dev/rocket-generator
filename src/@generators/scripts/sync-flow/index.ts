@@ -19,7 +19,7 @@ export const reduxSyncFlow = async (name: any, choices: any, reducer: string) =>
 
     const str = await scriptImport(name, choices);
     console.log(str);
-    if (str !== [undefined]) {
+    if (!str.includes(undefined)) {
       str.map((item: string) => {
         data.splice(3, 0, item);
         const text = data.join('\n');

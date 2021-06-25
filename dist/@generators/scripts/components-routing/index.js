@@ -50,18 +50,18 @@ var componentRouting = function (name) { return __awaiter(void 0, void 0, void 0
                 formattedName = utilities_1.utilityCapitalizeFirst(name);
                 dir = "./src/components-routing/Route" + formattedName;
                 localDir = __dirname + "/templates/" + formattedName;
-                return [4, fs_extra_1.default.pathExists(dir)];
+                return [4, fs_extra_1.pathExists(dir)];
             case 1:
                 if (_a.sent())
                     console.error("\u001B[31m", "A component " + formattedName + " already exists.");
-                return [4, fs_extra_1.default.pathExists(localDir)];
+                return [4, fs_extra_1.pathExists(localDir)];
             case 2:
                 if (_a.sent())
-                    return [2, fs_extra_1.default.copy(localDir, "./src/components-routing/" + formattedName).catch(function () { })];
-                return [4, fs_extra_1.default.mkdirs(dir)];
+                    return [2, fs_extra_1.copy(localDir, "./src/components-routing/" + formattedName).catch(function () { })];
+                return [4, fs_extra_1.mkdirs(dir)];
             case 3:
                 _a.sent();
-                fs_extra_1.default.writeFile(dir + "/index.tsx", new_template_1.component(formattedName), utilities_1.throwIfError);
+                fs_extra_1.writeFile(dir + "/index.tsx", new_template_1.component(formattedName), utilities_1.throwIfError);
                 return [2];
         }
     });

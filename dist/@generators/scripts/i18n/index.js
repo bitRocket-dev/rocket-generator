@@ -45,14 +45,14 @@ var translations = function () { return __awaiter(void 0, void 0, void 0, functi
             case 0:
                 localDir = __dirname + "/templates";
                 dir = './src/@sdk/i18n';
-                return [4, fs_extra_1.default.pathExists(dir)];
+                return [4, fs_extra_1.pathExists(dir)];
             case 1:
                 if (_a.sent())
                     console.error("\u001B[31m", "A component i18n already exists.");
-                return [4, fs_extra_1.default.pathExists(localDir)];
+                return [4, fs_extra_1.pathExists(localDir)];
             case 2:
                 if (_a.sent())
-                    return [2, fs_extra_1.default.copy(localDir, dir).catch(function () { })];
+                    return [2, fs_extra_1.copy(localDir, dir).catch(function () { })];
                 return [2];
         }
     });
