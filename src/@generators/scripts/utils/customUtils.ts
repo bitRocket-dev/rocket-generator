@@ -1,6 +1,6 @@
 /** @format */
 
-import {pathExists, unlinkSync, copy} from 'fs-extra';
+import { pathExists, unlinkSync, copy } from 'fs-extra';
 
 export const customUtils = async (name: string, dirPath?: string) => {
   const dir =
@@ -18,7 +18,8 @@ export const customUtils = async (name: string, dirPath?: string) => {
       : `./src/@sdk/utils/${dirPath}/.gitkeep`;
 
   pathExists(path, exists => {
-    if (exists) unlinkSync(path).catch(() => {});
+    if (exists) unlinkSync(path);
+    // .catch(() => {});
   });
 
   if (await pathExists(dir)) console.error(`\x1b[31m`, `A component ${name.toUpperCase()} already exists.`);

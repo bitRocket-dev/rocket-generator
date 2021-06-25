@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /** @format */
 
-import inquirer from 'inquirer';
+import * as inquirer from 'inquirer';
 import { readdirSync } from 'fs-extra';
 import { reduxFlow } from './@generators/scripts/flow/reduxFlow';
 import { componentUi } from './@generators/scripts/component-ui';
@@ -14,6 +14,8 @@ import { customHook } from './@generators/scripts/hooks';
 import { customUtils } from './@generators/scripts/utils/customUtils';
 import { packages } from './@generators/scripts/packages';
 import { COMPONENTS, CREATE_ROCKET_APP } from './constants/options';
+import { reduxSyncFlow } from './@generators/scripts/sync-flow';
+import { error } from 'console';
 
 //#region filename dynamic
 const fileNamePackages = readdirSync(`${__dirname}/@generators/scripts/packages/templates`);
@@ -33,8 +35,8 @@ const showMenu = () => {
       name: 'main',
       message: 'Hi! What do you want to do?',
       choices: [
-        CREATE_ROCKET_APP,
-        COMPONENTS,
+        'create-rocket-app',
+        'Components',
         'CRUD',
         'i18n',
         'hooks',
@@ -57,7 +59,7 @@ const showMenu = () => {
         'new-component-view',
         'new-component-shared',
       ],
-      when: answers => answers.main === COMPONENTS,
+      when: answers => answers.main === 'Components',
     },
     {
       type: 'input',
@@ -70,7 +72,7 @@ const showMenu = () => {
       name: 'createApp',
       message: 'Create a boilerplate',
       choices: ['Insert Name', '\x1b[33m--- Back ---\x1b[0m'],
-      when: answers => answers.main === CREATE_ROCKET_APP,
+      when: answers => answers.main === 'create-rocket-app',
     },
     {
       type: 'input',
@@ -84,7 +86,6 @@ const showMenu = () => {
       message: () => main(),
       when: answers => answers.action || answers.createApp === '\x1b[33m--- Back ---\x1b[0m',
     },
-
     {
       type: 'checkbox',
       name: 'packages',
@@ -92,7 +93,6 @@ const showMenu = () => {
       choices: fileNamePackages,
       when: answers => answers.main === 'Packages',
     },
-
     {
       type: 'input',
       name: 'newApp',
@@ -123,6 +123,25 @@ const showMenu = () => {
     },
     {
       type: 'checkbox',
+      name: 'reduxFlowSyncType',
+      message: 'what is the type?',
+      choices: ['Create', 'Update', 'Delete', 'Other'],
+      when: answers => answers.flowType === 'Syncronous',
+    },
+    {
+      type: 'input',
+      name: 'otherSyncType',
+      message: 'Insert the name of the type',
+      when: answers => answers.reduxFlowSyncType && answers.reduxFlowSyncType.includes('Other'),
+      validate: answer => {
+        if (answer === '') {
+          return 'please enter a valid answer';
+        }
+        return true;
+      },
+    },
+    {
+      type: 'checkbox',
       name: 'readType',
       message: 'Specify the Read.',
       choices: ['List', 'Detail'],
@@ -141,7 +160,6 @@ const showMenu = () => {
       },
     },
     //#endregion CRUD
-
     //#region COMPONENTS UI
     {
       type: 'checkbox',
@@ -163,7 +181,6 @@ const showMenu = () => {
       },
     },
     //#endregion COMPONENTS UI
-
     //#region NEW COMPONENTS ROUTING
     {
       type: 'checkbox',
@@ -173,7 +190,6 @@ const showMenu = () => {
       when: answers => answers.action === 'routing-component',
     },
     //#endregion NEW COMPONENTS ROUTING
-
     //#region NEW COMPONENTS ROUTING
     {
       type: 'input',
@@ -187,9 +203,7 @@ const showMenu = () => {
         return true;
       },
     },
-
     //#endregion NEW COMPONENTS ROUTING
-
     //#region COMPONENTS VIEW
     {
       type: 'input',
@@ -204,7 +218,6 @@ const showMenu = () => {
       },
     },
     //#endregion COMPONENTS VIEW
-
     //#region COMPONENTS SHARED
     {
       type: 'input',
@@ -219,7 +232,6 @@ const showMenu = () => {
       },
     },
     //#endregion COMPONENTS SHARED
-
     //#region CUSTOM HOOK
     {
       type: 'checkbox',
@@ -229,7 +241,6 @@ const showMenu = () => {
       when: answers => answers.main === 'hooks',
     },
     //#endregion CUSTOM HOOK
-
     //#region UTILS
     {
       type: 'checkbox',
@@ -263,37 +274,43 @@ const showMenu = () => {
   ];
   return inquirer.prompt(questions);
 };
-
 const main = async () => {
   let app = true;
   while (app) {
     await showMenu().then(answers => {
       switch (answers.main) {
-        case CREATE_ROCKET_APP:
+        case 'create-rocket-app':
           boilerplate(answers.newApp);
           app = false;
           break;
-
         case 'Packages':
           answers.packages.map(item => packages(item));
           break;
-
         case 'CRUD':
           if (answers.flowType === 'Asyncronous') {
-            answers.reduxFlowType.map(item => {
+            answers.reduxFlowType.map((item: any) => {
               if (item === 'Read') {
-                answers.readType.map(item => reduxFlow(`${item}-${answers.reduxFlowName}`, answers.reducer));
+                answers.readType.map((item: any) => reduxFlow(`${item}-${answers.reduxFlowName}`, answers.reducer));
               } else reduxFlow(`${item}-${answers.reduxFlowName}`, answers.reducer);
             });
           } else {
-            reduxFlow(`Sync-${answers.reduxFlowName}`, answers.reducer);
+            // answers.reduxFlowSyncType.map((item) => {
+            //   if (item === "Other")
+            //      (
+            //       `${
+            //         answers.reduxFlowName
+            //       }-${answers.otherSyncType.toLowerCase()}`,
+            //       answers.reducer
+            //     );
+            //   else
+            reduxSyncFlow(answers.reduxFlowName, answers.reduxFlowSyncType, answers.reducer).catch(error);
           }
+          //   });
+          // }
           break;
-
         case 'i18n':
           translations();
           break;
-
         case 'utils':
           answers.utils &&
             answers.utils.map(choice => {
@@ -319,43 +336,34 @@ const main = async () => {
               }
             });
           break;
-
         case 'hooks':
           answers.customHooks && answers.customHooks.map(item => customHook(item));
           break;
-
-        case COMPONENTS:
+        case 'Components':
           switch (answers.action) {
             case 'rocket-components':
               answers.rocketComponents.map(item => componentUi(item));
               break;
-
             case 'new-component-UI':
               componentUi(answers.newComponentUI);
               break;
-
             case 'new-component-routing':
               componentRouting(answers.newComponentRouting);
               break;
-
             case 'routing-component':
               answers.routingComponents.map(item => componentRouting(item));
               break;
-
             case 'new-component-view':
               componentView(answers.newComponentView);
               break;
-
             case 'new-component-shared':
               componentShared(answers.newComponentShared);
               break;
-
             default:
               console.log('One moment..');
               break;
           }
           break;
-
         default:
           console.log('One moment..');
           break;
@@ -363,5 +371,4 @@ const main = async () => {
     });
   }
 };
-
 main();

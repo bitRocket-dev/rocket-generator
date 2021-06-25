@@ -1,6 +1,6 @@
 /** @format */
 
-import {pathExists, mkdirs, writeFile} from 'fs-extra';
+import { pathExists, mkdirs, writeFile } from 'fs-extra';
 import { sagas } from './templates/sagas';
 import { actions } from './templates/actions';
 import { constants } from './templates/constants';

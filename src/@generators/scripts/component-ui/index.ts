@@ -1,12 +1,12 @@
 /** @format */
 
-import {pathExists, pathExistsSync, writeFile, mkdirs, copy, unlinkSync, existsSync} from 'fs-extra';
+import { pathExists, pathExistsSync, writeFile, mkdirs, copy, unlinkSync, existsSync } from 'fs-extra';
 import { component, story, test } from './new-template';
 import { utilityCapitalizeFirst, throwIfError, execAsync } from '../../utilities';
 
-import { dirname } from "path";
-import { fileURLToPath } from "url";
-const __dirname = dirname(fileURLToPath(import.meta.url));
+// import { dirname } from "path";
+// import { fileURLToPath } from "url";
+// const __dirname = dirname(fileURLToPath(import.meta.url));
 
 export const componentUi = async name => {
   const themePath = './src/components-ui/@theme';

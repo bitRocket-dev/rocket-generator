@@ -1,9 +1,10 @@
 /** @format */
 
-import {mkdirs, copy, writeFile} from 'fs-extra';
-import * as boxen from 'boxen';
+import { mkdirs, copy, writeFile } from 'fs-extra';
+
 import { pkg } from './templates/package';
 import { execAsync } from '../../utilities';
+import boxen = require('boxen');
 
 export const boilerplate = async name => {
   const dir = `./${name}`;
