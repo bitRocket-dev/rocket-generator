@@ -86,6 +86,7 @@ const showMenu = () => {
       message: () => main(),
       when: answers => answers.action || answers.createApp === '\x1b[33m--- Back ---\x1b[0m',
     },
+    //#region PACKAGES
     {
       type: 'checkbox',
       name: 'packages',
@@ -93,6 +94,59 @@ const showMenu = () => {
       choices: fileNamePackages,
       when: answers => answers.main === 'Packages',
     },
+    //#endregion PACKAGES
+
+    //#region FIREBASE
+    {
+      type: 'input',
+      name: 'apiKey',
+      message: 'apiKey',
+      when: answers => answers.packages && answers.packages.includes('firebase'),
+    },
+
+    {
+      type: 'input',
+      name: 'authDomain',
+      message: 'authDomain',
+      when: answers => answers.packages && answers.packages.includes('firebase'),
+    },
+
+    {
+      type: 'input',
+      name: 'projectId',
+      message: 'projectId',
+      when: answers => answers.packages && answers.packages.includes('firebase'),
+    },
+
+    {
+      type: 'input',
+      name: 'storageBucket',
+      message: 'storageBucket',
+      when: answers => answers.packages && answers.packages.includes('firebase'),
+    },
+
+    {
+      type: 'input',
+      name: 'messagingSenderId',
+      message: 'messagingSenderId',
+      when: answers => answers.packages && answers.packages.includes('firebase'),
+    },
+
+    {
+      type: 'input',
+      name: 'appId',
+      message: 'appId',
+      when: answers => answers.packages && answers.packages.includes('firebase'),
+    },
+
+    {
+      type: 'input',
+      name: 'measurementId',
+      message: 'measurementId',
+      when: answers => answers.packages && answers.packages.includes('firebase'),
+    },
+
+    //#endregion FIREBASE
     {
       type: 'input',
       name: 'newApp',
@@ -284,7 +338,16 @@ const main = async () => {
           app = false;
           break;
         case 'Packages':
-          answers.packages.map(item => packages(item));
+          const options = [
+            answers.apiKey,
+            answers.authDomain,
+            answers.projectId,
+            answers.storageBucket,
+            answers.messagingSenderId,
+            answers.appId,
+            answers.measurementId,
+          ];
+          packages(answers.packages, options);
           break;
         case 'CRUD':
           if (answers.flowType === 'Asyncronous') {

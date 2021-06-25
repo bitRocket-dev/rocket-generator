@@ -1,14 +1,22 @@
 /** @format */
 
-import { pathExists, copy } from 'fs-extra';
+import fs from 'fs-extra';
 import { throwIfError } from '../../utilities';
+import { envOption } from './envOption';
 
-export const packages = async name => {
-  const localDir = `${__dirname}/templates/${name}`;
-  const dir = `./src/@packages/${name}`;
+export const packages = (packages, options) => {
+  packages.map(name => {
+    const localDir = `${__dirname}/templates/${name}`;
+    const dir = `./src/@packages/${name}`;
 
-  if (await pathExists(dir)) console.error(`\x1b[31m`, `A component ${name} already exists.`);
+    if (name === 'firebase') {
+      const envPath = './.env';
+      fs.writeFile(envPath, envOption(options), throwIfError);
+    }
 
-  if (await pathExists(localDir)) return copy(localDir, dir).catch(() => {});
-  throwIfError;
+    if (fs.pathExists(dir)) console.error(`\x1b[31m`, `A component ${name} already exists.`);
+
+    if (fs.pathExists(localDir)) return fs.copy(localDir, dir).catch(() => {});
+    throwIfError;
+  });
 };
