@@ -192,8 +192,8 @@ const showMenu = () => {
         //  'Other'
       ],
       validate: answer => {
-        if (answer == '') {
-          return answer;
+        if (answer.length === 0) {
+          return 'Please choose one.';
         }
         return true;
       },
