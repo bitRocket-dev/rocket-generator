@@ -6,7 +6,7 @@ import { createComponent } from './templates/createComponent';
 import { createTest } from './templates/createTest';
 import { createStory } from './templates/createStory';
 
-export const componentUi = async name => {
+export const createComponentUi = async (name: string): Promise<void> => {
   const themePath = './src/components-ui/@theme';
   const providerPath = './src/components-ui/Providers.tsx';
   const localThemeDir = `${__dirname}/utils/@theme`;

@@ -1,6 +1,6 @@
 /** @format */
 
-export const createComponent = name => `
+export const createComponent = (name: string): string => `
 import { FC } from "react";
 
 export interface Props {}

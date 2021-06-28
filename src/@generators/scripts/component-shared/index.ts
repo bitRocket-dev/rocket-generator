@@ -5,7 +5,7 @@ import { utilityCapitalizeFirst } from '../../utilities';
 import { createStory } from './templates/createStory';
 import { createComponent } from './templates/createComponent';
 
-export const componentShared = async name => {
+export const createComponentShared = async (name: string): Promise<void> => {
   if (!name) console.error(`\x1b[31m`, 'Insert a name valid!');
 
   const formattedName = utilityCapitalizeFirst(name);

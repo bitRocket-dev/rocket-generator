@@ -2,7 +2,7 @@
 
 import { pathExists, copy } from 'fs-extra';
 
-export const translations = async () => {
+export const createI18n = async (): Promise<void> => {
   const localDir = `${__dirname}/templates`;
   const dir = './src/@sdk/i18n';
 

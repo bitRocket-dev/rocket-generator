@@ -5,7 +5,7 @@ import { utilityCapitalizeFirst } from '../../utilities';
 import { createComponent } from './templates/createComponent';
 import { createTest } from './templates/createTest';
 
-export const componentView = async name => {
+export const createComponentView = async (name: string): Promise<void> => {
   if (!name) console.error(`\x1b[31m`, 'Insert a name valid!');
 
   const formattedName = utilityCapitalizeFirst(name);

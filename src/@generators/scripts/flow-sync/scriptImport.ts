@@ -2,7 +2,7 @@
 
 import { readFileSync } from 'fs-extra';
 
-export const scriptImport = (name: string, choices: string[]) => {
+export const scriptImport = (name: string, choices: string[]): string[] => {
   const dir = `./src/@sdk/redux-modules/${name}/actions.ts`;
   const nameActionTypeUpper = name.toUpperCase();
   let content = [];

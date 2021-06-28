@@ -1,6 +1,6 @@
 /** @format */
 
-export const envOption = options =>
+export const envOption = (options: string[]): string =>
   `
 REACT_APP_FIREBASE_APIKEY=${options[0]},
 REACT_APP_FIREBASE_AUTHDOMAIN=${options[1]},

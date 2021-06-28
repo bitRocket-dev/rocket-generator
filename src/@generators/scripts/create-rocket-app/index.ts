@@ -5,7 +5,7 @@ import { createPackageJSON } from './templates/createPackageJSON';
 import { execAsync } from '../../utilities';
 import boxen = require('boxen');
 
-export const createRocketApp = async (name: string) => {
+export const createRocketApp = async (name: string): Promise<void> => {
   const dir = `./${name}`;
   await mkdirs(dir);
   const localDir = `${__dirname}/boilerplate`;

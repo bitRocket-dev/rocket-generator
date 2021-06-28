@@ -1,3 +1,3 @@
 /** @format */
 
-export const createGitkeep = () => ``;
+export const createGitkeep = (): string => ``;

@@ -4,12 +4,12 @@
 import * as inquirer from 'inquirer';
 import { readdirSync } from 'fs-extra';
 import { reduxFlow } from './@generators/scripts/flow-async';
-import { componentUi } from './@generators/scripts/component-ui';
-import { componentRouting } from './@generators/scripts/components-routing';
-import { componentView } from './@generators/scripts/component-view';
-import { componentShared } from './@generators/scripts/component-shared';
+import { createComponentUi } from './@generators/scripts/component-ui';
+import { createComponentRouting } from './@generators/scripts/components-routing';
+import { createComponentView } from './@generators/scripts/component-view';
+import { createComponentShared } from './@generators/scripts/component-shared';
 import { createRocketApp } from './@generators/scripts/create-rocket-app';
-import { translations } from './@generators/scripts/i18n';
+import { createI18n } from './@generators/scripts/i18n/createI18n';
 import { customHook } from './@generators/scripts/hooks';
 import { customUtils } from './@generators/scripts/utils/customUtils';
 import { packages } from './@generators/scripts/packages';
@@ -89,7 +89,7 @@ const showMenu = () => {
       type: 'input',
       name: '::: One Moment Please ::',
       message: () => main(),
-      when: (answers: { action: any; createApp: string }) =>
+      when: (answers: { action; createApp: string }) =>
         answers.action || answers.createApp === '\x1b[33m--- Back ---\x1b[0m',
     },
     //#region PACKAGES
@@ -350,6 +350,7 @@ const showMenu = () => {
 const main = async () => {
   let app = true;
   while (app) {
+    // eslint-disable-next-line no-loop-func
     await showMenu().then(answers => {
       switch (answers.main) {
         case CREATE_ROCKET_APP:
@@ -370,28 +371,16 @@ const main = async () => {
           break;
         case CRUD:
           if (answers.flowType === 'Asyncronous') {
-            answers.reduxFlowType.map((item: any) => {
+            answers.reduxFlowType.map(item => {
               if (item === 'Read') {
-                answers.readType.map((item: any) => reduxFlow(`${item}-${answers.reduxFlowName}`, answers.reducer));
+                answers.readType.map(item => reduxFlow(`${item}-${answers.reduxFlowName}`, answers.reducer));
               } else reduxFlow(`${item}-${answers.reduxFlowName}`, answers.reducer);
             });
-          } else {
-            // answers.reduxFlowSyncType.map((item) => {
-            //   if (item === "Other")
-            //      (
-            //       `${
-            //         answers.reduxFlowName
-            //       }-${answers.otherSyncType.toLowerCase()}`,
-            //       answers.reducer
-            //     );
-            //   else
-            reduxSyncFlow(answers.reduxFlowName, answers.reduxFlowSyncType, answers.reducer).catch(error);
-          }
-          //   });
-          // }
+          } else reduxSyncFlow(answers.reduxFlowName, answers.reduxFlowSyncType, answers.reducer).catch(error);
+
           break;
         case I18N:
-          translations();
+          createI18n();
           break;
         case UTILS:
           answers.utils &&
@@ -424,22 +413,22 @@ const main = async () => {
         case COMPONENTS:
           switch (answers.action) {
             case ROCKET_COMPONENTS:
-              answers.rocketComponents.map(item => componentUi(item));
+              answers.rocketComponents.map(item => createComponentUi(item));
               break;
             case NEW_COMPONENT_UI:
-              componentUi(answers.newComponentUI);
+              createComponentUi(answers.newComponentUI);
               break;
             case NEW_COMPONENT_ROUTING:
-              componentRouting(answers.newComponentRouting);
+              createComponentRouting(answers.newComponentRouting);
               break;
             case ROUTING_COMPONENT:
-              answers.routingComponents.map(item => componentRouting(item));
+              answers.routingComponents.map(item => createComponentRouting(item));
               break;
             case NEW_COMPONENT_VIEW:
-              componentView(answers.newComponentView);
+              createComponentView(answers.newComponentView);
               break;
             case NEW_COMPONENT_SHARED:
-              componentShared(answers.newComponentShared);
+              createComponentShared(answers.newComponentShared);
               break;
             default:
               console.log('One moment..');

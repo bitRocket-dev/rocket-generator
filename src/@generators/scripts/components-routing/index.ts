@@ -4,7 +4,7 @@ import { utilityCapitalizeFirst, throwIfError } from '../../utilities';
 import { pathExists, copy, mkdirs, writeFile } from 'fs-extra';
 import { createRoute } from './templates/createRoute';
 
-export const componentRouting = async (name: string) => {
+export const createComponentRouting = async (name: string): Promise<void> => {
   if (!name) throw new Error('You must include a component name.');
   const formattedName = utilityCapitalizeFirst(name);
   const dir = `./src/components-routing/Route${formattedName}`;

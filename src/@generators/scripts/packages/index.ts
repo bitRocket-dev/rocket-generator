@@ -4,7 +4,7 @@ import fs from 'fs-extra';
 import { throwIfError } from '../../utilities';
 import { envOption } from './envOption';
 
-export const packages = (packages, options) => {
+export const packages = (packages: string[], options) => {
   packages.map(name => {
     const localDir = `${__dirname}/templates/${name}`;
     const dir = `./src/@packages/${name}`;

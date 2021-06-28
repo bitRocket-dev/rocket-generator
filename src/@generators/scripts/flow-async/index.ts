@@ -9,7 +9,7 @@ import { createApi } from './templates/createApi';
 import { createReducers } from './templates/createReducers';
 import { splitString } from './templates/splitStringUtility';
 
-export const reduxFlow = async (name: string, reducer: string) => {
+export const reduxFlow = async (name: string, reducer: string): Promise<void> => {
   const names = splitString(name);
   if (!names[1]) throw new Error('You must include a component name.');
 

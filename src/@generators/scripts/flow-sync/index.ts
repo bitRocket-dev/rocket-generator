@@ -8,7 +8,7 @@ import { createConstants } from './templates/createConstants';
 import { createDeclarations } from './templates/createDeclarations';
 import { createReducers } from './templates/createReducers';
 
-export const reduxSyncFlow = async (name: string, choices: string[], reducer: string) => {
+export const reduxSyncFlow = async (name: string, choices: string[], reducer: string): Promise<void> => {
   const dir = `./src/@sdk/redux-modules/${name}`;
   const dir2 = `./src/@sdk/redux-modules/${name}/actions.ts`;
 

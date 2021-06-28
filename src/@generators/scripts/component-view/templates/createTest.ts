@@ -1,6 +1,6 @@
 /** @format */
 
-export const createTest = name => `
+export const createTest = (name: string): string => `
 import { View${name} } from '.';
 import { mount } from '@cypress/react'
 import { cyGet } from "../../../cypress/support/commands";

@@ -1,6 +1,6 @@
 /** @format */
 
-export const createPackageJSON = (name: string) => `
+export const createPackageJSON = (name: string): string => `
   {
   "name": "${name}",
   "version": "0.1.0",

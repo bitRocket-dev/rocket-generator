@@ -1,6 +1,6 @@
 /** @format */
 
-export const createRoute = name => `
+export const createRoute = (name: string): string => `
 import { memo, FC } from 'react';
 import { Route } from 'react-router-dom';
 

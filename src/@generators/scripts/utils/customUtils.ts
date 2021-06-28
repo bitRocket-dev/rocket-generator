@@ -2,7 +2,7 @@
 
 import { pathExists, unlinkSync, copy } from 'fs-extra';
 
-export const customUtils = async (name: string, dirPath?: string) => {
+export const customUtils = async (name: string, dirPath?: string): Promise<void> => {
   const dir =
     name === 'fetch' || name === 'helpers' || name === 'time'
       ? `./src/@sdk/utils/${name}`
