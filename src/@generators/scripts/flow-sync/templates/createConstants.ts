@@ -1,6 +1,6 @@
 /** @format */
 
-export const constants = (name, choices) => {
+export const createConstants = (name: string, choices: string[]) => {
   const nameActionType = name.toUpperCase();
   const nameActionLog = name.charAt(0).toUpperCase() + name.slice(1);
 

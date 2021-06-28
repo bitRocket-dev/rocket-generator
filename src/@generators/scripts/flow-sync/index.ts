@@ -3,14 +3,14 @@
 import { pathExists, readFileSync, writeFile, mkdirs } from 'fs-extra';
 import { scriptImport } from './scriptImport';
 import { scriptBody } from './scriptBody';
-import { actions } from './templates/actions';
-import { constants } from './templates/constants';
-import { declarations } from './templates/declarations';
-import { reducers } from './templates/reducers';
+import { createActions } from './templates/createActions';
+import { createConstants } from './templates/createConstants';
+import { createDeclarations } from './templates/createDeclarations';
+import { createReducers } from './templates/createReducers';
 
-export const reduxSyncFlow = async (name: any, choices: any, reducer: string) => {
+export const reduxSyncFlow = async (name: string, choices: string[], reducer: string) => {
   const dir = `./src/@sdk/redux-modules/${name}`;
-  const dir2 = `./src/@sdk/redux-modules/${name}/actions.tsx`;
+  const dir2 = `./src/@sdk/redux-modules/${name}/actions.ts`;
 
   if (await pathExists(dir2)) {
     await scriptBody(name, choices);
@@ -30,17 +30,15 @@ export const reduxSyncFlow = async (name: any, choices: any, reducer: string) =>
     }
   } else {
     await mkdirs(dir);
-    writeFile(`${dir}/actions.tsx`, actions(name, choices), writeFileErrorHandler);
+    writeFile(`${dir}/actions.ts`, createActions(name, choices), writeFileErrorHandler);
   }
 
   function writeFileErrorHandler(err: any) {
     if (err) throw err;
   }
 
-  writeFile(`${dir}/constants.tsx`, constants(name, choices), writeFileErrorHandler);
-  writeFile(`${dir}/declarations.tsx`, declarations(name), writeFileErrorHandler);
+  writeFile(`${dir}/constants.ts`, createConstants(name, choices), writeFileErrorHandler);
+  writeFile(`${dir}/declarations.ts`, createDeclarations(name), writeFileErrorHandler);
 
-  if (reducer === 'yes') {
-    writeFile(`${dir}/reducers.tsx`, reducers(name, choices), writeFileErrorHandler);
-  }
+  if (reducer === 'yes') writeFile(`${dir}/reducers.ts`, createReducers(name, choices), writeFileErrorHandler);
 };

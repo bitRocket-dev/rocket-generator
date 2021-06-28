@@ -1,8 +1,9 @@
 /** @format */
 
 import { pathExists, mkdirs, unlinkSync, writeFile } from 'fs-extra';
-import { component, story } from './templates';
 import { utilityCapitalizeFirst } from '../../utilities';
+import { createStory } from './templates/createStory';
+import { createComponent } from './templates/createComponent';
 
 export const componentShared = async name => {
   if (!name) console.error(`\x1b[31m`, 'Insert a name valid!');
@@ -23,6 +24,6 @@ export const componentShared = async name => {
     if (exists) unlinkSync(path);
   });
 
-  writeFile(`${dir}/${formattedName}.stories.tsx`, story(formattedName), writeFileErrorHandler);
-  writeFile(`${dir}/index.tsx`, component(formattedName), writeFileErrorHandler);
+  writeFile(`${dir}/${formattedName}.stories.tsx`, createStory(formattedName), writeFileErrorHandler);
+  writeFile(`${dir}/index.tsx`, createComponent(formattedName), writeFileErrorHandler);
 };

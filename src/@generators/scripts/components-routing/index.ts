@@ -2,9 +2,9 @@
 
 import { utilityCapitalizeFirst, throwIfError } from '../../utilities';
 import { pathExists, copy, mkdirs, writeFile } from 'fs-extra';
-import { component } from './new-template';
+import { createRoute } from './templates/createRoute';
 
-export const componentRouting = async name => {
+export const componentRouting = async (name: string) => {
   if (!name) throw new Error('You must include a component name.');
   const formattedName = utilityCapitalizeFirst(name);
   const dir = `./src/components-routing/Route${formattedName}`;
@@ -16,5 +16,5 @@ export const componentRouting = async name => {
 
   await mkdirs(dir);
 
-  writeFile(`${dir}/index.tsx`, component(formattedName), throwIfError);
+  writeFile(`${dir}/index.tsx`, createRoute(formattedName), throwIfError);
 };

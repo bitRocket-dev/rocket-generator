@@ -1,16 +1,6 @@
 /** @format */
 
-export const component = name => `
-import { FC } from "react";
-
-export interface Props {}
-
-export const ${name} :FC<Props> = ({}): JSX.Element => {
-  return <div>${name}</div>;
-};
-`;
-
-export const story = name => `
+export const createStory = name => `
 import { ${name}, Props } from './';
 import { Story, Meta } from '@storybook/react/types-6-0';
 import { Providers } from '../../Providers';

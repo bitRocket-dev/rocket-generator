@@ -1,12 +1,10 @@
 /** @format */
 
 import { pathExists, pathExistsSync, writeFile, mkdirs, copy, unlinkSync, existsSync } from 'fs-extra';
-import { component, story, test } from './new-template';
 import { utilityCapitalizeFirst, throwIfError, execAsync } from '../../utilities';
-
-// import { dirname } from "path";
-// import { fileURLToPath } from "url";
-// const __dirname = dirname(fileURLToPath(import.meta.url));
+import { createComponent } from './templates/createComponent';
+import { createTest } from './templates/createTest';
+import { createStory } from './templates/createStory';
 
 export const componentUi = async name => {
   const themePath = './src/components-ui/@theme';
@@ -108,9 +106,9 @@ export const componentUi = async name => {
 
   await mkdirs(dir);
 
-  writeFile(`${dir}/${formattedName}.stories.tsx`, story(formattedName), throwIfError);
-  writeFile(`${dir}/${formattedName}.test.tsx`, test(formattedName), throwIfError);
-  writeFile(`${dir}/index.tsx`, component(formattedName), throwIfError);
+  writeFile(`${dir}/${formattedName}.stories.tsx`, createStory(formattedName), throwIfError);
+  writeFile(`${dir}/${formattedName}.test.tsx`, createTest(formattedName), throwIfError);
+  writeFile(`${dir}/index.tsx`, createComponent(formattedName), throwIfError);
 
   await execAsync(`npm install styled-components`, { cwd: dir });
 };

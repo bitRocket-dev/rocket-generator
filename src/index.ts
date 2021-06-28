@@ -3,12 +3,12 @@
 
 import * as inquirer from 'inquirer';
 import { readdirSync } from 'fs-extra';
-import { reduxFlow } from './@generators/scripts/flow-async/reduxFlow';
+import { reduxFlow } from './@generators/scripts/flow-async';
 import { componentUi } from './@generators/scripts/component-ui';
 import { componentRouting } from './@generators/scripts/components-routing';
 import { componentView } from './@generators/scripts/component-view';
 import { componentShared } from './@generators/scripts/component-shared';
-import { boilerplate } from './@generators/scripts/create-rocket-app/boilerplate';
+import { createRocketApp } from './@generators/scripts/create-rocket-app';
 import { translations } from './@generators/scripts/i18n';
 import { customHook } from './@generators/scripts/hooks';
 import { customUtils } from './@generators/scripts/utils/customUtils';
@@ -353,7 +353,7 @@ const main = async () => {
     await showMenu().then(answers => {
       switch (answers.main) {
         case CREATE_ROCKET_APP:
-          boilerplate(answers.newApp);
+          createRocketApp(answers.newApp);
           app = false;
           break;
         case PACKAGES:

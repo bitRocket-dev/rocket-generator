@@ -5,10 +5,10 @@ import styled from 'styled-components';
 import { TStyled } from '../@theme';
 import { TSize } from './helpers/declarations';
 import { utilityGetSizes } from './helpers/getSize';
-import srcBank from '../Icon/assets/bg_bank.svg';
-import srcClose from '../Icon/assets/bg_close.svg';
-import srcCalendar from '../Icon/assets/bg_calendar.svg';
-import srcTime from '../Icon/assets/bg_time.svg';
+import srcBank from './assets/bg_bank.svg';
+import srcClose from './assets/bg_close.svg';
+import srcCalendar from './assets/bg_calendar.svg';
+import srcTime from './assets/bg_time.svg';
 
 export type TIcon = 'bank' | 'close' | 'calendar' | 'time';
 

@@ -1,7 +1,6 @@
 /** @format */
 
-export const pkg = name => {
-  return `
+export const createPackageJSON = (name: string) => `
   {
   "name": "${name}",
   "version": "0.1.0",
@@ -11,7 +10,6 @@ export const pkg = name => {
     "node": ">=10.13.0"
   },
   "dependencies": {
-  
     "connected-react-router": "^6.0.0",
     "fast-memoize": "^2.5.2",
     "hedron": "^0.7.1",
@@ -95,4 +93,3 @@ export const pkg = name => {
     "@types/react-datepicker": "^3.1.8"
   }
 }`;
-};

@@ -1,6 +1,6 @@
 /** @format */
 
-import { UIModal, Props } from './';
+import { UIModal, Props } from '.';
 import { Story, Meta } from '@storybook/react/types-6-0';
 import { Providers } from '../Providers';
 import { useState } from 'react';

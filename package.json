@@ -1,32 +1,20 @@
 {
   "name": "rocket-generator",
-  "version": "1.1.52",
+  "version": "1.1.56",
   "description": "Node Generator for bitRocket.dev Community",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "scripts": {
     "build": "npx tsc",
-    "create-rocket-app": "node ./@generators/scripts/create-rocket-app/index $1",
-    "generate:component-flow": "node ./@generators/scripts/flow/index $1",
-    "generate:component-redux-flow": "node ./@generators/scripts/redux-flow/index $1",
-    "generate:component-shared": "node ./@generators/scripts/component-shared/index $1",
-    "generate:component-ui": "node ./@generators/scripts/component-ui/index $1",
-    "generate:component-view": "node ./@generators/scripts/component-view/index $1",
-    "generate:redux-flow": "node ./@generators/scripts/redux-flow/index $1",
-    "postcreate-rocket-app": "npm i",
-    "postversion": "git push && git push --tags",
     "prepare": "npm run build",
-    "prepublishOnly": "npm run test:eslint",
+    "prepublishOnly": "npm run test:format",
     "prettier": "prettier --write \"src/**/*.ts\" \"src/**/*.tsx\" \"src/**/*.js\"",
     "preversion": "npm run test:lint",
-    "start:dev": "npx ts-node src/index.ts",
+    "start": "npx ts-node src/index.ts",
     "test:commit-msg": "commitlint -env HUSKY_GIT_PARAMS",
     "test:eslint": "eslint --ext .ts,.tsx ./src",
     "test:format": "npm run test:lint",
-    "test:lint": "tsc --noEmit",
-    "upgrade:check": "npm-check",
-    "upgrade:interactive": "npm-check --update",
-    "version": "npm run test:format && git add -A src"
+    "test:lint": "tsc --noEmit"
   },
   "bin": {
     "rocket-generator": "lib/index.js"
