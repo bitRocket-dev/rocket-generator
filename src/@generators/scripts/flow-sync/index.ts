@@ -18,7 +18,6 @@ export const reduxSyncFlow = async (name: string, choices: string[], reducer: st
     const data = readFileSync(dir2).toString().split('\n');
 
     const str = await scriptImport(name, choices);
-    console.log(str);
     if (!str.includes(undefined)) {
       str.map((item: string) => {
         data.splice(4, 0, item);

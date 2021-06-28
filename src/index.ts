@@ -8,6 +8,7 @@ import { createComponentUi } from './@generators/scripts/component-ui';
 import { createComponentRouting } from './@generators/scripts/components-routing';
 import { createComponentView } from './@generators/scripts/component-view';
 import { createComponentShared } from './@generators/scripts/component-shared';
+import { reduxScriptStore } from './@generators/scripts/flow';
 import { createRocketApp } from './@generators/scripts/create-rocket-app';
 import { createI18n } from './@generators/scripts/i18n/createI18n';
 import { customHook } from './@generators/scripts/hooks';
@@ -376,7 +377,10 @@ const main = async () => {
                 answers.readType.map(item => reduxFlow(`${item}-${answers.reduxFlowName}`, answers.reducer));
               } else reduxFlow(`${item}-${answers.reduxFlowName}`, answers.reducer);
             });
-          } else reduxSyncFlow(answers.reduxFlowName, answers.reduxFlowSyncType, answers.reducer).catch(error);
+          } else {
+            reduxSyncFlow(answers.reduxFlowName, answers.reduxFlowSyncType, answers.reducer).catch(error);
+          }
+          reduxScriptStore(answers.reduxFlowName);
 
           break;
         case I18N:
