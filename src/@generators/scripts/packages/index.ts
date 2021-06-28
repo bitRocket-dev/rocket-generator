@@ -16,7 +16,6 @@ export const packages = (packages, options) => {
 
     if (fs.pathExists(dir)) console.error(`\x1b[31m`, `A component ${name} already exists.`);
 
-    if (fs.pathExists(localDir)) return fs.copy(localDir, dir).catch(() => {});
-    throwIfError;
+    if (fs.pathExists(localDir)) return fs.copy(localDir, dir).catch(err => throwIfError(err));
   });
 };

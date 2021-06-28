@@ -1,7 +1,7 @@
 /** @format */
 
 import { utilityCapitalizeFirst, throwIfError } from '../../utilities';
-import {pathExists, copy, mkdirs, writeFile  } from 'fs-extra';
+import { pathExists, copy, mkdirs, writeFile } from 'fs-extra';
 import { component } from './new-template';
 
 export const componentRouting = async name => {
@@ -12,8 +12,7 @@ export const componentRouting = async name => {
 
   if (await pathExists(dir)) console.error(`\x1b[31m`, `A component ${formattedName} already exists.`);
 
-  if (await pathExists(localDir))
-    return copy(localDir, `./src/components-routing/${formattedName}`).catch(() => {});
+  if (await pathExists(localDir)) return copy(localDir, `./src/components-routing/${formattedName}`).catch(() => {});
 
   await mkdirs(dir);
 

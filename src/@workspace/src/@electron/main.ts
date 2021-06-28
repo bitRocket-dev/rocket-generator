@@ -1,12 +1,13 @@
 /** @format */
 
 import electron from 'electron';
+import isDev from 'electron-is-dev';
+import path from 'path';
+
 const app = electron.app;
 const BrowserWindow = electron.BrowserWindow;
-import path from 'path';
-import isDev from 'electron-is-dev';
 
-let mainWindow;
+let mainWindow: any;
 
 function createWindow() {
   mainWindow = new BrowserWindow({ width: 900, height: 680 });

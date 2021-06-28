@@ -1,6 +1,6 @@
 /** @format */
 
-import {pathExists, mkdirs, unlinkSync, writeFile} from 'fs-extra';
+import { pathExists, mkdirs, unlinkSync, writeFile } from 'fs-extra';
 import { component, test } from './templates';
 import { utilityCapitalizeFirst } from '../../utilities';
 

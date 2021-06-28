@@ -1,6 +1,6 @@
 /** @format */
 
-import {pathExists, copy } from 'fs-extra';
+import { pathExists, copy } from 'fs-extra';
 
 export const translations = async () => {
   const localDir = `${__dirname}/templates`;

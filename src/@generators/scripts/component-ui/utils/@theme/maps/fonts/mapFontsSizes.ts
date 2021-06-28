@@ -9,11 +9,11 @@ export interface TFontSizeValues {
 }
 
 export const mapFontsSize: TFontSizeValues = {
-  display: "50px",
-  header: "28px",
-  title: "21px",
-  subtitle: "16px",
-  caption: "14px",
+  display: '50px',
+  header: '28px',
+  title: '21px',
+  subtitle: '16px',
+  caption: '14px',
 };
 
 export type TFontVariant = keyof TFontSizeValues;

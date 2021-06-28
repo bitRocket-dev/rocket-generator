@@ -1,6 +1,6 @@
 /** @format */
 
-import {pathExists, copy} from 'fs-extra';
+import { pathExists, copy } from 'fs-extra';
 
 export const customHook = async name => {
   const dir = `./src/@sdk/hooks/${name}`;
