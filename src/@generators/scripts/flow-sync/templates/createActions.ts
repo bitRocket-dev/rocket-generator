@@ -1,6 +1,6 @@
 /** @format */
 
-export const createActions = (name: string, choices: string[]) => {
+export const createActions = (name: string, choices: string[]): string => {
   const nameActionTypeUpper = name.toUpperCase();
   const nameActionTypeLowewr = name.charAt(0).toUpperCase() + name.slice(1);
 

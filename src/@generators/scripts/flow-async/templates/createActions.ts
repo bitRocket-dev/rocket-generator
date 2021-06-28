@@ -2,7 +2,7 @@
 
 import { splitString } from './splitStringUtility';
 
-export const actions = name => {
+export const createActions = (name: string): string => {
   const names = splitString(name);
   const nameOperationTypeUpper = names[0].toUpperCase();
   const nameOperationTypeLower = names[0].charAt(0).toUpperCase() + names[0].slice(1);

@@ -1,12 +1,12 @@
 /** @format */
 
 import { pathExists, mkdirs, writeFile } from 'fs-extra';
-import { sagas } from './templates/sagas';
-import { actions } from './templates/actions';
-import { constants } from './templates/constants';
-import { declarations } from './templates/declarations';
-import { api } from './templates/api';
-import { reducers } from './templates/reducers';
+import { createSagas } from './templates/createSagas';
+import { createActions } from './templates/createActions';
+import { createConstants } from './templates/createConstants';
+import { createDeclarations } from './templates/createDeclarations';
+import { createApi } from './templates/createApi';
+import { createReducers } from './templates/createReducers';
 import { splitString } from './templates/splitStringUtility';
 
 export const reduxFlow = async (name: string, reducer: string) => {
@@ -35,19 +35,19 @@ export const reduxFlow = async (name: string, reducer: string) => {
   }
 
   if (names[0] !== 'Sync') {
-    writeFile(`${dir2}/sagas.ts`, sagas(name), writeFileErrorHandler);
-    writeFile(`${dir2}/actions.ts`, actions(name), writeFileErrorHandler);
-    writeFile(`${dir2}/constants.ts`, constants(name), writeFileErrorHandler);
-    writeFile(`${dir2}/declarations.ts`, declarations(name), writeFileErrorHandler);
-    writeFile(`${dir2}/api.ts`, api(name), writeFileErrorHandler);
+    writeFile(`${dir2}/sagas.ts`, createSagas(name), writeFileErrorHandler);
+    writeFile(`${dir2}/actions.ts`, createActions(name), writeFileErrorHandler);
+    writeFile(`${dir2}/constants.ts`, createConstants(name), writeFileErrorHandler);
+    writeFile(`${dir2}/declarations.ts`, createDeclarations(name), writeFileErrorHandler);
+    writeFile(`${dir2}/api.ts`, createApi(name), writeFileErrorHandler);
   } else {
-    writeFile(`${dirSync}/actions.ts`, actions(name), writeFileErrorHandler);
-    writeFile(`${dirSync}/constants.ts`, constants(name), writeFileErrorHandler);
-    writeFile(`${dirSync}/declarations.ts`, declarations(name), writeFileErrorHandler);
+    writeFile(`${dirSync}/actions.ts`, createActions(name), writeFileErrorHandler);
+    writeFile(`${dirSync}/constants.ts`, createConstants(name), writeFileErrorHandler);
+    writeFile(`${dirSync}/declarations.ts`, createDeclarations(name), writeFileErrorHandler);
   }
 
   if (reducer === 'yes') {
-    if (names[0] !== 'Sync') writeFile(`${dir2}/reducers.ts`, reducers(name), writeFileErrorHandler);
-    else writeFile(`${dirSync}/reducers.ts`, reducers(name), writeFileErrorHandler);
+    if (names[0] !== 'Sync') writeFile(`${dir2}/reducers.ts`, createReducers(name), writeFileErrorHandler);
+    else writeFile(`${dirSync}/reducers.ts`, createReducers(name), writeFileErrorHandler);
   }
 };

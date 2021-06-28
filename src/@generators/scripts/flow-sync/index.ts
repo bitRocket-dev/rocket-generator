@@ -33,7 +33,7 @@ export const reduxSyncFlow = async (name: string, choices: string[], reducer: st
     writeFile(`${dir}/actions.ts`, createActions(name, choices), writeFileErrorHandler);
   }
 
-  function writeFileErrorHandler(err: any) {
+  function writeFileErrorHandler(err: Error) {
     if (err) throw err;
   }
 
