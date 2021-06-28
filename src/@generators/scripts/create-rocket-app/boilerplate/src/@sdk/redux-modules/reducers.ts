@@ -1,5 +1,9 @@
 /** @format */
+//NOTE:"prettier-ignore" necessario per il rocket generator
 
-import { combineReducers } from 'redux';
+import {combineReducers} from 'redux';
 
-export const reducers = combineReducers({});
+//prettier-ignore
+export const reducers = combineReducers({
+
+});
