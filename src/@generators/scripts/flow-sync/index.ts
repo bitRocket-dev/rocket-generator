@@ -6,7 +6,8 @@ import { createDeclarations } from './templates/createDeclarations';
 import { createReducers } from './templates/createReducers';
 import { reduxScriptActions } from '../script-redux-flow/scriptActions';
 import { createActions } from '../flow-sync/templates/createActions';
-import { reduxScriptStore } from '../script-redux-flow/scriptStore/reduxScriptStore';
+import { reduxScriptStore } from '../script-redux-flow/scriptStore';
+import { reduxScriptReducers } from '../script-redux-flow/scriptReducer';
 
 export const reduxSyncFlow = async (name: string, choices: string[], reducer: string): Promise<void> => {
   const dir = `./src/@sdk/redux-modules/${name}`;
@@ -25,5 +26,7 @@ export const reduxSyncFlow = async (name: string, choices: string[], reducer: st
   }
 
   if (reducer === 'yes')
-    writeFile(`${dir}/reducers.ts`, createReducers(name, choices), writeFileErrorHandler), reduxScriptStore(name);
+    writeFile(`${dir}/reducer.ts`, createReducers(name, choices), writeFileErrorHandler),
+      reduxScriptStore(name),
+      reduxScriptReducers(name);
 };

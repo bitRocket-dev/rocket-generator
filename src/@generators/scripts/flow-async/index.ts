@@ -8,7 +8,8 @@ import { createDeclarations } from './templates/createDeclarations';
 import { createApi } from './templates/createApi';
 import { createReducers } from './templates/createReducers';
 import { splitString } from './templates/splitStringUtility';
-import { reduxScriptStore } from '../script-redux-flow/scriptStore/reduxScriptStore';
+import { reduxScriptStore } from '../script-redux-flow/scriptStore';
+import { reduxScriptReducers } from '../script-redux-flow/scriptReducer';
 
 export const reduxFlow = async (name: string, reducer: string): Promise<void> => {
   const names = splitString(name);
@@ -48,6 +49,7 @@ export const reduxFlow = async (name: string, reducer: string): Promise<void> =>
   }
 
   if (reducer === 'yes') {
+    reduxScriptReducers(names[1]);
     if (names[0] !== 'Sync') writeFile(`${dir2}/reducers.ts`, createReducers(name), writeFileErrorHandler);
     else writeFile(`${dirSync}/reducers.ts`, createReducers(name), writeFileErrorHandler);
     reduxScriptStore(names[1]);

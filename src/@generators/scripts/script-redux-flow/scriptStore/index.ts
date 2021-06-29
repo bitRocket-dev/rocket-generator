@@ -10,7 +10,7 @@ export const reduxScriptStore = async (name: string): Promise<void> => {
 
   if (pathExistsSync(dir)) {
     const data = readFileSync(dir).toString().split('\n');
-    if (!readFileSync(dir).toString().includes(`${nameActionTypeLower}`)) {
+    if (!readFileSync(dir).toString().includes(`${nameActionTypeLower}:any`)) {
       data.splice(5, 0, createScriptStore(name));
 
       const text = data.join('\n');
