@@ -3,9 +3,9 @@
 import { readFileSync } from 'fs';
 import { copy, pathExists, writeFile } from 'fs-extra';
 
-export const reduxScriptReducers = async (name: string): Promise<void> => {
+export const addReducerToCombineReducers = async (name: string): Promise<void> => {
   const reducerDir = `./src/@sdk/redux-modules/reducers.ts`;
-  const localDir = `${__dirname}/templates/reducers.ts`;
+  const localDir = `${__dirname}/utils/reducers.ts`;
   const nameUpperOne = name.charAt(0).toUpperCase() + name.slice(1);
 
   if (await pathExists(reducerDir)) {
@@ -21,6 +21,6 @@ export const reduxScriptReducers = async (name: string): Promise<void> => {
     }
   } else {
     await copy(localDir, reducerDir);
-    reduxScriptReducers(name);
+    addReducerToCombineReducers(name);
   }
 };
