@@ -4,7 +4,7 @@ import { appendFileSync, readFileSync } from 'fs-extra';
 import { utilityCapitalizeFirst } from '../../utilities';
 
 export const scriptBody = (name: string, choices: string[]): void => {
-  const dir = `./src/@sdk/redux-modules/${name}/actions.tsx`;
+  const dir = `./src/@sdk/redux-modules/${name}/actions.ts`;
   const formattedName = utilityCapitalizeFirst(name);
 
   choices.map(item => {
@@ -16,6 +16,6 @@ export const scriptBody = (name: string, choices: string[]): void => {
   payload,
         });\r`,
       );
-    } else return console.log('body already exist');
+    }
   });
 };
