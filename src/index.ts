@@ -380,7 +380,6 @@ const main = async () => {
           } else {
             reduxSyncFlow(answers.reduxFlowName, answers.reduxFlowSyncType, answers.reducer).catch(error);
           }
-          reduxScriptStore(answers.reduxFlowName);
 
           break;
         case I18N:
