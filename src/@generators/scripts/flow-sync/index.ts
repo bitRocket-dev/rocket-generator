@@ -4,8 +4,9 @@ import { mkdirs, pathExists, writeFile } from 'fs-extra';
 import { createConstants } from './templates/createConstants';
 import { createDeclarations } from './templates/createDeclarations';
 import { createReducers } from './templates/createReducers';
-import { scriptActions } from '../flow-Actions';
+import { reduxScriptActions } from '../script-redux-flow/scriptActions';
 import { createActions } from '../flow-sync/templates/createActions';
+import { reduxScriptStore } from '../script-redux-flow/scriptStore/reduxScriptStore';
 
 export const reduxSyncFlow = async (name: string, choices: string[], reducer: string): Promise<void> => {
   const dir = `./src/@sdk/redux-modules/${name}`;
@@ -15,7 +16,7 @@ export const reduxSyncFlow = async (name: string, choices: string[], reducer: st
   }
 
   if (await pathExists(dir)) {
-    await scriptActions(name, choices);
+    await reduxScriptActions(name, choices);
   } else {
     await mkdirs(dir);
     writeFile(`${dir}/actions.ts`, createActions(name, choices), writeFileErrorHandler);
@@ -23,5 +24,6 @@ export const reduxSyncFlow = async (name: string, choices: string[], reducer: st
     writeFile(`${dir}/declarations.ts`, createDeclarations(name), writeFileErrorHandler);
   }
 
-  if (reducer === 'yes') writeFile(`${dir}/reducers.ts`, createReducers(name, choices), writeFileErrorHandler);
+  if (reducer === 'yes')
+    writeFile(`${dir}/reducers.ts`, createReducers(name, choices), writeFileErrorHandler), reduxScriptStore(name);
 };

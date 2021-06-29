@@ -1,7 +1,7 @@
 /** @format */
 
 import { appendFileSync, readFileSync } from 'fs-extra';
-import { utilityCapitalizeFirst } from '../../../utilities';
+import { utilityCapitalizeFirst } from '../../../../utilities';
 
 export const scriptBody = (name: string, choices: string[]): void => {
   const dir = `./src/@sdk/redux-modules/${name}/actions.ts`;

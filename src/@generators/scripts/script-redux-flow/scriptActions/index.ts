@@ -5,7 +5,7 @@ import { pathExists, writeFile } from 'fs-extra';
 import { scriptBody } from './templates/scriptBody';
 import { scriptImport } from './templates/scriptImport';
 
-export const scriptActions = async (name: string, choices: string[]) => {
+export const reduxScriptActions = async (name: string, choices: string[]) => {
   const dir2 = `./src/@sdk/redux-modules/${name}/actions.ts`;
 
   if (await pathExists(dir2)) {
