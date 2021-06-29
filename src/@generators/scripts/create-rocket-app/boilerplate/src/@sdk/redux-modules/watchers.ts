@@ -1,3 +1,5 @@
 /** @format */
 
-export const watchers: (() => Generator)[] = [];
+import { watcherAuth } from './auth/watcher';
+
+export const watchers: (() => Generator)[] = [watcherAuth];
