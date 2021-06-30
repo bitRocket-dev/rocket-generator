@@ -13,3 +13,4 @@ export const ROCKET_COMPONENTS = 'rocket-components';
 export const NEW_COMPONENT_UI = 'new-component-UI';
 export const NEW_COMPONENT_VIEW = 'new-component-view';
 export const NEW_COMPONENT_SHARED = 'new-component-shared';
+export const AUTHENTICATION = 'authentication';

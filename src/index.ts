@@ -8,7 +8,7 @@ import { createComponentUi } from './@generators/scripts/component-ui';
 import { createComponentRouting } from './@generators/scripts/components-routing';
 import { createComponentView } from './@generators/scripts/component-view';
 import { createComponentShared } from './@generators/scripts/component-shared';
-
+import { createAuthentication } from './@generators/scripts/authentication/createAuthentication';
 import { createRocketApp } from './@generators/scripts/create-rocket-app';
 import { createI18n } from './@generators/scripts/i18n/createI18n';
 import { customHook } from './@generators/scripts/hooks';
@@ -16,6 +16,7 @@ import { customUtils } from './@generators/scripts/utils/customUtils';
 import { packages } from './@generators/scripts/packages';
 import { reduxSyncFlow } from './@generators/scripts/flow-sync';
 import {
+  AUTHENTICATION,
   COMPONENTS,
   CREATE_ROCKET_APP,
   CRUD,
@@ -49,7 +50,17 @@ const showMenu = () => {
       type: 'list',
       name: 'main',
       message: 'Hi! What do you want to do?',
-      choices: [CREATE_ROCKET_APP, COMPONENTS, CRUD, I18N, HOOKS, UTILS, PACKAGES, '\x1b[31m--- Exit ---\x1b[0m \n'],
+      choices: [
+        CREATE_ROCKET_APP,
+        COMPONENTS,
+        CRUD,
+        I18N,
+        HOOKS,
+        AUTHENTICATION,
+        UTILS,
+        PACKAGES,
+        '\x1b[31m--- Exit ---\x1b[0m \n',
+      ],
     },
     //#region ::: CREATE ROCKET APP
     {
@@ -387,6 +398,9 @@ const main = async () => {
           break;
         case I18N:
           createI18n();
+          break;
+        case AUTHENTICATION:
+          createAuthentication();
           break;
         case UTILS:
           answers.utils &&
