@@ -5,10 +5,10 @@ export const createActions = (name: string, choices: string[]): string => {
   const nameActionTypeLowewr = name.charAt(0).toUpperCase() + name.slice(1);
 
   return `/** @format */
-  // prettier-ignore
+// prettier-ignore
 
 import {
-  ${choices.map(operation => `AT_${nameActionTypeUpper}_${operation.toUpperCase()},\n`).join('')}} from './constants';
+${choices.map(operation => `AT_${nameActionTypeUpper}_${operation.toUpperCase()},\n`).join('')}} from './constants';
 
 ${choices
   .map(
@@ -16,7 +16,7 @@ ${choices
       `export const action${nameActionTypeLowewr}${operation} = (payload: any) => ({
   type: AT_${nameActionTypeUpper}_${operation.toUpperCase()},
   payload,
-  });\r`,
+});\r`,
   )
   .join('')}
 `;
