@@ -1,6 +1,6 @@
 /** @format */
 
-import { copy, pathExistsSync, readFileSync, writeFile } from 'fs-extra';
+import { copy, pathExists, readFileSync, writeFileSync } from 'fs-extra';
 import { utilityCreateStoreKey } from './utils/createStoreKey';
 
 export const addReducerToStore = async (name: string): Promise<void> => {
@@ -8,15 +8,12 @@ export const addReducerToStore = async (name: string): Promise<void> => {
   const localDir = `${__dirname}/utils/store.ts`;
   const nameActionTypeLower = name.charAt(0).toUpperCase() + name.slice(1);
 
-  if (pathExistsSync(dir)) {
+  if (await pathExists(dir)) {
     const data = readFileSync(dir).toString().split('\n');
-    if (!readFileSync(dir).toString().includes(`${nameActionTypeLower}:any`)) {
+    if (!readFileSync(dir).toString().includes(`${nameActionTypeLower}: any`)) {
       data.splice(5, 0, utilityCreateStoreKey(name));
-
       const text = data.join('\n');
-      writeFile(`${dir}`, text, function (err) {
-        if (err) return console.log(err);
-      });
+      writeFileSync(`${dir}`, text);
     }
   } else {
     await copy(localDir, dir);

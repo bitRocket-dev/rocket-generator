@@ -10,6 +10,7 @@ import { createReducers } from './templates/createReducers';
 import { splitString } from './templates/splitStringUtility';
 import { addReducerToStore } from '../utils/addReducerToStore';
 import { addReducerToCombineReducers } from '../utils/addReducerToCombineReducers';
+import { writeFileSync } from 'fs';
 
 export const reduxFlow = async (name: string, reducer: string, type: string): Promise<void> => {
   const [operation, nameOp] = splitString(name);
@@ -37,8 +38,8 @@ export const reduxFlow = async (name: string, reducer: string, type: string): Pr
   writeFile(`${dirFile}/api.ts`, createApi(name), writeFileErrorHandler);
 
   if (reducer === 'yes') {
-    writeFile(`${dirFile}/reducers.ts`, createReducers(name), writeFileErrorHandler);
-    await addReducerToCombineReducers(nameOp, type, operation.toLocaleLowerCase());
-    await addReducerToStore(nameOp);
+    writeFileSync(`${dirFile}/reducers.ts`, createReducers(name));
+    addReducerToCombineReducers(nameOp, type, operation.toLowerCase());
+    addReducerToStore(nameOp);
   }
 };
