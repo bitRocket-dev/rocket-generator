@@ -20,5 +20,6 @@ export const configureStore = (): Store<CombinedState<TStore>> => {
 
   watchers.forEach(watcher => middlewareSaga.run(watcher));
 
+  //@ts-ignore
   return store;
 };
