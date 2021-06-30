@@ -12,7 +12,7 @@ export const addActionImport = (name: string, choices: string[]): string[] => {
   const chomap = choices.map((item, index) => {
     if (readFileSync(dir).toString().includes(`AT_${nameActionTypeUpper}_${item.toUpperCase()},`))
       console.log('import already exist');
-    else content.push(`  AT_${nameActionTypeUpper}_${item.toUpperCase()},`);
+    else content.push(`AT_${nameActionTypeUpper}_${item.toUpperCase()},`);
 
     return content[index];
   });
@@ -20,11 +20,13 @@ export const addActionImport = (name: string, choices: string[]): string[] => {
 };
 
 export const addActionFunc = (name: string, choices: string[]): void => {
+  const nameActionTypeUpper = name.toUpperCase();
   const dir = `./src/@sdk/redux-modules/${name}/actions.ts`;
   const formattedName = utilityCapitalizeFirst(name);
 
   choices.map(item => {
-    if (!readFileSync(dir).toString().includes(`action${formattedName}${item}`)) {
+    console.log(`action${formattedName}${item}`);
+    if (!readFileSync(dir).toString().includes(`AT_${nameActionTypeUpper}_${item.toUpperCase()},`)) {
       appendFileSync(
         dir,
         `export const action${formattedName}${item}= (payload: any) => ({
@@ -32,7 +34,7 @@ export const addActionFunc = (name: string, choices: string[]): void => {
   payload,
   });\r`,
       );
-    }
+    } else console.log('hooopla');
   });
 };
 //#endregion
@@ -46,6 +48,7 @@ export const addActionToExisting = async (name: string, choices: string[]) => {
     const data = await readFileSync(dir2).toString().split('\n');
 
     const str = await addActionImport(name, choices);
+    console.log(str);
     if (!str.includes(undefined)) {
       str.map((item: string) => {
         data.splice(4, 0, item);

@@ -35,7 +35,7 @@ import { error } from 'console';
 //#region filename dynamic
 const fileNamePackages = readdirSync(`${__dirname}/@generators/scripts/packages/templates`);
 const fileNameHooks = readdirSync(`${__dirname}/@generators/scripts/hooks/templates`);
-const fileNameComponentUi = readdirSync(`${__dirname}/@generators/scripts/component-ui/templates`);
+const fileNameComponentUi = readdirSync(`${__dirname}/@generators/scripts/component-ui/templates/default`);
 const fileNameUtils = readdirSync(`${__dirname}/@generators/scripts/utils/templates`);
 const fileNameUtilsValidate = readdirSync(`${__dirname}/@generators/scripts/utils/templates/validate`);
 const fileNameUtilsFormatting = readdirSync(`${__dirname}/@generators/scripts/utils/templates/formatting`);
@@ -51,35 +51,22 @@ const showMenu = () => {
       message: 'Hi! What do you want to do?',
       choices: [CREATE_ROCKET_APP, COMPONENTS, CRUD, I18N, HOOKS, UTILS, PACKAGES, '\x1b[31m--- Exit ---\x1b[0m \n'],
     },
-    {
-      type: 'list',
-      name: 'action',
-      message: 'What do you need?',
-      choices: [
-        '\x1b[33m--- Back ---\x1b[0m',
-        new inquirer.Separator(),
-        ROUTING_COMPONENT,
-        NEW_COMPONENT_ROUTING,
-        ROCKET_COMPONENTS,
-        NEW_COMPONENT_UI,
-        NEW_COMPONENT_VIEW,
-        NEW_COMPONENT_SHARED,
-      ],
-      when: answers => answers.main === COMPONENTS,
-    },
-    {
-      type: 'input',
-      name: 'Exit',
-      message: () => process.exit(),
-      when: (answers: { action: string }) => answers.action === '\x1b[31m--- Exit ---\x1b[0m \n',
-    },
+    //#region ::: CREATE ROCKET APP
     {
       type: 'list',
       name: 'createApp',
       message: 'Create a boilerplate',
       choices: ['Insert Name', '\x1b[33m--- Back ---\x1b[0m'],
-      when: (answers: { main: string }) => answers.main === 'create-rocket-app',
+      when: (answers: { main: string }) => answers.main === CREATE_ROCKET_APP,
     },
+    {
+      type: 'input',
+      name: 'newApp',
+      message: 'What is the name?',
+      when: (answers: { createApp: string }) => answers.createApp === 'Insert Name',
+    },
+    //#endregion
+    //#region ::: EXIT/BACK
     {
       type: 'input',
       name: 'exitApp',
@@ -93,6 +80,13 @@ const showMenu = () => {
       when: (answers: { action; createApp: string }) =>
         answers.action || answers.createApp === '\x1b[33m--- Back ---\x1b[0m',
     },
+    {
+      type: 'input',
+      name: 'Exit',
+      message: () => process.exit(),
+      when: (answers: { action: string }) => answers.action === '\x1b[31m--- Exit ---\x1b[0m \n',
+    },
+    //#endregion
     //#region PACKAGES
     {
       type: 'checkbox',
@@ -102,7 +96,6 @@ const showMenu = () => {
       when: answers => answers.main === PACKAGES,
     },
     //#endregion PACKAGES
-
     //#region FIREBASE
     {
       type: 'input',
@@ -154,12 +147,6 @@ const showMenu = () => {
     },
 
     //#endregion FIREBASE
-    {
-      type: 'input',
-      name: 'newApp',
-      message: 'What is the name?',
-      when: (answers: { createApp: string }) => answers.createApp === 'Insert Name',
-    },
     //#region CRUD
     {
       type: 'list',
@@ -236,6 +223,22 @@ const showMenu = () => {
     //#endregion CRUD
     //#region COMPONENTS UI
     {
+      type: 'list',
+      name: 'action',
+      message: 'What do you need?',
+      choices: [
+        '\x1b[33m--- Back ---\x1b[0m',
+        new inquirer.Separator(),
+        ROUTING_COMPONENT,
+        NEW_COMPONENT_ROUTING,
+        ROCKET_COMPONENTS,
+        NEW_COMPONENT_UI,
+        NEW_COMPONENT_VIEW,
+        NEW_COMPONENT_SHARED,
+      ],
+      when: answers => answers.main === COMPONENTS,
+    },
+    {
       type: 'checkbox',
       name: 'rocketComponents',
       message: 'Choose rocket component.',
@@ -255,7 +258,7 @@ const showMenu = () => {
       },
     },
     //#endregion COMPONENTS UI
-    //#region NEW COMPONENTS ROUTING
+    //#region COMPONENTS ROUTING
     {
       type: 'checkbox',
       name: 'routingComponents',
