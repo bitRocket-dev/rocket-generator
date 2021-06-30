@@ -11,47 +11,34 @@ import { splitString } from './templates/splitStringUtility';
 import { addReducerToStore } from '../utils/addReducerToStore';
 import { addReducerToCombineReducers } from '../utils/addReducerToCombineReducers';
 
-export const reduxFlow = async (name: string, reducer: string): Promise<void> => {
-  const names = splitString(name);
-  if (!names[1]) throw new Error('You must include a component name.');
+export const reduxFlow = async (name: string, reducer: string, type: string): Promise<void> => {
+  const [operation, nameOp] = splitString(name);
 
-  const nameUpper = names[1].charAt(0).toUpperCase() + names[1].slice(1);
+  if (!nameOp) throw new Error('You must include a component name.');
+  const nameUpper = nameOp.charAt(0).toUpperCase() + nameOp.slice(1);
+  const dirPath = `./src/@sdk/redux-modules/${nameUpper}`;
+  const dirFile = `${dirPath}/${operation.toLocaleLowerCase()}`;
 
-  const dir = `./src/@sdk/redux-modules/${nameUpper}`;
-  const dir2 = `${dir}/${names[0]}`;
-  const dirSync = `./src/@sdk/redux-modules/${nameUpper}-Sync`;
-
-  if (names[0] !== 'Sync') {
-    if (await pathExists(dir)) {
-      await mkdirs(dir2);
-    } else {
-      await mkdirs(dir);
-      await mkdirs(dir2);
-    }
+  if (await pathExists(dirPath)) {
+    await mkdirs(dirFile);
   } else {
-    await mkdirs(dirSync);
+    await mkdirs(dirPath);
+    await mkdirs(dirFile);
   }
 
   function writeFileErrorHandler(err) {
     if (err) throw err;
   }
 
-  if (names[0] !== 'Sync') {
-    writeFile(`${dir2}/sagas.ts`, createSagas(name), writeFileErrorHandler);
-    writeFile(`${dir2}/actions.ts`, createActions(name), writeFileErrorHandler);
-    writeFile(`${dir2}/constants.ts`, createConstants(name), writeFileErrorHandler);
-    writeFile(`${dir2}/declarations.ts`, createDeclarations(name), writeFileErrorHandler);
-    writeFile(`${dir2}/api.ts`, createApi(name), writeFileErrorHandler);
-  } else {
-    writeFile(`${dirSync}/actions.ts`, createActions(name), writeFileErrorHandler);
-    writeFile(`${dirSync}/constants.ts`, createConstants(name), writeFileErrorHandler);
-    writeFile(`${dirSync}/declarations.ts`, createDeclarations(name), writeFileErrorHandler);
-  }
+  writeFile(`${dirFile}/sagas.ts`, createSagas(name), writeFileErrorHandler);
+  writeFile(`${dirFile}/actions.ts`, createActions(name), writeFileErrorHandler);
+  writeFile(`${dirFile}/constants.ts`, createConstants(name), writeFileErrorHandler);
+  writeFile(`${dirFile}/declarations.ts`, createDeclarations(name), writeFileErrorHandler);
+  writeFile(`${dirFile}/api.ts`, createApi(name), writeFileErrorHandler);
 
   if (reducer === 'yes') {
-    addReducerToCombineReducers(names[1]);
-    if (names[0] !== 'Sync') writeFile(`${dir2}/reducers.ts`, createReducers(name), writeFileErrorHandler);
-    else writeFile(`${dirSync}/reducers.ts`, createReducers(name), writeFileErrorHandler);
-    addReducerToStore(names[1]);
+    writeFile(`${dirFile}/reducers.ts`, createReducers(name), writeFileErrorHandler);
+    await addReducerToCombineReducers(nameOp, type, operation.toLocaleLowerCase());
+    await addReducerToStore(nameOp);
   }
 };

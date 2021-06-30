@@ -20,6 +20,6 @@ export const addReducerToStore = async (name: string): Promise<void> => {
     }
   } else {
     await copy(localDir, dir);
-    addReducerToStore(name);
+    await addReducerToStore(name);
   }
 };

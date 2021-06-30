@@ -388,8 +388,10 @@ const main = async () => {
           if (answers.flowType === 'Asyncronous') {
             answers.reduxFlowType.map(item => {
               if (item === 'Read') {
-                answers.readType.map(item => reduxFlow(`${item}-${answers.reduxFlowName}`, answers.reducer));
-              } else reduxFlow(`${item}-${answers.reduxFlowName}`, answers.reducer);
+                answers.readType.map(item =>
+                  reduxFlow(`${item}-${answers.reduxFlowName}`, answers.reducer, answers.flowType),
+                );
+              } else reduxFlow(`${item}-${answers.reduxFlowName}`, answers.reducer, answers.flowType);
             });
           } else {
             reduxSyncFlow(answers.reduxFlowName, answers.reduxFlowSyncType, answers.reducer).catch(error);
