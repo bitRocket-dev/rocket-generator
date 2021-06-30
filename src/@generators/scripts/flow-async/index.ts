@@ -8,6 +8,8 @@ import { createDeclarations } from './templates/createDeclarations';
 import { createApi } from './templates/createApi';
 import { createReducers } from './templates/createReducers';
 import { splitString } from './templates/splitStringUtility';
+import { addReducerToStore } from '../utils/addReducerToStore';
+import { addReducerToCombineReducers } from '../utils/addReducerToCombineReducers';
 
 export const reduxFlow = async (name: string, reducer: string): Promise<void> => {
   const names = splitString(name);
@@ -47,7 +49,9 @@ export const reduxFlow = async (name: string, reducer: string): Promise<void> =>
   }
 
   if (reducer === 'yes') {
+    addReducerToCombineReducers(names[1]);
     if (names[0] !== 'Sync') writeFile(`${dir2}/reducers.ts`, createReducers(name), writeFileErrorHandler);
     else writeFile(`${dirSync}/reducers.ts`, createReducers(name), writeFileErrorHandler);
+    addReducerToStore(names[1]);
   }
 };
