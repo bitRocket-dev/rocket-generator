@@ -3,5 +3,5 @@
 // prettier-ignore
 
 export interface TStore {
-
+  auth: boolean;
 }
