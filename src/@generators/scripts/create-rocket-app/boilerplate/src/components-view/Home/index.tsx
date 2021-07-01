@@ -2,7 +2,7 @@
 
 import { FC } from 'react';
 import { useDispatch } from 'react-redux';
-import { actionUserLogoutRequest } from '../@sdk/redux-modules/auth/actions';
+import { actionUserLogoutRequest } from '../../@sdk/redux-modules/auth/actions';
 
 export const ViewHome: FC = (): JSX.Element => {
   const dispatch = useDispatch();
