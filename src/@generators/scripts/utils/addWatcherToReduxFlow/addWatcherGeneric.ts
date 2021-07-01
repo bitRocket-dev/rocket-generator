@@ -9,11 +9,7 @@ export const addWatcherToReduxFlow = async (name: string, operation: string): Pr
   if (await pathExists(indexWatcherPath)) {
     const data = readFileSync(indexWatcherPath).toString().split('\n');
     if (!readFileSync(indexWatcherPath).toString().includes(`watcher${nameUpperOne},`)) {
-      data.splice(
-        1,
-        0,
-        `import { watcher${nameUpperOne} } from './${nameUpperOne}/${operation.toLocaleLowerCase()}/watcher'`,
-      );
+      data.splice(1, 0, `import { watcher${nameUpperOne} } from './${nameUpperOne}/watcher'`);
       data.splice(data.length - 3, 0, `watcher${nameUpperOne},`);
       const text = data.join('\n');
       writeFileSync(`${indexWatcherPath}`, text);
