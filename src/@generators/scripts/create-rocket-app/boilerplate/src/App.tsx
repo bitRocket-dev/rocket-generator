@@ -11,7 +11,7 @@ export const App: FC = (): JSX.Element => {
   return (
     <BrowserRouter>
       <Switch>
-        <RouteLogged exact path="/" component={ViewHome} />
+        <RouteLogged exact path="" component={ViewHome} />
         <RouteGuest path="/login" component={ViewLogin} />
       </Switch>
     </BrowserRouter>

@@ -1,6 +1,6 @@
 {
   "name": "rocket-generator",
-  "version": "1.1.56",
+  "version": "1.1.58",
   "description": "Node Generator for bitRocket.dev Community",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",

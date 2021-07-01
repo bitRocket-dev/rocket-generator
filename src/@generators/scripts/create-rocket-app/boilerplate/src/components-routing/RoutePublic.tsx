@@ -2,9 +2,10 @@
 
 import { memo, FC } from 'react';
 import { Route } from 'react-router-dom';
+import { TRoute } from '../@sdk/declarations/routes';
 
 interface Props {
-  path: string;
+  path: TRoute;
   component: FC<any>;
   exact?: boolean;
 }
