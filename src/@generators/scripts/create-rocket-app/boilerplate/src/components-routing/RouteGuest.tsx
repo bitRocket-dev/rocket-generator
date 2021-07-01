@@ -5,9 +5,10 @@ import { Route } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { selectorIsAuthenticated } from '../@sdk/redux-modules/auth/selector';
 import { RouteRedirect } from './RouteRedirect';
+import { TRoute } from '../@sdk/declarations/routes';
 
 interface Props {
-  path: string;
+  path: TRoute;
   component: FC<any>;
   exact?: boolean;
 }

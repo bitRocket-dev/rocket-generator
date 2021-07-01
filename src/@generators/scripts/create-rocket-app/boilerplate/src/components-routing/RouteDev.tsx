@@ -2,11 +2,12 @@
 
 import React, { memo, FC } from 'react';
 import { Redirect, Route } from 'react-router-dom';
+import { TRoute } from '../@sdk/declarations/routes';
 
 const IS_DEVELOPMENT = process.env.NODE_ENV === 'development';
 
 interface Props {
-  path: string;
+  path: TRoute;
   component: FC<any>;
   exact?: boolean;
   strict?: boolean;

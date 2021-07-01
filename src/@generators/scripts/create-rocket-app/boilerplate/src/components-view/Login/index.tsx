@@ -7,11 +7,11 @@ import { actionUserLoginRequest } from '../../@sdk/redux-modules/auth/actions';
 export const ViewLogin: FC = (): JSX.Element => {
   const dispatch = useDispatch();
 
-  const handleDispatch = () => dispatch(actionUserLoginRequest(true));
+  const onClickLogin = () => dispatch(actionUserLoginRequest(true));
 
   return (
     <div data-cy="view-login">
-      <button onClick={handleDispatch}>Login</button>
+      <button onClick={onClickLogin}>Login</button>
     </div>
   );
 };

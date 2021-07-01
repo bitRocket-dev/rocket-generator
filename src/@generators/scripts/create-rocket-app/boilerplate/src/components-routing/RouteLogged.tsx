@@ -3,11 +3,12 @@
 import { memo, FC } from 'react';
 import { useSelector } from 'react-redux';
 import { Route } from 'react-router-dom';
+import { TRoute } from '../@sdk/declarations/routes';
 import { selectorIsAuthenticated } from '../@sdk/redux-modules/auth/selector';
 import { RouteRedirect } from './RouteRedirect';
 
 interface Props {
-  path: string;
+  path: TRoute;
   component: FC<any>;
   exact?: boolean;
 }
