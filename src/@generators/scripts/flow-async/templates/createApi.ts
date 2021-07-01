@@ -1,11 +1,8 @@
 /** @format */
 
-import { splitString } from './splitStringUtility';
-
-export const createApi = (name: string): string => {
-  const names = splitString(name);
-  const formattedName = names[1].charAt(0).toUpperCase() + names[1].slice(1);
-  const formattedOperation = names[0].charAt(0).toUpperCase() + names[0].slice(1);
+export const createApi = (name: string, operation: string): string => {
+  const formattedName = name.charAt(0).toUpperCase() + name.slice(1);
+  const formattedOperation = operation.charAt(0).toUpperCase() + operation.slice(1);
 
   const handleOperation = operation => {
     switch (operation) {

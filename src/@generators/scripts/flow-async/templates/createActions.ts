@@ -1,13 +1,10 @@
 /** @format */
 
-import { splitString } from './splitStringUtility';
-
-export const createActions = (name: string): string => {
-  const names = splitString(name);
-  const nameOperationTypeUpper = names[0].toUpperCase();
-  const nameOperationTypeLower = names[0].charAt(0).toUpperCase() + names[0].slice(1);
-  const nameActionTypeUpper = names[1].toUpperCase();
-  const nameActionTypeLowewr = names[1].charAt(0).toUpperCase() + names[1].slice(1);
+export const createActions = (name: string, operation: string): string => {
+  const nameOperationTypeUpper = operation.toUpperCase();
+  const nameOperationTypeLower = operation.charAt(0).toUpperCase() + operation.slice(1);
+  const nameActionTypeUpper = name.toUpperCase();
+  const nameActionTypeLowewr = name.charAt(0).toUpperCase() + name.slice(1);
 
   return `
 //#region ::: IMPORT

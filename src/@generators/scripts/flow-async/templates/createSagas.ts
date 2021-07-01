@@ -1,11 +1,8 @@
 /** @format */
 
-import { splitString } from './splitStringUtility';
-
-export const createSagas = (name: string): string => {
-  const names = splitString(name);
-  const formattedOperation = names[0].charAt(0).toUpperCase() + names[0].slice(1);
-  const formattedName = names[1].charAt(0).toUpperCase() + names[1].slice(1);
+export const createSagas = (name: string, operation: string): string => {
+  const formattedOperation = operation.charAt(0).toUpperCase() + operation.slice(1);
+  const formattedName = name.charAt(0).toUpperCase() + name.slice(1);
 
   return `
 import { call, put } from 'redux-saga/effects';
