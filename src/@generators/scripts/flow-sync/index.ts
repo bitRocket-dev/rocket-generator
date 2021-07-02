@@ -9,9 +9,10 @@ import { createActions } from '../flow-sync/templates/createActions';
 import { addReducerToStore } from '../utils/addReducerToStore';
 import { addReducerToCombineReducers } from '../utils/addReducerToCombineReducers/';
 import { addConstantsToExisting } from '../utils/addConstantstoExisting';
-
+import { addReducerToExisting } from '../utils/addReducerToExisting';
 export const reduxSyncFlow = async (name: string, choices: string[], reducer: string): Promise<void> => {
   const dir = `./src/@sdk/redux-modules/${name}`;
+  const reducerPath = `./src/@sdk/redux-modules/${name}/reducer.ts`;
 
   function writeFileErrorHandler(err: Error) {
     if (err) throw err;
@@ -20,6 +21,7 @@ export const reduxSyncFlow = async (name: string, choices: string[], reducer: st
   if (await pathExists(dir)) {
     await addActionToExisting(name, choices);
     addConstantsToExisting(name, choices);
+    addReducerToExisting(name, choices);
   } else {
     await mkdirs(dir);
     writeFile(`${dir}/actions.ts`, createActions(name, choices), writeFileErrorHandler);
@@ -28,8 +30,10 @@ export const reduxSyncFlow = async (name: string, choices: string[], reducer: st
   }
 
   if (reducer === 'yes') {
-    writeFile(`${dir}/reducer.ts`, createReducers(name, choices), writeFileErrorHandler);
-    addReducerToStore(name);
-    addReducerToCombineReducers(name);
+    if (!(await pathExists(reducerPath))) {
+      writeFile(`${dir}/reducer.ts`, createReducers(name, choices), writeFileErrorHandler);
+      addReducerToStore(name);
+      addReducerToCombineReducers(name);
+    }
   }
 };

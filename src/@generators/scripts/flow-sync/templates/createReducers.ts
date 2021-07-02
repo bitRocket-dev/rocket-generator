@@ -1,4 +1,5 @@
 /** @format */
+
 // prettier-ignore
 export const createReducers = (name: string, choices: string[]): string => {
   const formattedName = name.charAt(0).toUpperCase() + name.slice(1);
