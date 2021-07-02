@@ -8,6 +8,7 @@ import { addActionToExisting } from '../utils/addActionToExisting';
 import { createActions } from '../flow-sync/templates/createActions';
 import { addReducerToStore } from '../utils/addReducerToStore';
 import { addReducerToCombineReducers } from '../utils/addReducerToCombineReducers/';
+import { addConstantsToExisting } from '../utils/addConstantstoExisting';
 
 export const reduxSyncFlow = async (name: string, choices: string[], reducer: string): Promise<void> => {
   const dir = `./src/@sdk/redux-modules/${name}`;
@@ -18,6 +19,7 @@ export const reduxSyncFlow = async (name: string, choices: string[], reducer: st
 
   if (await pathExists(dir)) {
     await addActionToExisting(name, choices);
+    addConstantsToExisting(name, choices);
   } else {
     await mkdirs(dir);
     writeFile(`${dir}/actions.ts`, createActions(name, choices), writeFileErrorHandler);

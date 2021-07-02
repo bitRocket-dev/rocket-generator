@@ -10,9 +10,8 @@ export const addActionImport = (name: string, choices: string[]): string[] => {
   const nameActionTypeUpper = name.toUpperCase();
   let content = [];
   const chomap = choices.map((item, index) => {
-    if (readFileSync(dir).toString().includes(`AT_${nameActionTypeUpper}_${item.toUpperCase()},`))
-      console.log(`ERROR! ${name.toUpperCase()}-${item} already exist!`);
-    else content.push(`AT_${nameActionTypeUpper}_${item.toUpperCase()},`);
+    if (!readFileSync(dir).toString().includes(`AT_${nameActionTypeUpper}_${item.toUpperCase()},`))
+      content.push(`AT_${nameActionTypeUpper}_${item.toUpperCase()},`);
 
     return content[index];
   });
