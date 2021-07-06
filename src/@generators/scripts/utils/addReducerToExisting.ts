@@ -1,7 +1,6 @@
 /** @format */
 
-import { readFileSync, writeFileSync } from 'fs';
-import { pathExists } from 'fs-extra';
+import { pathExists, readFileSync, writeFileSync } from 'fs-extra';
 export const addReducerToExisting = async (name: string, choices: string[]) => {
   const nameUpper = name.toUpperCase();
   const dir = `./src/@sdk/redux-modules/${name}/reducer.ts`;
